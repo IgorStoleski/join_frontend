@@ -1,0 +1,261 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    animation-name: animateBgColor;
+    animation-duration: 800ms;
+    animation-timing-function: ease-out;
+}
+
+#forgot-content, #reset-content {
+    display: none;
+}
+
+form {
+    animation-name: animateBgOpacity;
+    animation-duration: 800ms;
+    animation-timing-function: ease-out;
+    width: 100%;
+}
+
+.logo-small {
+    animation-name: animateLogoSmall;
+    animation-duration: 800ms;
+    animation-timing-function: linear;
+    animation-delay: 0ms;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+    height: 120px;
+}
+
+.logo-large {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-duration: 200ms;
+    animation-timing-function: ease-out;
+    width: 265px;
+    height: 323px;
+    animation-fill-mode: forwards;
+}
+
+/******************* INTRO ANIMATION *******************/
+@keyframes animateBgColor {
+    0% {
+        background-color: var(--bg-color, #4589FF);
+    }
+
+    50% {
+        background-color: var(--bg-color, #4589FF);
+    }
+
+    100% {
+        background-color: #FFFFFF;
+    }
+}
+
+@keyframes animateBgOpacity {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes animateLogoSmall {
+    0% {
+        transform: translate(50vw, 50vh);
+    }
+
+    100% {
+        transform: translate(80px, 77px);
+    }
+}
+
+.log-in-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 652px;
+    padding: 48px 115px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 39px;
+    border-radius: 30px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
+}
+
+.log-in-main-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.log-in-sub-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.log-in-header-title {
+    text-align: center;
+    color: black;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+    word-wrap: break-word;
+}
+
+.log-in-header-line {
+    width: 150px;
+    height: 2px;
+    background-color: var(--bg-color, #4589FF);
+}
+
+.log-in-formular {
+    height: 152px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+}
+
+.log-in-formular-container {
+    display: flex;
+    padding: 12px 21px;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+}
+
+.log-in-info-box {
+    width: 422px;
+    padding: 12px 21px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid var(--style, #D1D1D1);
+    background: #FFF;
+}
+
+.log-in-input-frame {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.log-in-text-input {
+    width: 100%;
+    color: var(--style, #D1D1D1);
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    border: none;
+    color: black;
+    cursor: pointer;
+}
+
+.log-in-text-input::placeholder {
+    color: var(--style, #D1D1D1);
+}
+
+.log-in-text-input:focus {
+    outline: none;
+    border: none;
+}
+
+.log-in-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.password-match-error {
+    align-self: stretch;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22.80px;
+    word-wrap: break-word;
+    color: var(--error, #FF8190);
+    display: none;
+    margin-top: -40px;
+}
+
+.remember-me-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 58px;
+}
+
+.remember-me-section {
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.remember-me-icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.remember-me-icon:hover {
+    background-image: url(/img/check-button-hover.png);
+    cursor: pointer;
+}
+
+.remember-me-text {
+    color: var(--menu, #42526E);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+}
+
+.forgot-password-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.forgot-password-link {
+    color: var(--ligth-blue, #005DFF);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.forgot-password-link:hover {
+    text-decoration: underline;
+    scale: 1.06;
+}

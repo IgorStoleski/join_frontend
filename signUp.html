@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="css/signUp.css">
+    <link rel="stylesheet" href="css/signUpMedia.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <script src="./js/app.js"></script>
+    <link rel="icon" type="image/png" href="img/join_logo_blue.png">
+</head>
+
+<body onload="initRegister()">
+    <header>
+        <img class="white-small-logo" src="img/join_logo_large.png" alt="Join Logo">
+    </header>
+
+    <form id="signUpForm" class="sign-up-container">
+        <div class="arrow-container">
+            <a href="index.html" class="arrow-left-icon"></a>
+        </div>
+
+        <div class="sign-up-main-header">
+            <div class="sign-up-sub-header">
+                <div class="sign-up-header-title">Sign up</div>
+                <div class="sign-up-header-line"></div>
+            </div>
+        </div>
+
+        <section class="sign-up-formular">
+            <section class="sign-up-formular-container">
+                <section class="sign-up-info-box">
+                    <div class="sign-up-input-frame">
+                        <input required type="text" id="username" class="sign-up-text-input" placeholder="Name" pattern="[A-Za-z].*" title="Das erste Zeichen muss ein Buchstabe sein.">
+                        <img class="sign-up-icon" src="img/person.png" alt="Name">
+                    </div>
+                </section>
+                <section class="sign-up-info-box">
+                    <div class="sign-up-input-frame">
+                        <input required type="email" id="email" class="sign-up-text-input" name="email"
+                            autocomplete="email" placeholder="Email">
+                        <img class="sign-up-icon" src="img/mail.png" alt="Email">
+                    </div>
+                </section>
+                <section class="sign-up-info-box">
+                    <div class="sign-up-input-frame">
+                        <input required type="password" id="password" class="sign-up-text-input" placeholder="Password"
+                            autocomplete="current-password" minlength="4">
+                        <img class="sign-up-icon" src="img/lock.png" alt="Password" id="passwordIcon">
+                    </div>
+                </section>
+                <section class="sign-up-info-box">
+                    <div id="sign-up-input-frame" class="sign-up-input-frame">
+                        <input required type="password" id="confirmPassword" class="sign-up-text-input"
+                            placeholder="Confirm Password" autocomplete="current-password" minlength="4">
+                        <img class="sign-up-icon" src="img/lock.png" alt="Confirm Password" id="confirmPasswordIcon">
+                    </div>
+                </section>
+            </section>
+
+            <section class="password-match-error" id="signUpMatchError">Ups! your password don´t match</section>
+            <section class="password-match-error" id="emailExistsError">Ups! Email already exists</section>
+
+            <section class="privacy-check-container">
+                <img class="privacy-check-icon" id="privacyCheck" src="img/check-button.png" alt="Check Button">
+                <p class="privacy-accept-text">I accept the</p>
+                <a class="privacy-policy-link" href="privacyPolicy.html" target="_blank">Privacy Policy</a>
+            </section>
+        </section>
+
+        <section class="sign-up-btn-container">
+            <button type="submit" class="sign-up-btn">Sign up</button>
+        </section>
+    </form>
+
+    <footer class="legal-notice-container">
+        <section class="legal-notice-sub-container">
+            <a class="legal-notice-text" href="privacyPolicy.html" target="_blank">Privacy Policy</a>
+        </section>
+        <section class="legal-notice-sub-container">
+            <a class="legal-notice-text" href="legalNotice.html" target="_blank">Legal Notice</a>
+        </section>
+    </footer>
+
+    <script src="js/storage.js"></script>
+    <script src="js/register.js"></script>
+    <script src="js/registerUi.js"></script>
+    <script src="js/contact.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/aside.css">
+    <link rel="stylesheet" href="./css/addTaskMain.css">
+    <link rel="stylesheet" href="./css/addTaskSecondary.css">
+    <link rel="stylesheet" href="./css/addTaskThird.css">
+    <link rel="stylesheet" href="./css/fonts.css">
+    <link rel="stylesheet" href="./css/contact.css">
+    <link rel="stylesheet" href="./css/contact2.css">
+    <link rel="stylesheet" href="./css/contact3.css">
+    <link rel="icon" type="image/png" href="./img/join_logo_blue.png">
+</head>
+
+<body onload="init(), initTask()">
+    <div w3-include-html="./templates/header.html"></div>
+    <div w3-include-html="./templates/aside.html"></div>
+    <form id="taskForm">
+        <div class="add-task-container">
+            <div class="add-task-container-first">
+                <div class="add-task-container-titel">
+                    <div class="add-task-titel-textcontainer">
+                        <input id="taskTitle" class="add-task-titel-textfield" placeholder="Enter a title">
+                    </div>
+                    <div id="requiredTitle" class="add-task-field-required">
+                        This field is required
+                    </div>
+                </div>
+                <div class="add-task-container-description">
+                    <div class="add-task-description-header">Description</div>
+                    <textarea id="taskDescription" class="add-task-description-textfield"
+                        placeholder="Enter a Description" cols="30" rows="4"></textarea>
+                    <div id="requiredDescription" class="add-task-field-required">
+                        This field is required
+                    </div>
+                </div>
+                <div class="due-date-container">
+                    <div class="due-date-header">
+                        Due date
+                    </div>
+                    <div class="due-date-input-container">
+                        <input id="dueDate" class="due-date-textfield" type="date">
+                    </div>
+                    <div id="requiredDate" class="add-task-field-required">
+                        This field is required
+                    </div>
+                </div>
+            </div>
+            <div class="add-task-container-priority">
+                <div class="add-task-priority-header">
+                    Priority
+                </div>
+                <div class="priority-choice">
+                    <button type="button" onclick="priority(this)" id="prioUrgent"
+                        class="priority-choice-inner prio-urgent">
+                        Urgent
+                        <div class="priority-choice-inner-pic">
+                            <img src="./img/prio-high.png" id="prioUrgentImg" class="original-image"
+                                data-image="prio-high.png">
+                        </div>
+                    </button>
+                    <button type="button" onclick="priority(this)" id="prioMedium"
+                        class="priority-choice-inner prio-medium">
+                        Medium
+                        <div class="priority-choice-inner-pic">
+                            <img src="./img/prio-medium.png" id="prioMediumImg" class="original-image"
+                                data-image="prio-medium.png">
+                        </div>
+                    </button>
+                    <button type="button" onclick="priority(this)" id="prioLow" class="priority-choice-inner prio-low">
+                        Low
+                        <div class="priority-choice-inner-pic">
+                            <img src="./img/prio-low.png" id="prioLowImg" class="original-image"
+                                data-image="prio-low.png">
+                        </div>
+                    </button>
+                </div>
+                <div id="requiredPriority" class="add-task-field-required">
+                    This field is required
+                </div>
+            </div>
+            <div class="assigned-to-container">
+                <div class="assigned-to-header">
+                    Assigned to
+                </div>
+                <div class="assigned-to-choicefield" id="assigned-to-choicefield">
+                    <div class="assigned-to-dropdown" onclick="toggleAssignedToContainer()">
+                        <div class="assigned-dropdown-header">
+                            <input oninput="searchContacts(this.value)" id="searchInput" class="assigned-select-text"
+                                placeholder="Select contacts to assign" type="text">
+                        </div>
+                        <div class="assigned-dropdown-arrow"></div>
+                    </div>
+                </div>
+                <div class="contacts-container" onclick="event.stopPropagation()">
+                    <div id="loadedContacts" class="loaded-contacts">
+                    </div>
+                    <button id="addContactBtn" onclick="openModal()" class="add-person-btn" type="button">
+                        Add new contact
+                        <img src="./img/person_add.svg" class="button-icon">
+                    </button>
+                </div>
+                <div id="chosenContacts" class="chosen-contacts"></div>
+            </div>
+            <div class="category-container">
+                <div class="category-header">
+                    Category
+                </div>
+                <div class="category-choicefield" id="categoryChoicefield">
+                    <div class="category-dropdown" onclick="toggleCategoryContainer()">
+                        <div class="dropdown-header" id="dropdownHeader">
+                            <span class="select-text">Select task category</span>
+                            <span id="selectedCategoryDisplay"></span>
+                        </div>
+                        <div class="dropdown-arrow"></div>
+                    </div>
+                </div>
+                <div id="requiredCategory" class="add-task-field-required">
+                    This field is required
+                </div>
+                <div id="loadedCategories" class="loaded-categories"></div>
+            </div>
+            <div class="subtasks-container">
+                <div class="subtasks-header">
+                    Subtasks
+                </div>
+                <div class="add-subtask-input">
+                    <input onclick="openSubtaskInput()" type="text" id="subtaskInput" class="new-subtask-textfield" placeholder="Add new subtask">
+                    <img onclick="openSubtaskInput()" class="open-subtask-button" src="./img/open_subtask.png">
+                    <img onclick="closeSubtaskInput()" class="add-subtask-button hidden" id="closeSubtask" src="./img/close_subtask.png"> 
+                    <span class="separator" id="separator">|</span> 
+                    <img onclick="addSubtask()" class="add-subtask-button hidden" id="addNewSubtask" src="./img/add_subtask.png">
+                </div>
+                <div id="subtask-add-container" class="subtask-add-container"></div>
+            </div>
+        </div>
+        <div class="add-task-buttons">
+            <div class="add-task-buttons-inner">
+                <button onclick="resetTaskForm()" type="button" id="clearTaskButton" class="clear-form-btn">
+                    Clear
+                    <img class="button-clear-pic" src="./img/cancel-icon.svg">
+                </button>
+                <button type="submit" id="createTaskButton" class="create-task-btn">
+                    Create Task
+                    <img class="button-create-task-pic" src="./img/check.svg">
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <form id="contactModal" onclick="closeModalBackAddContact(event)" class="modal" onsubmit="saveNewContact(); return false;"></form>
+
+    <div id="add-background-overlay" class="background-overlay"></div>
+
+    <script src="./js/app.js"></script>
+    <script src="./js/storage.js"></script>
+    <script src="./js/addTask.js"></script>
+    <script src="./js/addTaskSubtask.js"></script>
+    <script src="./js/addTaskUi.js"></script>
+    <script src="./js/templates/addTaskTemplates.js"></script>
+    <script src="./js/addTaskUtils.js"></script>
+    <script src="./js/contact.js"></script>
+    <script src="./js/contactEdit.js"></script>
+    <script src="./js/templates/contactTemplates.js"></script>
+    <script src="./js/includeHTML.js"></script>
+    <script src="./js/uiHelpers.js"></script>
+</body>
+</html>

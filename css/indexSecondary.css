@@ -1,0 +1,332 @@
+.log-in-btn-section {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 35px;
+}
+
+.log-in-btn-container,
+.guest-log-in-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.log-in-btn {
+    padding: 10px 35px;
+    background: var(--bg-color, #4589FF);
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-family: 'Open sans', sans-serif;
+    font-size: 23px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    cursor: pointer;
+    border: none;
+}
+
+.log-in-btn:hover {
+    background: var(--ligth-blue, #005DFF);
+    transition: ease-in-out 100ms;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.log-in-btn:active {
+    transition: ease-in-out 100ms;
+    background: #FFFFFF;
+    color: var(--bg-color, #4589FF);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.guest-log-in-btn {
+    padding: 10px 35px;
+    background: #FFFFFF;
+    border-radius: 8px;
+    border: 1px solid #647188;
+    color: var(--guest-log-in, #647188);
+    font-size: 23px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.guest-log-in-btn:hover {
+    transition: ease-in-out 100ms;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    color: var(--bg-color, #4589FF);
+    border: 1px solid var(--bg-color, #4589FF);
+}
+
+.guest-log-in-btn:active {
+    color: var(--btn-hover, #005DFF);
+    border: 1px solid var(--btn-hover, #005DFF);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.legal-notice-container {
+    display: flex;
+    width: 240px;
+    height: 35px;
+    flex-shrink: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 42.7px;
+    justify-content: center;
+    animation-name: animateBgOpacity;
+    animation-duration: 800ms;
+    animation-timing-function: ease-out;
+}
+
+.legal-notice-sub-container {
+    padding: 8px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.legal-notice-text {
+    color: var(--menu, #42526E);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    text-decoration: none;
+}
+
+.legal-notice-text:hover {
+    color: var(--ligth-blue, #005DFF);
+}
+
+.sign-up-container {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    position: absolute;
+    top: 67px;
+    right: 86px;
+    animation-name: animateBgOpacity;
+    animation-duration: 800ms;
+    animation-timing-function: ease-out;
+}
+
+.not-a-user {
+    color: #000;
+    font-size: 23px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+}
+
+.sign-up-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.sign-up-btn {
+    padding: 10px 21px;
+    border-radius: 8px;
+    background: var(--bg-color, #4589FF);
+    color: #FFFFFF;
+    border: none;
+    font-size: 23px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.sign-up-btn:hover {
+    background: var(--ligth-blue, #005DFF);
+    transition: ease-in-out 100ms;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.sign-up-btn:active {
+    background-color: #FFFFFF;
+    color: var(--bg-color, #4589FF);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
+
+    100% {
+        transform: translateX(5px);
+    }
+}
+
+.shake-password {
+    animation: shake 0.5s ease-in-out;
+}
+
+/* Media Query für Bildschirmbreite von maximal 1024px */
+@media (max-width: 1024px) {
+    .logo-large {
+        width: 100px;
+        height: 122px;
+    }
+
+    .logo-small {
+        width: 64px;
+        height: 78px;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        align-items: flex-start;
+        justify-content: flex-start;
+        position: absolute;
+        left: -7%;
+        top: -5%;
+    }
+
+    .log-in-container {
+        max-width: 396px;
+        padding: 32px 0px;
+        gap: 3px;
+        top: 48%;
+    }
+
+    .log-in-header-title {
+        font-size: 40px;
+    }
+
+    .log-in-header-line {
+        width: 88px;
+    }
+
+    .log-in-formular-container {
+        gap: 14px;
+    }
+
+    .log-in-info-box {
+        width: 100%;
+    }
+
+    .log-in-text-input {
+        font-size: 16px;
+    }
+
+    .password-match-error {
+        padding-left: 20px;
+        margin-top: -42px;
+    }
+
+    .remember-me-text, .forgot-password-link {
+        font-size: 14px;
+    }
+
+    .remember-me-container {
+        width: 100%;
+        align-items: flex-start;
+        flex-direction: column-reverse;
+        padding: 0 32px;
+        gap: 16px;
+    }
+
+    .log-in-btn-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 19px;
+        padding-top: 10px;
+    }
+
+    .log-in-btn-container,
+    .guest-log-in-btn-container {
+        width: 100%;
+    }
+
+    .log-in-btn, .guest-log-in-btn {
+        font-size: 19px;
+        flex: 1;
+    }
+
+    .sign-up-btn:active, .log-in-btn:active {
+        background: var(--ligth-blue, #005DFF);
+        transition: ease-in-out 100ms;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    }
+
+    .sign-up-container {
+        top: auto;
+        bottom: 55px;
+        left: 50%;
+        transform: translateX(-50%);
+        right: unset;
+        width: 272px;
+    }
+
+    .legal-notice-container {
+        bottom: 18px;
+    }
+
+    .not-a-user {
+        font-size: 19px;
+    }
+
+    .sign-up-btn {
+        font-size: 19px;
+        padding: 10px 16px;
+    }
+}
+
+
+/* Media Query für Bildschirmbreite von maximal 450px */
+@media (max-width: 600px) {
+    .logo-small {
+        width: 44px;
+        height: 58px;
+        left: -10%;
+        top: -7%;
+    }
+
+    .log-in-container {
+        width: 90%;
+    }
+}
+
+/* Media Query für Bildschirmbreite von maximal 540px */
+@media only screen and (max-height: 680px) and (max-width: 540px) {
+    .logo-small {
+        width: 34px;
+        height: 48px;
+        left: -9%;
+        top: -10%;
+    }
+
+    .sign-up-container {
+        top: auto;
+        bottom: 35px;
+        left: 50%;
+        transform: translateX(-50%);
+        right: unset;
+        width: 272px;
+    }
+
+    .legal-notice-container {
+        bottom: 4px;
+    }
+}

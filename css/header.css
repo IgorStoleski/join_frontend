@@ -1,0 +1,251 @@
+header {
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+}
+
+.header-container {
+    display: flex;
+    padding: 20px 39px;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--version-2-main-color, #4589FF);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.10);
+}
+
+.header-container-logo {
+    width: 45.93px;
+    height: 56px;
+    flex-shrink: 0;
+}
+
+.header-container-right {
+    width: 433px;
+    height: 56px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+}
+
+.help {
+    margin-right: 18px;
+}
+
+#header-container-right-text {
+    width: 301px;
+    height: 23px;
+    color: var(--white, #FFF);
+    font-family: Open Sans;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+}
+
+.header-container-help {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.header-container-help:hover {
+    scale: 1.2;
+}
+
+.header-container-right-user {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    z-index: 1;
+    position: relative;
+}
+
+.header-container-right-user-profile {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+}
+
+.user-container-header {
+    z-index: 2;
+}
+
+.initials {
+    width: 28px;
+    flex-shrink: 0;
+    color: #005DFF;
+    z-index: 5;
+    position: absolute;
+    text-align: center;
+}
+
+.user-initials {
+    box-sizing: border-box;
+    display: flex;
+    width: 46px;
+    height: 46px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 559px;
+    background: #FFF;
+    z-index: 3;
+    position: relative;
+}
+
+.elipse {
+    box-sizing: border-box;
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    stroke-width: 3px;
+    stroke: #FFF;
+    z-index: 4;
+    border: 3px solid white;
+    border-radius: 50%;
+}
+
+.user-initials:hover {
+    background-color: #B5DBFF;
+}
+
+#logoutBtn {
+    position: fixed;
+    top: 96px;
+    right: 0;
+    width: 152px;
+    height: 117px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    border-radius: 20px 0px 20px 20px;
+    background: var(--white, #FFF);
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.20);
+    /* z-index: 4; */
+    display: none;
+}
+
+.nav-item {
+    display: flex;
+    width: 152px;
+    padding: 8px 16px;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.nav-link {
+    color: var(--menu-color, #42526E);
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    text-decoration: none;
+}
+
+.nav-item:hover {
+    box-sizing: border-box;
+    background: #D2E3FF;
+}
+
+.nav-item:first-child {
+    display: none;
+}
+
+
+/* Media Query für Bildschirmbreite von maximal 768px */
+@media(max-width: 768px) {
+    .header-container {
+        height: 80px;
+        box-sizing: border-box;
+    }
+
+    .header-container-right {
+        position: absolute;
+        right: -15px;
+    }
+
+    #header-container-right-text {
+        visibility: hidden;
+    }
+
+    .header-container-help {
+        visibility: hidden;
+    }
+
+    .header-container-logo {
+        width: 32px;
+        height: 39px;
+        position: absolute;
+        left: 25px;
+    }
+
+    .user-initials {
+        width: 40px;
+        height: 40px;
+    }
+
+    .elipse {
+        box-sizing: border-box;
+        width: 50px;
+        height: 50px;
+    }
+
+    #logoutBtn {
+        top: 65px;
+        right: 22px;
+        width: 135px;
+        display: inline-flex;
+        padding: 10px;
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        display: none;
+
+        animation-name: slideInFromRight;
+        animation-duration: 0.1s;
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes slideInFromRight {
+        from {
+            right: -150px;
+        }
+
+        to {
+            right: 20px;
+        }
+    }
+
+    @keyframes slideOutToRight {
+        from {
+            right: 20px;
+        }
+
+        to {
+            right: -150px;
+        }
+    }
+
+    .nav-item:hover {
+        background: transparent;
+    }
+
+    .nav-link {
+        color: #4589FF;
+    }
+
+    .nav-link:first-child {
+        display: flex;
+    }
+}

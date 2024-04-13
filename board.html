@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/boardMain.css">
+    <link rel="stylesheet" href="./css/boardSecondary.css">
+    <link rel="stylesheet" href="./css/boardSlide.css">
+    <link rel="stylesheet" href="./css/boardAddTask.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/aside.css">
+    <link rel="stylesheet" href="./css/fonts.css">
+    <link rel="stylesheet" href="./css/editAddTask.css">
+    <link rel="stylesheet" href="./css/editAddTask2.css">
+    <link rel="stylesheet" href="./css/contact.css">
+    <link rel="stylesheet" href="./css/contact2.css">
+    <link rel="stylesheet" href="./css/contact3.css">
+    <link rel="stylesheet" href="./css/addTaskMain.css">
+    <link rel="stylesheet" href="./css/addTaskSecondary.css">
+    <link rel="stylesheet" href="./css/addTaskThird.css">
+    <script src="./js/includeHTML.js"></script>
+    <script src="./js/uiHelpers.js"></script>
+    <script src="./js/app.js"></script>
+    <script src="./js/storage.js"></script>
+    <script src="./js/boardRenderTasks.js"></script>
+    <script src="./js/boardFilterAndAnimation.js"></script>
+    <script src="./js/boardSlideAndMobile.js"></script>
+    <script src="./js/editTaskAnimation.js"></script>
+    <script src="./js/editTaskRenderAndLoad.js"></script>
+    <script src="./js/templates/boardTemplates.js"></script>
+    <script src="./js/templates/contactTemplates.js"></script>
+    <link rel="icon" type="image/png" href="./img/join_logo_blue.png">
+</head>
+<body id="noscroll" onload="init(), updateHTML(), initAddTask()">
+    <div w3-include-html="./templates/boardSlide.html"></div>
+    <div w3-include-html="./templates/editTaskSlide.html"></div>
+    <div w3-include-html="./templates/header.html"></div>
+    <div w3-include-html="./templates/aside.html"></div>
+    <div class="search-add-task">
+        <div class="search-add-task-container">
+            <div class="input-conteiner">
+                <input id="input-field" class="input-field" type="text" placeholder="Find Task">
+                <div class="search-right">
+                    <div id="reset-search" class="reset-btn">x</div>
+                    <img src="./img/placeholder.png" alt="Platzhalter">
+                    <img id="search" class="icon" onclick="setFilter()" src="./img/search.png" alt="Lupe">
+                </div>
+            </div>
+            <button onclick="addTask('todo')" class="add-btn">Add Task<img class="plus-icon" src="./img/plus.png"
+                    alt="Plus"></button>
+        </div>
+    </div>
+    <div class="board-container">
+        <div class="task-container">
+            <div class="board-headline">
+                <span>To do</span>
+                <button onclick="addTask('todo')" class="board-add-btn"><img src="./img/plus-blue.png" alt="Plus"></button>
+            </div>
+            <div class="scroll-container">
+                <div class="drag-area todo-touch" id="todo" data-status="todo" ondrop="moveTo('todo'); removeHighlight('todo')" ondragleave="removeHighlight('todo')" ondragover="allowDrop(event); highlight('todo')"></div>
+                
+            </div>
+        </div>
+        <div class="task-container">
+            <div class="board-headline">
+                <span>In progress</span>
+                <button onclick="addTask('inprogress')" class="board-add-btn"><img src="./img/plus-blue.png" alt="Plus"></button>
+            </div>
+            <div class="scroll-container">
+                <div class="drag-area in-progress-touch" id="in-progress" data-status="inprogress" ondrop="moveTo('inprogress'); removeHighlight('in-progress')" ondragleave="removeHighlight('in-progress')" ondragover="allowDrop(event); highlight('in-progress')"></div>
+                
+            </div>
+        </div>
+        <div class="task-container">
+            <div class="board-headline">
+                <span>Await feedback</span>
+                <button onclick="addTask('feedback')" class="board-add-btn"><img src="./img/plus-blue.png" alt="Plus"></button>
+            </div>
+            <div class="scroll-container">
+                <div class="drag-area feedback-touch" id="feedback" data-status="feedback" ondrop="moveTo('feedback'); removeHighlight('feedback')" ondragleave="removeHighlight('feedback')" ondragover="allowDrop(event); highlight('feedback')"></div>
+                
+            </div>
+        </div>
+        <div class="task-container">
+            <div class="board-headline">
+                <span>Done</span>
+            </div>
+            <div class="scroll-container">
+                <div class="drag-area done-touch" id="done" data-status="done" ondrop="moveTo('done'); removeHighlight('done')" ondragleave="removeHighlight('done')" ondragover="allowDrop(event); highlight('done')"></div>
+                
+            </div>
+        </div>
+    </div>
+
+    <form id="contactModal" onclick="closeModalBackAddContact(event)" class="modal" onsubmit="saveNewContact(); return false;"></form>
+    <form id="taskFormSlider"></form>
+    <div class="task-background-overlay"></div>
+    <div class="background-overlay"></div>
+    <div id="contactAddedContainer" class="contact-added"></div>
+
+    
+    <script src="./js/contact.js"></script>
+    <script src="./js/contactEdit.js"></script>
+    <script src="./js/contactMobile.js"></script>
+    <script src="./js/taskManager.js"></script>
+    <script src="./js/taskUiManager.js"></script>
+    <script src="./js/taskSubtaskManager.js"></script>
+    <script src="./js/taskUtilsManager.js"></script>
+    <script src="./js/templates/taskTemplates.js"></script>
+</body>
+
+</html>

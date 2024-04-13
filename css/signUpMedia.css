@@ -1,0 +1,114 @@
+/* Media Query für Bildschirmbreite von maximal 768px */
+@media (max-width: 768px) {
+    .white-small-logo {
+        width: 64px;
+        height: 78px;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        align-items: flex-start;
+        justify-content: flex-start;
+        position: absolute;
+        left: 10%;
+        top: 1.5%;
+    }
+
+    .sign-up-container {
+        max-width: 396px;
+        padding: 32px 0px;
+        gap: 16px;
+    }
+
+    .arrow-container {
+        width: 32px;
+        height: 32px;
+        left: 30px;
+        top: 40px;
+    }
+
+    .sign-up-main-header {
+        gap: 12px;
+    }
+
+    .sign-up-header-title {
+        font-size: 47px;
+    }
+
+    .sign-up-header-line {
+        width: 88px;
+    }
+
+    .sign-up-formular {
+        gap: 16px;
+    }
+
+    .sign-up-formular-container {
+        gap: 12px;
+    }
+
+    .sign-up-info-box {
+        width: 100%;
+    }
+
+    .sign-up-text-input {
+        font-size: 16px;
+    }
+
+    .password-match-error {
+        padding-left: 32px;
+        margin-top: -25px;
+    }
+
+    .privacy-accept-text {
+        font-size: 14px;
+    }
+
+    .privacy-policy-link {
+        font-size: 14px;
+    }
+
+    .sign-up-btn {
+        padding: 10px 35px;
+        font-size: 19px;
+    }
+
+    .sign-up-btn:active {
+        background: var(--ligth-blue, #005DFF);
+        transition: ease-in-out 100ms;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    }
+
+    .legal-notice-container {
+        bottom: 26px;
+    }
+}
+
+
+/* Media Query für Bildschirmbreite von maximal 450px */
+@media (max-width: 450px) {
+    .white-small-logo {
+        width: 44px;
+        height: 58px;
+    }
+
+    .sign-up-formular {
+        gap: 1px;
+    }
+
+    .sign-up-container {
+        width: 90%;
+        height: 75%;
+    }
+
+    .privacy-check-container {
+        padding-top: 0;
+    }
+
+    .privacy-accept-text {
+        margin: 0;
+    }
+
+    .sign-up-formular-container {
+        gap: 8px;
+    }
+}

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: log_in_ui.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: log_in_ui.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>let passwordMatchError = document.getElementById('passwordMatchError');
+
+
+/**
+ * Retrieves the value of the email input field.
+ * @returns {string} - The value of the email input field.
+ */
+function getEmailInputValue() {
+    let emailInput = document.getElementById('emailLogin');
+    return emailInput.value;
+}
+
+
+/**
+ * Retrieves the value of the password input field.
+ * @returns {string} - The value of the password input field.
+ */
+function getPasswordInputValue() {
+    let passwordInput = document.getElementById('passwordLogin');
+    return passwordInput.value;
+}
+
+
+/**
+ * Resets the style of the form inputs and hides the password match error message.
+ */
+function resetFormStyle() {
+    let signUpInfoBoxes = document.querySelectorAll('.log-in-info-box');
+    for (let i = 0; i &lt; signUpInfoBoxes.length; i++) {
+        signUpInfoBoxes[i].style.borderColor = '#D1D1D1';
+    }
+}
+
+
+/**
+ * Displays the password match error message and highlights the last sign-up info box.
+ */
+function showPasswordMatchError() {
+    passwordMatchError.style.display = 'block';
+    let signUpInfoBoxes = document.querySelectorAll('.log-in-info-box');
+    let lastSignUpInfoBox = signUpInfoBoxes[signUpInfoBoxes.length - 1];
+    lastSignUpInfoBox.style.borderColor = '#FF8190';
+}
+
+
+/**
+ * Applies a shake animation to the password input frame element.
+ */
+function shakePasswordInput() {
+    let passwordInput = document.getElementById('log-in-input-frame');
+    passwordInput.classList.add('shake-password');
+
+    setTimeout(() => {
+        passwordInput.classList.remove('shake-password');
+    }, 500);
+}
+
+
+/**
+ * Hides the password match error text.
+ */
+function errorTextLogIn() {
+    passwordMatchError.style.display = 'none';
+}
+let password = document.getElementById('passwordLogin');
+password.addEventListener('input', errorTextLogIn);
+
+
+/**
+ * Adds blur event listeners to log-in input sections.
+ * Changes the border color of the input section when focused and blurred.
+ */
+function addLoginBlurEvents() {
+    let signUpInfoBoxes = document.querySelectorAll('.log-in-info-box');
+    signUpInfoBoxes.forEach(box => {
+        let input = box.querySelector('.log-in-text-input');
+
+        input.addEventListener('focus', () => {
+            box.style.borderColor = '#4589FF';
+        });
+
+        input.addEventListener('blur', () => {
+            box.style.borderColor = '#D1D1D1';
+        });
+    });
+}
+document.addEventListener('DOMContentLoaded', addLoginBlurEvents);
+
+
+let passwordInput = document.getElementById('passwordLogin');
+let passwordIcon = document.getElementById('passwordIcon');
+
+/**
+ * Updates the visibility icon of a password input field based on its current state.
+ * @param {HTMLInputElement} passwordInput - The password input element.
+ * @param {HTMLImageElement} passwordIcon - The visibility icon associated with the password input.
+ */
+function updatePasswordVisibility(passwordInput, passwordIcon) {
+    if (passwordInput.value.length > 0) {
+        passwordIcon.src = passwordInput.type === 'password' ? 'img/visibility_off.png' : 'img/visibility.png';
+    } else {
+        passwordIcon.src = 'img/lock.png';
+    }
+}
+
+
+/**
+ * Toggles the visibility of a password input between masked and visible.
+ * @param {HTMLInputElement} passwordInput - The password input element.
+ * @param {HTMLImageElement} passwordIcon - The visibility icon associated with the password input.
+ */
+function togglePasswordVisibility(passwordInput, passwordIcon) {
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        passwordIcon.src = 'img/visibility.png';
+    } else {
+        passwordInput.type = 'password';
+        passwordIcon.src = 'img/visibility_off.png';
+    }
+}
+
+
+/**
+ * Event listener for input changes in a password field to update its visibility icon.
+ */
+passwordInput.addEventListener('input', function () {
+    updatePasswordVisibility(passwordInput, passwordIcon);
+});
+
+
+/**
+ * Event listener for the click event on the password visibility icon.
+ */
+passwordIcon.addEventListener('click', function () {
+    togglePasswordVisibility(passwordInput, passwordIcon);
+});
+
+
+
+/**
+ * Toggles the state of the remember check element.
+ */
+function togglerememberCheck() {
+    rememberLogIn = !rememberLogIn;
+    if (rememberLogIn) {
+        setCheckedState();
+    } else {
+        setUncheckedState();
+    }
+}
+
+
+/**
+* The remember check element.
+* @type {HTMLImageElement}
+*/
+const rememberCheck = document.getElementById('rememberCheck');
+rememberCheck.addEventListener('click', togglerememberCheck);
+
+
+/**
+ * Sets the checked state for the remember check element.
+ */
+function setCheckedState() {
+    rememberCheck.src = 'img/checked.png';
+    rememberCheck.removeEventListener('mouseenter', applyHoverCheckedBackground);
+    rememberCheck.removeEventListener('mouseleave', removeHoverCheckedBackground);
+    rememberCheck.addEventListener('mouseenter', applyHoverCheckedBackground);
+    rememberCheck.addEventListener('mouseleave', removeHoverCheckedBackground);
+}
+
+
+/**
+ * Sets the unchecked state for the remember check element.
+ */
+function setUncheckedState() {
+    rememberCheck.src = 'img/check-button.png';
+    rememberCheck.removeEventListener('mouseenter', applyHoverCheckedBackground);
+    rememberCheck.removeEventListener('mouseleave', removeHoverCheckedBackground);
+    rememberCheck.addEventListener('mouseenter', applyHoverButtonBackground);
+    rememberCheck.addEventListener('mouseleave', removeHoverButtonBackground);
+}
+
+
+/**
+ * Applies a hover background to the remember check element when checked.
+ */
+function applyHoverCheckedBackground() {
+    rememberCheck.style.backgroundImage = 'url(../img/hover_checked.png)';
+}
+
+
+/**
+ * Applies a hover background to the remember check element when unchecked.
+ */
+function applyHoverButtonBackground() {
+    rememberCheck.style.backgroundImage = 'url(../img/check-button-hover.png)';
+}
+
+
+/**
+ * Removes the hover background from the remember check element when unchecked.
+ */
+function removeHoverCheckedBackground() {
+    rememberCheck.style.backgroundImage = 'none';
+}
+
+
+/**
+ * Removes the hover background from the remember check button element.
+ */
+function removeHoverButtonBackground() {
+    rememberCheck.style.backgroundImage = 'none';
+}
+
+
+/**
+ * Saves user data upon login.
+ * @param {string} userEmail - The user's email.
+ * @param {string} userPassword - The user's password.
+ * @param {boolean} rememberStatus - The remember me status.
+ */
+function saveUserDataOnLogin(userEmail, userPassword, rememberStatus) {
+    if (rememberStatus) {
+        let userData = {
+            email: userEmail,
+            password: userPassword,
+            rememberStatus: rememberStatus
+        };
+        saveLoggedInUserData(userData);
+    }
+}
+
+
+const emailInput = document.getElementById('emailLogin');
+const passwordInputCheck = document.getElementById('passwordLogin');
+const loginButton = document.getElementById('loginBtn');
+
+
+/**
+ * Adds a click event listener to the login button.
+ * Retrieves user email and password input, and calls the function to save user data on login.
+ */
+loginButton.addEventListener('click', function () {
+    let userEmail = emailInput.value;
+    let userPassword = passwordInputCheck.value;
+    let rememberStatus = rememberLogIn;
+    saveUserDataOnLogin(userEmail, userPassword, rememberStatus);
+});
+
+
+/**
+ * Fills in the email and password input fields with saved user data from local storage on page load.
+ * If user data with remember status exists, populates the input fields and updates the remember checkbox.
+ */
+function fillInFromLocalStorage() {
+    let localStorageData = localStorage.getItem('loggedInUser');
+    if (localStorageData) {
+        let userData = JSON.parse(localStorageData);
+        if (userData.rememberStatus) {
+            emailInput.value = userData.email;
+            passwordInputCheck.value = userData.password;
+            togglerememberCheck();
+        }
+    }
+}
+
+window.addEventListener('load', fillInFromLocalStorage);</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addFocusBlurEvents">addFocusBlurEvents</a></li><li><a href="global.html#addForgotBlurEvents">addForgotBlurEvents</a></li><li><a href="global.html#addLoginBlurEvents">addLoginBlurEvents</a></li><li><a href="global.html#addLoginButtonListener">addLoginButtonListener</a></li><li><a href="global.html#addResetBlurEvents">addResetBlurEvents</a></li><li><a href="global.html#afternoon">afternoon</a></li><li><a href="global.html#allowDrop">allowDrop</a></li><li><a href="global.html#applyBackgroundColor">applyBackgroundColor</a></li><li><a href="global.html#applyHoverButtonBackground">applyHoverButtonBackground</a></li><li><a href="global.html#applyHoverCheckedBackground">applyHoverCheckedBackground</a></li><li><a href="global.html#closeCard">closeCard</a></li><li><a href="global.html#closeMenuOnClickAndOutside">closeMenuOnClickAndOutside</a></li><li><a href="global.html#createAndShowSuccessOverlay">createAndShowSuccessOverlay</a></li><li><a href="global.html#createForgotTemplate">createForgotTemplate</a></li><li><a href="global.html#createResetTemplate">createResetTemplate</a></li><li><a href="global.html#createSuccessMessageTemplate">createSuccessMessageTemplate</a></li><li><a href="global.html#displayForgotContent">displayForgotContent</a></li><li><a href="global.html#displayResetContent">displayResetContent</a></li><li><a href="global.html#done">done</a></li><li><a href="global.html#errorEmailExists">errorEmailExists</a></li><li><a href="global.html#errorTextLogIn">errorTextLogIn</a></li><li><a href="global.html#errorTextSignUp">errorTextSignUp</a></li><li><a href="global.html#evening">evening</a></li><li><a href="global.html#extractInitials">extractInitials</a></li><li><a href="global.html#feedback">feedback</a></li><li><a href="global.html#fillInFromLocalStorage">fillInFromLocalStorage</a></li><li><a href="global.html#filterTasks">filterTasks</a></li><li><a href="global.html#forgotPasswordLink">forgotPasswordLink</a></li><li><a href="global.html#generateForgotContent">generateForgotContent</a></li><li><a href="global.html#generateResetContent">generateResetContent</a></li><li><a href="global.html#generateTodoHTML">generateTodoHTML</a></li><li><a href="global.html#getConfirmPasswordInputValue">getConfirmPasswordInputValue</a></li><li><a href="global.html#getEmailInputValue">getEmailInputValue</a></li><li><a href="global.html#getGreeting">getGreeting</a></li><li><a href="global.html#getInitials">getInitials</a></li><li><a href="global.html#getItem">getItem</a></li><li><a href="global.html#getLoggedInUserName">getLoggedInUserName</a></li><li><a href="global.html#getPasswordInputValue">getPasswordInputValue</a></li><li><a href="global.html#getResetConfirmPasswordValue">getResetConfirmPasswordValue</a></li><li><a href="global.html#getResetPasswordValue">getResetPasswordValue</a></li><li><a href="global.html#handleForgotPasswordClick">handleForgotPasswordClick</a></li><li><a href="global.html#handleLogIn">handleLogIn</a></li><li><a href="global.html#handlePasswordInput">handlePasswordInput</a></li><li><a href="global.html#handlePasswordResetSubmission">handlePasswordResetSubmission</a></li><li><a href="global.html#hideForgotMatchError">hideForgotMatchError</a></li><li><a href="global.html#hideIndexContainer">hideIndexContainer</a></li><li><a href="global.html#hideResetMatchError">hideResetMatchError</a></li><li><a href="global.html#hideUserName">hideUserName</a></li><li><a href="global.html#inProgress">inProgress</a></li><li><a href="global.html#includeHTML">includeHTML</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initLogIn">initLogIn</a></li><li><a href="global.html#initRegister">initRegister</a></li><li><a href="global.html#isEmailAlreadyRegistered">isEmailAlreadyRegistered</a></li><li><a href="global.html#isEmailInUsersArray">isEmailInUsersArray</a></li><li><a href="global.html#isGuestUser">isGuestUser</a></li><li><a href="global.html#loadUsers">loadUsers</a></li><li><a href="global.html#logIn">logIn</a></li><li><a href="global.html#logOut">logOut</a></li><li><a href="global.html#markDesktopLink">markDesktopLink</a></li><li><a href="global.html#markMobileLink">markMobileLink</a></li><li><a href="global.html#morning">morning</a></li><li><a href="global.html#moveTo">moveTo</a></li><li><a href="global.html#noTasks">noTasks</a></li><li><a href="global.html#privacyCheck">privacyCheck</a></li><li><a href="global.html#rememberCheck">rememberCheck</a></li><li><a href="global.html#removeHoverButtonBackground">removeHoverButtonBackground</a></li><li><a href="global.html#removeHoverCheckedBackground">removeHoverCheckedBackground</a></li><li><a href="global.html#removeSuccessOverlay">removeSuccessOverlay</a></li><li><a href="global.html#renderSlideCard">renderSlideCard</a></li><li><a href="global.html#resetForm">resetForm</a></li><li><a href="global.html#resetFormStyle">resetFormStyle</a></li><li><a href="global.html#resetPasswordInputStyles">resetPasswordInputStyles</a></li><li><a href="global.html#resetSignUpFormStyle">resetSignUpFormStyle</a></li><li><a href="global.html#saveLoggedInUserData">saveLoggedInUserData</a></li><li><a href="global.html#saveUserDataOnLogin">saveUserDataOnLogin</a></li><li><a href="global.html#setCheckedState">setCheckedState</a></li><li><a href="global.html#setFilter">setFilter</a></li><li><a href="global.html#setItem">setItem</a></li><li><a href="global.html#setUncheckedState">setUncheckedState</a></li><li><a href="global.html#shakePasswordInput">shakePasswordInput</a></li><li><a href="global.html#shakeResetPasswordInput">shakeResetPasswordInput</a></li><li><a href="global.html#showEmailAlreadyRegisteredError">showEmailAlreadyRegisteredError</a></li><li><a href="global.html#showEmailNotFoundError">showEmailNotFoundError</a></li><li><a href="global.html#showForgotAndRedirect">showForgotAndRedirect</a></li><li><a href="global.html#showGreeting">showGreeting</a></li><li><a href="global.html#showLoggedInUserInitials">showLoggedInUserInitials</a></li><li><a href="global.html#showPasswordMatchError">showPasswordMatchError</a></li><li><a href="global.html#showResetAndRedirect">showResetAndRedirect</a></li><li><a href="global.html#showResetMatchError">showResetMatchError</a></li><li><a href="global.html#showSuccessMessageAndRedirect">showSuccessMessageAndRedirect</a></li><li><a href="global.html#signUpUser">signUpUser</a></li><li><a href="global.html#slideCard">slideCard</a></li><li><a href="global.html#startDragging">startDragging</a></li><li><a href="global.html#todo">todo</a></li><li><a href="global.html#toggleActiveClass">toggleActiveClass</a></li><li><a href="global.html#toggleMenu">toggleMenu</a></li><li><a href="global.html#togglePasswordVisibility">togglePasswordVisibility</a></li><li><a href="global.html#togglePrivacyCheck">togglePrivacyCheck</a></li><li><a href="global.html#togglerememberCheck">togglerememberCheck</a></li><li><a href="global.html#updateHTML">updateHTML</a></li><li><a href="global.html#updatePasswordVisibility">updatePasswordVisibility</a></li><li><a href="global.html#validateAndSubmitResetForm">validateAndSubmitResetForm</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Aug 22 2023 01:06:47 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

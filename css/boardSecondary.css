@@ -1,0 +1,206 @@
+.board-subtasks-container {
+    box-sizing: border-box;
+    display: flex;
+    padding-right: 0px;
+    justify-content: space-between;
+    align-items: center;
+    gap: 11px;
+    width: 218px;
+    height: 16px;
+}
+
+.progress-bar-container {
+    box-sizing: border-box;
+    display: flex;
+    width: 128px;
+    padding-right: 0px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: 8px;
+    background: #F4F4F4;
+}
+
+.progress-bar {
+    box-sizing: border-box;
+    width: 0;
+    height: 8px;
+    align-self: stretch;
+    border-radius: 16px;
+    background: #4589FF;
+
+}
+
+.subtasks {
+    color: #000;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+}
+
+.no-tasks-to-do {
+    box-sizing: border-box;
+    display: flex;
+    width: 250px;
+    height: 41px;
+    margin: 57px 8px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border-radius: 10px;
+    border: 1px dashed #A8A8A8;
+    background: #E7E7E7;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+}
+
+.no-tasks-to-do-text {
+    color: #A8A8A8;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+}
+
+.show-task-border{
+    cursor: pointer;
+    box-sizing: border-box;
+    display: flex;
+    height: 250px;
+    width: 250px;
+    padding: 18px 19px;
+    border-radius: 30px;
+    margin: 25px 8px;
+    border: 2px dashed rgba(0, 0, 0, 0.2);
+}
+
+.task-container .content-container:last-of-type {
+    margin-bottom: 70px;
+}
+
+@media(max-width: 1440px) {
+    .task-container .content-container:last-of-type {
+        margin: 25px 8px;
+    }
+}
+
+.rotate{
+    transform: rotate(10deg);
+}
+
+.hide{
+    visibility: hidden;
+}
+
+@media(max-width: 768px) {
+    .hide {
+        visibility: visible;
+    }
+}
+
+.card-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.dropdown img{
+    width: 24px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+  
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 30px 0px 30px 30px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #4589FF;
+    color: white;
+    border-radius: 30px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.negativ-gap {
+    position: relative;
+    left: -7px;
+}
+
+.negativ-gap--7 {
+    position: relative;
+    left: -7px;
+}
+
+.negativ-gap--14 {
+    position: relative;
+    left: -14px;
+}
+
+.negativ-gap--21 {
+    position: relative;
+    left: -21px;
+}
+
+.negativ-gap--28 {
+    position: relative;
+    left: -28px;
+}
+
+.prio-icon {
+    box-sizing: border-box;
+    display: flex;
+    width: 32px;
+    height: 32px;
+    padding: 10px 18px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.task-slide-delete:hover .task-slide-delete-edit-img {
+    content: url('../img/delete_hover.png');
+}
+
+.task-slide-delete:hover .task-slide-delete-text {
+    color: #005DFF;
+    font-weight: 700;
+}
+
+.task-slide-placeholder {
+    width: 0px;
+    height: 24px;
+    border: 1px solid #D1D1D1;
+}
+
+.task-slide-edit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}

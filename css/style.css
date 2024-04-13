@@ -1,0 +1,16 @@
+:root {
+    --bg-color: #4589FF;
+    --ligth-blue: #005DFF;
+    --btn-hover: #005DFF;
+    --style: #D1D1D1;
+    --menu: #42526E;
+    --guest-log-in: #647188;
+    --error: #FF8190;
+    --icon: #A8A8A8;
+    --arrow-hover: #E3EEFF;
+}
+
+body {
+    margin: 0;
+    font-family: 'Open sans', sans-serif;
+}

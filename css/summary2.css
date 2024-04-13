@@ -1,0 +1,205 @@
+@media(max-width: 1400px) {
+    .summery-container {
+        width: unset;
+        padding-top: 200px;
+    }
+
+    .greetings {
+        display: none;
+    }
+
+    .greetings-mobile {
+        z-index: 5;
+        background-color: white;
+        height: 100vh;
+        width: 100vw;
+        position: absolute;
+    }
+
+    .mobile-greeting-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 3px;
+        padding: 455px 73px 415px 73px;
+    }
+
+    .greetings-left-mobile {
+        font-size: 33px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 120%;
+    }
+
+    .greetings-right-mobile {
+        font-size: 47px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 120%;
+        color: #005DFF;
+    }
+
+    .task-urgent-todo {
+        height: 100%;
+        width: unset;
+    }
+
+    .task-urgent {
+        flex-direction: column;
+        height: 414px;
+        width: unset;
+    }
+
+    .task-urgent-container {
+        display: flex;
+        width: 396px;
+        height: 150px;
+        padding: 28px 48px;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .task-urgent-container:hover {
+        border-radius: 0px 30px 30px 30px;
+        background: var(--white, #FFF);
+        color: #4589FF;
+        width: 396px;
+        height: 150px;
+    }
+
+    .task-urgent-left {
+        width: 116px;
+        height: 98px;
+    }
+
+    .task-urgent-left-up {
+        width: 99px;
+        height: 76px;
+        gap: 7px;
+    }
+
+    .task-urgent-left-up img {
+        box-sizing: border-box;
+    }
+
+    .text-small {
+        font-size: 19px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 120%;
+    }
+
+    .task-urgent-left-down {
+        width: 116px;
+        height: 23px;
+        font-size: 19px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 120%;
+    }
+
+    .todo-task {
+        height: unset;
+        width: 23px;
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 120%;
+    }
+
+    .task-urgent-right {
+        width: 191px;
+        height: 49px;
+        align-items: flex-start;
+        gap: 2px;
+    }
+
+    .task-urgent-right h2 {
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 120%;
+        width: 191px;
+        height: 28px;
+    }
+
+    .task-urgent-right span {
+        width: 147px;
+        height: 19px;
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 120%;
+    }
+
+    .placeholder {
+        height: 118px;
+    }
+
+    .task-todo {
+        width: unset;
+        flex-direction: unset;
+        justify-content: unset;
+        gap: 16px;
+        width: 316px;
+        height: 76px;
+        padding: 15px 40px;
+    }
+
+    .task-todo-inner {
+        gap: 20px;
+    }
+
+    .text {
+        font-size: 19px;
+    }
+
+    .tasks-board {
+        flex-direction: column;
+        height: 470px;
+    }
+
+    .task-container {
+        box-sizing: border-box;
+        width: 186px;
+        height: 152px;
+        padding: 15px 40px;
+        gap: 7px;
+    }
+
+    .task-container-inner {
+        box-sizing: border-box;
+        width: 119px;
+        height: 76px;
+        gap: 20px;
+    }
+}
+
+
+@media(min-height: 800px) and (max-width: 1024px) {
+    .summery-container {
+        padding-bottom: 180px;
+    }
+}
+
+
+@media(max-width: 428px) {
+    .mobile {
+        transform: scale(0.7);
+    }
+
+    .summery-container {
+        padding-top: 8px;
+        height: unset;
+    }
+
+    .task-urgent {
+        height: unset;
+    }
+
+    .tasks-board {
+        height: unset;
+    }
+}

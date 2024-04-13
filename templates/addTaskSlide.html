@@ -1,0 +1,114 @@
+<div class="add-task-container">
+    <div class="add-task-container-first">
+        <div class="add-task-container-titel">
+            <div class="add-task-titel-textcontainer">
+                <input id="taskTitle" class="add-task-titel-textfield" placeholder="Enter a title"></input>
+            </div>
+            <div class="add-task-field-required">
+                This field is required
+            </div>
+        </div>
+        <div class="add-task-container-describtion">
+            <div class="add-task-describtion-header">Description</div>
+            <div class="add-task-describtion-inner">
+                <input id="taskDescription" class="add-task-describtion-textfield" placeholder="Enter a Description"></input>
+                <div class="add-task-describtion-textfield-inner">
+                    <div class="expand-describtion-field-picture">
+                        <img src="./img/recurso.png">
+                    </div>
+                </div>
+            </div>
+            <div class="add-task-field-required">
+                This field is required
+            </div>
+        </div>
+        <div class="due-date-container">
+            <div class="due-date-header">
+                Due date
+            </div>
+            <input id="dueDate" class="due-date-textfield" type="date" placeholder="dd/mm/yyyy"></input>
+        </div>
+    </div>
+    <div class="add-task-container-priority">
+        <div class="add-task-priority-header">
+            Priority
+        </div>
+        <div class="priority-choice">
+            <div class="priority-choice-inner">
+                <div class="priority-choice-inner-text">
+                    Urgent
+                </div>
+                <div class="priority-choice-inner-pic">
+                    <img src="./img/prio-high.png">
+                </div>
+            </div>
+            <div class="priority-choice-inner">
+                <div class="priority-choice-inner-text">
+                    Medium
+                </div>
+                <div class="priority-choice-inner-pic">
+                    <img src="./img/prio-medium.png">
+                </div>
+            </div>
+            <div class="priority-choice-inner">
+                <div class="priority-choice-inner-text">
+                    Low
+                </div>
+                <div class="priority-choice-inner-pic">
+                    <img src="./img/prio-low.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="assigned-to-container">
+        <div class="assigned-to-header">
+            Assigned to
+        </div>
+        <div class="assigned-to-choicefield">
+            <select class="assigned-to-dropdown">
+                <option value="" disabled selected>Select contacts to assign</option>
+                <option value="contact1">Contact 1</option>
+                <option value="contact2">Contact 2</option>
+                <option value="contact3">Contact 3</option>
+                <!-- Add more contacts as needed -->
+            </select>
+        </div>
+    </div>
+    <div class="category-container">
+        <div class="category-header">
+            Category
+        </div>
+        <div class="category-choicefield">
+            <select class="category-dropdown">
+                <option value="" disabled selected>Select task category</option>
+                <option value="category1">Category 1</option>
+                <option value="category2">Category 2</option>
+                <option value="category3">Category 3</option>
+                <!-- Add more categories as needed -->
+            </select>
+        </div>
+    </div>
+    <div class="subtasks-container">
+        <div class="subtasks-header">
+            Subtasks
+        </div>
+        <div class="add-subtask-input">
+            <input type="text" class="new-subtask-textfield" placeholder="Add new subtask">
+            <img class="add-subtask-button" src="./img/subtask.svg">
+        </div>
+    </div>
+</div>
+<div class="add-task-buttons">
+    <div class="add-task-buttons-inner">
+        <button class="button-clear">
+            <div class="button-clear-text"> Clear </div>
+            <div class="button-clear-pic"> <img src="./img/cancel-icon.svg"></div>
+        </button>
+        <button id="createTaskButton" class="button-create-task" onclick="createTask()">
+            <div class="button-create-task-text "> Create Task </div>
+            <div class="button-create-task-pic"> <img src="./img/check.svg"></div>
+        </button>
+
+    </div>
+
+</div>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Notice</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="css/legalNotice.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/imprint.css">
+    <script src="./js/app.js"></script>
+    <script src="./js/storage.js"></script>
+    <link rel="icon" type="image/png" href="img/join_logo_blue.png">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body onload="init()">
+    <div w3-include-html="./templates/header.html"></div>
+    <main>
+        <div w3-include-html="./templates/imprint.html"></div>
+        <section class="legal-notice-container">
+            <section class="legal-notice-header">
+                <h1>Impressum</h1>
+                <a href="board.html" class="arrow-container" onclick="closeCurrentTab(); return false;">
+                    <div class="arrow-left-icon"></div>
+                </a>
+            </section>
+
+            <section class="legal-container-information">
+                <section class="imprint-container">                    
+                    <h2>Angaben gem&auml;&szlig; &sect; 5 TMG</h2>
+                    <br>
+                    <p>Igor Stoleski<br />
+                    Neuffenstr. 30<br />
+                    73207 Plochingen</p>
+                    <br>
+                    <h2>Kontakt</h2>
+                    <br>
+                    E-Mail: kontakt@igor-stoleski.de</p>
+                    <br>
+                    <p>Quelle: <a href="https://www.e-recht24.de">eRecht24</a></p>
+                </section>
+            </section>
+        </section>
+    </main>
+    <script src="./js/help.js"></script>
+    <script src="./js/includeHTML.js"></script>
+    <script src="./js/uiHelpers.js"></script>
+</body>
+
+</html>

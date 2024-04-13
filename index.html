@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/indexSecondary.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/forgotPassword.css">
+    <link rel="stylesheet" href="css/resetPassword.css">
+    <script src="./js/app.js"></script>
+    <link rel="icon" type="image/png" href="img/join_logo_blue.png">
+</head>
+
+<body onload="initLogIn()">
+    <div class="index-container">
+        <header>
+            <img class="logo-small" src="img/join_logo_blue.png" alt="Join Logo">
+            <img class="logo-large" src="img/join_logo_large.png" alt="Join Logo">
+
+            <div class="sign-up-container">
+                <div class="not-a-user">Not a Join user?</div>
+                <div class="sign-up-btn-container">
+                    <a class="sign-up-btn" href="signUp.html">Sign up</a>
+                </div>
+            </div>
+        </header>
+
+        <form id="logInForm">
+            <main class="log-in-container">
+                <section class="log-in-main-header">
+                    <div class="log-in-sub-header">
+                        <div class="log-in-header-title">Log in</div>
+                        <div class="log-in-header-line"></div>
+                    </div>
+                </section>
+
+                <section class="log-in-formular">
+                    <section class="log-in-formular-container">
+                        <div class="log-in-info-box">
+                            <div class="log-in-input-frame">
+                                <input id="emailLogin" required type="email" class="log-in-text-input" name="email" autocomplete="email" placeholder="Email">
+                                <img class="log-in-icon" src="img/mail.png" alt="Email">
+                            </div>
+                        </div>
+                        <div class="log-in-info-box">
+                            <div id="log-in-input-frame" class="log-in-input-frame">
+                                <input id="passwordLogin" required type="password" class="log-in-text-input"
+                                    placeholder="Password" autocomplete="current-password">
+                                <img class="log-in-icon" src="img/lock.png" alt="Password" id="passwordIcon">
+                            </div>
+                        </div>
+                    </section>
+                    <div class="password-match-error" id="passwordMatchError">Wrong password Ups! Try again</div>
+                </section>
+
+                <section class="remember-me-container">
+                    <div class="remember-me-section">
+                        <img class="remember-me-icon" id="rememberCheck" src="img/check-button.png" alt="Check Button">
+                        <p class="remember-me-text">Remember me</p>
+                    </div>
+                    <div class="forgot-password-section">
+                        <div class="forgot-password-link">I forgot my password</div>
+                    </div>
+                </section>
+
+                <section class="log-in-btn-section">
+                    <div class="log-in-btn-container">
+                        <button id="loginBtn" class="log-in-btn">Log in</button>
+                    </div>
+                    <div class="guest-log-in-btn-container">
+                        <a href="summary.html" class="guest-log-in-btn">Guest Log in</a>
+                    </div>
+                </section>
+            </main>
+        </form>
+
+        <footer class="legal-notice-container">
+            <section class="legal-notice-sub-container">
+                <a class="legal-notice-text" href="privacyPolicy.html" target="_blank">Privacy Policy</a>
+            </section>
+            <section class="legal-notice-sub-container">
+                <a class="legal-notice-text" href="legalNotice.html" target="_blank">Legal Notice</a>
+            </section>
+        </footer>
+    </div>
+    <div id="forgot-content"></div>
+    <div id="reset-content"></div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/logIn.js"></script>
+    <script src="js/logInUi.js"></script>
+    <script src="js/forgotPassword.js"></script>
+    <script src="js/resetPassword.js"></script>
+    <script src="js/templates/resetPasswordTemplates.js"></script>
+    <script src="js/contact.js"></script>
+</body>
+
+</html>

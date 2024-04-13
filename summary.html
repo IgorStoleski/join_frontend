@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/summary.css">
+    <link rel="stylesheet" href="./css/summary2.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/aside.css">
+    <link rel="stylesheet" href="./css/fonts.css">
+    <script src="./js/app.js"></script>
+    <script src="./js/storage.js"></script>
+    <link rel="icon" type="image/png" href="./img/join_logo_blue.png">
+    <script src="./js/includeHTML.js"></script>
+</head>
+<body onload="init(); count()">
+    <div w3-include-html="./templates/header.html"></div>
+    <div w3-include-html="./templates/aside.html"></div>
+    <div id="mobile-container" class="greetings-mobile mobile-ani">
+        <div id="greetings-mobile" class="mobile-greeting-container">
+            <span id="mobile-day-time" class="greetings-left-mobile"></span>
+            <span id="user-name-mobile" class="greetings-right-mobile"></span>
+        </div>
+    </div>
+    <div class="center mobile">
+        <div class="summery-container">                  
+            <div class="greetings">
+                <div class="center-greetings">
+                    <span id="day-time" class="greetings-left"></span>
+                    <span id="user-name" class="greetings-right"></span>
+                </div>
+            </div>
+            <div class="task-urgent-todo mb-35">
+                <div class="task-urgent">
+                    <div class="task-urgent-container" onclick="location.href='board.html'">
+                        <div class="task-urgent-left">
+                            <div class="task-urgent-left-up">
+                                <img class="image-76 urgend-border" src="./img/urgent.png" alt="Todo liste">
+                                <span id="urgent-task" class="todo-task">0</span>
+                            </div>                            
+                            <div class="task-urgent-left-down text-w">
+                                <span class="text-small">Tasks Urgent</span>
+                            </div>
+                        </div>
+                        <div class="placeholder"></div>
+                        <div class="task-urgent-right">
+                            <h2 id="deadline">October 16, 2023</h2>
+                            <span>Upcoming Deadline</span>
+                        </div>
+                    </div>
+                    <div class="task-todo" onclick="location.href='board.html'">
+                        <div class="task-todo-inner">
+                            <img class="image-76" src="./img/to-do.png" alt="">
+                            <span id="todo-task" class="todo-task">0</span>
+                        </div>
+                        <div class="text-color-blue text">
+                            <span>Tasks To-do</span>
+                        </div>
+                    </div>
+                </div>    
+                <div class="tasks-board">
+                    <div class="tasks-board-left">
+                        <div class="task-container" onclick="location.href='board.html'">
+                            <div class="task-container-inner">
+                                <img class="image-76 urgend-border" src="./img/board.png" alt="">  
+                                <span id="board-task" class="todo-task">0</span>                  
+                            </div>
+                            <div class="center w-124 center-text">
+                                <span class="text-color-blue text">Task in <br> Board</span>   
+                            </div>
+                        </div>
+                        <div class="task-container" onclick="location.href='board.html'">
+                            <div class="task-container-inner">
+                                <img class="image-76 urgend-border" src="./img/in-progress.png" alt="">
+                                <span id="in-progress-task" class="todo-task">0</span>
+                            </div>
+                            <div class="center w-124 center-text">
+                                <span class="text-color-blue text">Task in <br> Progress</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tasks-board-right">
+                        <div class="task-container" onclick="location.href='board.html'">
+                            <div class="task-container-inner">
+                                <img class="image-76 urgend-border" src="./img/awaiting-feedback.png" alt="">
+                                <span id="feedback-task" class="todo-task">0</span>
+                            </div>
+                            <div class="center w-124 center-text">
+                                <span class="text-color-blue text">Awaiting <br> Feedback</span>
+                            </div>
+                        </div>
+                        <div class="task-container" onclick="location.href='board.html'">
+                            <div class="task-container-inner">
+                                <img class="image-76 urgend-border" src="./img//done.png" alt="">
+                                <span id="done-task" class="todo-task">0</span>
+                            </div>
+                            <div class="center w-124 center-text">
+                                <span class="text-color-blue text">Tasks <br> Done</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>                 
+            </div>                               
+        </div>  
+    </div>  
+    <script src="./js/summary.js"></script>
+    <script src="./js/summaryCounter.js"></script>
+    <script src="./js/uiHelpers.js"></script>
+</body>
+</html>
