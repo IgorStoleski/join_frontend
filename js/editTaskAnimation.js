@@ -8,11 +8,12 @@ let currentTaskId;
  * @param {number} id - The ID of the task to be edited.
  */
 function editTask(id) {
+  const element = todos.find(todo => todo.id === id);
   document.body.style.overflow = 'hidden';
   const slideEditTask = document.getElementById("task-slide");
-  slideEditTask.innerHTML = renderEditTask(id);
-  const element = todos[id];
-  currentTaskId = id;
+  slideEditTask.innerHTML = renderEditTask(element);
+  /* const element = todos[id]; */
+  /* currentTaskId = id; */
   currentSelectedTask = element;
   addSubtaskToEdit(element);
   loadSelectedPriority(element);
@@ -67,11 +68,11 @@ function updateElementProperties(element) {
  * @param {number} id - The ID of the task being saved.
  */
 async function saveEditedTask(id) {
-  const element = todos[id];
+  const element = todos.find(todo => todo.id === id);
+  const pk = id;
   updateElementProperties(element);
-  todos[id] = element;
-  await setItem("tasks", JSON.stringify(todos));
-  openEditedTask(element.id);
+  await setUpdateTask(element, pk);
+  openEditedTask(id);
   selectedContacts = [];
   document.body.style.overflow = 'auto';
 }

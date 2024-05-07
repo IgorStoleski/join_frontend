@@ -32,8 +32,8 @@ function refreshHTML() {
 /**
  * Push the current tasks data into storage.
  */
-async function pushData() {
-  await setItem("tasks", JSON.stringify(todos));
+async function pushData(task, pk) {
+  await setUpdateTask(task, pk);
 }
 
 
@@ -42,7 +42,7 @@ async function pushData() {
  */
 async function loadData() {
   try {
-    todos = JSON.parse(await getItem("tasks"));
+    todos = await getTasks();
   } catch (e) {
     console.error("Loading error:", e);
   }
@@ -54,7 +54,7 @@ async function loadData() {
  */
 async function loadContactsFromStorage() {
   try {
-    contacts = JSON.parse(await getItem("contacts"));
+    contacts = await loadAllContacts();
   } catch (e) {
     console.error("Loading error:", e);
   }
@@ -272,7 +272,7 @@ function generateTasks(element) {
   const priorityImageSrc = setPriorityImage(element.priority);
   assignedToHTML = renderAssigned(element);
   const completedTasksCount = renderSubtask(element);
-  const allTasksCount = element.subtasks.length;
+  const allTasksCount = element.subtasks ? element.subtasks.length : 0;
   const progress = (completedTasksCount / allTasksCount) * 100;
   const progressBar = progressBarHTML(element, progress);
   const numberTasks = numberTasksHTML(completedTasksCount);
@@ -330,7 +330,7 @@ function setPriorityImage(priority) {
  * @param {number} id - ID of the task that's being dragged.
  */
 function startDragging(id) {
-  currentDraggedElement = id;
+  currentDraggedElement = todos.find(todo => todo.id === id);
   startRotateCard(id);
   showAllTaskBorders();
 }
@@ -351,8 +351,10 @@ function allowDrop(ev) {
  * @param {string} status - The new status for the dragged task.
  */
 function moveTo(status) {
-  todos[currentDraggedElement].status = status;
-  pushData();
+  currentDraggedElement.status = status;
+  const pk = currentDraggedElement.id;
+  const task = currentDraggedElement;
+  pushData(task, pk);
   loadData();
   updateHTML();
 }

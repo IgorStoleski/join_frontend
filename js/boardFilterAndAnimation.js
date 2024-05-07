@@ -138,7 +138,11 @@ function slideCard(id) {
  * @returns {string} HTML markup for the slide card.
  */
 function renderSlideCard(id) {
-    const element = todos[id];
+    const element = todos.find(todo => todo.id === id);
+    if (!element) {
+        console.error(`No todo found with id: ${id}`);
+        return;
+    }
     const priorityImageSrc = setPriorityImage(element.priority);
     assignedToHTML = renderSlideAssigned(element);
     subtasksHTML = renderSlideSubtask(element, id);
@@ -266,7 +270,7 @@ function renderAssigned(element) {
  */
 function filterAndColor(element) {
     return {
-        filteredAssignedTo: element.assignedTo.filter(name => name !== undefined),
+        filteredAssignedTo: element.assignedTo ? element.assignedTo.filter(name => name !== undefined) : [],
         bgcolors: element.bgcolor
     };
 }

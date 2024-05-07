@@ -16,16 +16,9 @@ async function initContact() {
 }
 
 
-/**
- * Loads all contacts from the storage.
- */
-async function loadAllContacts() {
-    try {
-        contacts = JSON.parse(await getItem('contacts'));
-    } catch (e) {
-        console.error('Loading error:', e);
-    }
-}
+
+
+
 
 
 /**

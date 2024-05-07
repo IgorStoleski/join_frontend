@@ -3,7 +3,6 @@
  * and loading tasks asynchronously.
  */
 async function initAddTask() {
-    await addLoadContactsFromStorage();
     await addLoadTasks();
 }
 
@@ -12,13 +11,14 @@ async function initAddTask() {
  * Asynchronously loads contacts data from storage and assigns it to the 'contacts' variable.
  * @throws {Error} Throws an error if there's an issue parsing or loading the data.
  */
-async function addLoadContactsFromStorage() {
+/* async function addLoadContactsFromStorage() {
     try {
-        contacts = JSON.parse(await getItem('contacts'));
+        contacts = await loadAllContacts();
+        console.log('load contacts for add TAsk:', contacts);
     } catch (e) {
         console.error('Loading error:', e);
     }
-}
+} */
 
 
 /**
@@ -28,7 +28,7 @@ async function addLoadContactsFromStorage() {
  */
 async function addLoadTasks() {
     try {
-        todos = JSON.parse(await getItem('tasks'));
+        todos = await getTasks();
     } catch (e) {
         console.error('Loading error:', e);
     }
@@ -108,26 +108,20 @@ function addValidateSelections(title, description, dueDate) {
 function processValidInput(title, description, dueDate) {
     const extractedBgcolors = addExtractBgcolor(selectedContacts);
     const cleanedSelectedContacts = selectedContacts.filter(contact => contact !== null && contact !== undefined);   
-    const highestId = todos.reduce((maxId, currentTodo) => {
-        return currentTodo.id > maxId ? currentTodo.id : maxId;
-    }, 0);
-
-    const newTodoId = highestId + 1;
-
+    
     const newTodo = {
-        id: newTodoId,
         title: title,
         description: description,
-        category: selectedCategory,
-        status: selectedStatus,
+        category: selectedCategory, 
+        status: 'todo',
         priority: selectedPriority,
-        dueDate: dueDate,
+        due_date: dueDate,
         assignedTo: cleanedSelectedContacts,
         bgcolor: extractedBgcolors,
         subtasks: subtasks
     };
     todos.push(newTodo);
-    addCompleteTaskCreation();
+    addCompleteTaskCreation(newTodo);
 }
 
 
@@ -139,8 +133,8 @@ function processValidInput(title, description, dueDate) {
  * 4. Updates the HTML to reflect the changes.
  * @throws {Error} Throws an error if an error occurs during local storage operation.
  */
-async function addCompleteTaskCreation() {
-    await setItem('tasks', JSON.stringify(todos));
+async function addCompleteTaskCreation(newTodo) {
+    await setTask(newTodo);
     addShowCreatedTaskMessage();
     addResetTaskForm();
     closeAddTaskModal();

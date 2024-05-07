@@ -1,24 +1,12 @@
 let formSubmitted = false;
 let rememberLogIn = false;
-
+let userId;
 
 /**
  * Initializes the login process by loading user data.
  */
 async function initLogIn() {
     await loadAllContacts();
-}
-
-
-/**
- * Loads users from storage
- */
-async function loadAllContacts() {
-    try {
-        contacts = JSON.parse(await getItem('contacts'));
-    } catch (e) {
-        console.error('Loading error:', e);
-    }
 }
 
 
@@ -39,19 +27,36 @@ document.getElementById('logInForm').addEventListener('submit', function (event)
  * @param {string} password - The user's password.
  * @returns {boolean} - Returns true if the login is successful, false otherwise.
  */
-function logIn(email, password) {
+async function logIn(email, password, formSubmitted = true) {
     let isLoggedIn = false;
-    for (let i = 0; i < contacts.length; i++) {
-        const user = contacts[i];
-        if (user.email === email && user.password === password) {
+    let userToken = null;
+    let id = null;
+
+    try {
+        const response = await fetch(STORAGE_URL + 'login/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password })
+        });
+        const data = await response.json();
+        if (response.ok) {
+            userToken = data.token;
+            id = data.user_id;
+            saveAuthToken(userToken);
             isLoggedIn = true;
-            break;
+            userId = id;
+            handleSuccessfulLogIn(id);
+            
+        } else {
+            if (formSubmitted) shakePasswordInput(); 
         }
+    } catch (e) {
+        console.error('Netzwerkfehler beim Login:', e);
+        if (formSubmitted) shakePasswordInput(); 
     }
-    if (!isLoggedIn && formSubmitted) {
-        shakePasswordInput();
-    }
-    formSubmitted = false;
+
     return isLoggedIn;
 }
 
@@ -69,36 +74,48 @@ function handleLogIn() {
 
     let isLoggedIn = logIn(email, password);
 
-    if (isLoggedIn) {
-        handleSuccessfulLogIn(email, password);
-    } else {
+    if (!isLoggedIn) {
         handleFailedLogIn();
     }
 }
-
-
 /**
 * Handles the actions after a successful login.
 * @param {string} email - The user's email.
 * @param {string} password - The user's password.
 */
-function handleSuccessfulLogIn(email, password) {
-    let loggedInUser = findLoggedInUser(email, password);
-
+async function handleSuccessfulLogIn(pk) {
+    const loggedInUser = await fetchUserDetails(pk);
     if (loggedInUser) {
-        let initials = extractInitials(loggedInUser.name, loggedInUser.surname);
-
+        let initials = extractInitials(loggedInUser.username, loggedInUser.last_name);
         let userData = {
             email: loggedInUser.email,
-            name: loggedInUser.name,
-            surname: loggedInUser.surname,
-            password: loggedInUser.password,
+            name: loggedInUser.username,
+            surname: loggedInUser.last_name,
             initials: initials,
-            rememberStatus: rememberLogIn,
             isLoggedIn: true
         };
         saveLoggedInUserData(userData);
         window.location.href = 'summary.html';
+    } else {
+        console.error('Could not retrieve user data');
+    }
+}
+
+async function fetchUserDetails(pk) {
+    const token = getAuthToken();
+    const response = await fetch(STORAGE_URL + 'users/' + pk + '/', { 
+        method: 'GET',
+        headers: {
+            'Authorization': `Token ${token}`,
+            'Content-Type': 'application/json'
+        }
+    });
+
+    if (response.ok) {
+        return await response.json();
+    } else {
+        console.error('Failed to fetch user details');
+        return null;
     }
 }
 
@@ -118,8 +135,8 @@ function handleFailedLogIn() {
  * @param {string} password - The password of the user.
  * @returns {Object | undefined} The user object if found; otherwise, undefined.
  */
-function findLoggedInUser(email, password) {
-    return contacts.find(contact => contact.email === email && contact.password === password);
+function extractInitials(username, lastName) {
+    return `${username.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
 }
 
 

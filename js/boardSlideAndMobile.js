@@ -79,7 +79,7 @@ function renderSlideCardHTML(
                 <span id="task-slide-description" class="task-slide-description">${element.description}</span>
                 <div class="task-slide-due-date-container">
                     <span class="task-slide-due-date">Due date: </span>
-                    <span id="task-slide-due-date" class="task-slide-due-date-date">${element.dueDate}</span>
+                    <span id="task-slide-due-date" class="task-slide-due-date-date">${element.due_date}</span>
                 </div>
                 <div class="task-slide-prio-container">
                     <span class="task-slide-prio-text">Priority: </span>

@@ -28,11 +28,10 @@ function subtaskToEditHTML(subtask, i) {
  * Generates the HTML markup for the task edit view. 
  * @param {number} id - The ID of the task to be edited.
  */
-function renderEditTask(id) {
-    const task = todos.find((todo) => todo.id === id);
+function renderEditTask(task) {
     return /* html */ `
         <div id="edit-slide-container" class="edit-slide-container">
-            <form id="edit-taskForm" onsubmit="saveEditedTask(${id}); return false;" class="edit-task-slide-container">
+            <form id="edit-taskForm" onsubmit="saveEditedTask(${task.id}); return false;" class="edit-task-slide-container">
                 <div class="edit-add-task-container scroll-slide-edit-container">
                     <div class="edit-add-task-container-first">
                         <div class="edit-add-task-container-titel">
@@ -57,7 +56,7 @@ function renderEditTask(id) {
                             Due date
                         </div>
                         <div class="edit-due-date-input-container">
-                            <input id="edit-due-date" class="edit-due-date-textfield" type="date">
+                            <input id="edit-due-date" class="edit-due-date-textfield" type="date" value="${task.due_date}">
                         </div>
                         <div id="edit-required-date" class="edit-add-task-field-required">
                             This field is required

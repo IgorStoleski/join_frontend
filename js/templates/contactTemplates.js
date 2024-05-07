@@ -150,7 +150,11 @@ function generateAddContactModalHTML() {
                 </div>
                 <div class="modal-input-row">
                     <div class="modal-input-frame">
-                        <input class="modal-input-field" required type="text" id="fullName" placeholder="Name" pattern="[A-Za-z].*" title="Das erste Zeichen muss ein Buchstabe sein.">
+                        <input class="modal-input-field" required type="text" id="Name" placeholder="Name" pattern="[A-Za-z].*" title="Das erste Zeichen muss ein Buchstabe sein.">
+                        <img class="modal-input-icon" src="img/person.png" alt="Name">
+                    </div>
+                    <div class="modal-input-frame">
+                        <input class="modal-input-field" required type="text" id="Surname" placeholder="Surname" pattern="[A-Za-z].*" title="Das erste Zeichen muss ein Buchstabe sein.">
                         <img class="modal-input-icon" src="img/person.png" alt="Name">
                     </div>
                     <div class="modal-input-frame">
@@ -204,7 +208,11 @@ function generateEditContactModalHTML(index, initials, contact) {
          </div>
          <div class="modal-input-row">
              <div class="modal-input-frame">
-                     <input class="modal-input-field" required type="text" id="editFullName" placeholder="Name" pattern="[A-Za-z].*" title="Das erste Zeichen muss ein Buchstabe sein.">
+                     <input class="modal-input-field" required type="text" id="editName" placeholder="Name" pattern="[A-Za-z].*" title="Das erste Zeichen muss ein Buchstabe sein.">
+                     <img class="modal-input-icon" src="img/person.png" alt="Name"> 
+             </div>
+             <div class="modal-input-frame">
+                     <input class="modal-input-field" required type="text" id="editSurname" placeholder="Surname" pattern="[A-Za-z].*" title="Das erste Zeichen muss ein Buchstabe sein.">
                      <img class="modal-input-icon" src="img/person.png" alt="Name"> 
              </div>
              <div class="modal-input-frame">

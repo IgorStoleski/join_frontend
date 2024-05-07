@@ -4,8 +4,8 @@
  * @throws {Error} Throws an error if any of the asynchronous operations fail.
  */
 async function initTask() {
-    await loadContactsFromStorage();
-    await loadTasks();
+    await loadAllContacts();
+    //await getTasks();
     await renderAssignedTo();
     renderCategorys();
 }
@@ -17,26 +17,26 @@ async function initTask() {
  * Logs an error to the console if any exception occurs during the loading or parsing process.
  * @throws {Error} Throws an error if there's an issue loading or parsing the 'contacts' data.
  */
-async function loadContactsFromStorage() {
+/* async function loadContactsFromStorage() {
     try {
         contacts = JSON.parse(await getItem('contacts'));
     } catch (e) {
         console.error('Loading error:', e);
     }
-}
+} */
 
 
 /**
  * Asynchronously loads tasks from backend.
  * @throws {Error} When there's an issue parsing the tasks from JSON.
  */
-async function loadTasks() {
+/* async function loadTasks() {
     try {
         todos = JSON.parse(await getItem('tasks'));
     } catch (e) {
         console.error('Loading error:', e);
     }
-}
+} */
 
 
 /**
@@ -142,25 +142,20 @@ function validateSelections(title, description, dueDate) {
 function processValidInput(title, description, dueDate) {
     const extractedBgcolors = extractBgcolor(selectedContacts);
     const cleanedSelectedContacts = selectedContacts.filter(contact => contact !== null && contact !== undefined);
-    const highestId = todos.reduce((maxId, currentTodo) => {
-        return currentTodo.id > maxId ? currentTodo.id : maxId;
-    }, 0);
-    const newTodoId = highestId + 1;
-
+    
     const newTodo = {
-        id: newTodoId,
         title: title,
         description: description,
         category: selectedCategory, 
         status: statusFromURL || 'todo',
         priority: selectedPriority,
-        dueDate: dueDate,
+        due_date: dueDate,
         assignedTo: cleanedSelectedContacts,
         bgcolor: extractedBgcolors,
         subtasks: subtasks
     };
     todos.push(newTodo);
-    completeTaskCreation();
+    completeTaskCreation(newTodo);
 }
 
 
@@ -168,8 +163,8 @@ function processValidInput(title, description, dueDate) {
  * Completes the task creation by storing the tasks and showing relevant messages.
  * @throws {Error} Throws an error if there's a problem during task creation completion.
  */
-async function completeTaskCreation() {
-    await setItem('tasks', JSON.stringify(todos));
+async function completeTaskCreation(newTodo) {
+    await setTask(newTodo);
     showCreatedTaskMessage();
     resetTaskForm();
 }

@@ -21,8 +21,8 @@ async function count() {
  * @throws {Error} Throws an error if the data cannot be parsed or loaded.
  */
 async function loadData(){
-    const getTodos = await getItem('tasks');
-    counter = JSON.parse(getTodos);
+    const getTodos = await getTasks();
+    counter = getTodos;
 }
 
 
@@ -62,8 +62,8 @@ function findNearestDueDate() {
     const now = new Date().getTime();
     let nearestDueDate = null;
     for (const task of counter) {
-        if (task.dueDate) {
-            const taskDueDate = new Date(task.dueDate).getTime();
+        if (task.due_date) {
+            const taskDueDate = new Date(task.due_date).getTime();
             if (!nearestDueDate || Math.abs(taskDueDate - now) < Math.abs(nearestDueDate - now)) {
                 nearestDueDate = taskDueDate;
             }

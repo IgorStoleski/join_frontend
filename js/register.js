@@ -4,21 +4,21 @@ let isChecked = false;
 /**
  * Initializes the registration process by loading user data.
  */
-async function initRegister() {
+/* async function initRegister() {
     await loadAllContacts();
-}
+} */
 
 
 /**
  * 
  */
-async function loadAllContacts() {
+/* async function loadAllContacts() {
     try {
         contacts = JSON.parse(await getItem('contacts'));
     } catch (e) {
         console.error('Loading error:', e);
     }
-}
+} */
 
 
 /**
@@ -36,6 +36,7 @@ document.getElementById('signUpForm').addEventListener('submit', function (event
  */
 async function signUpUser() {
     const username = document.getElementById('username').value;
+    const usersurname = document.getElementById('usersurname').value;
     const passWord = getPasswordInputValue();
     const confirmPassword = getConfirmPasswordInputValue();
     const emailValue = email.value;
@@ -59,7 +60,7 @@ async function signUpUser() {
         return;
     }
 
-    let newContact = createNewContact(username, emailValue, passWord);
+    let newContact = createNewContact(username, usersurname, emailValue, passWord);
     registerContact(newContact);
 }
 
@@ -106,16 +107,16 @@ function isValidUsername(username) {
  * @param {string} password - The password associated with the contact.
  * @returns {Object} Returns a new contact object.
  */
-function createNewContact(username, email, password) {
+function createNewContact(username, usersurname, email, password) {
     let maxContactId = Math.max(...contacts.map(contact => contact.id), -1);
     let nextContactId = maxContactId + 1;
-    let { newName, newsurname } = extractNameParts(username);
+    
 
     return {
         bgcolor: getRandomColor(),
         id: nextContactId,
-        name: newName,
-        surname: newsurname,
+        name: username,
+        surname: usersurname,
         email,
         telefon: '',
         password,
@@ -142,7 +143,15 @@ function extractNameParts(username) {
  */
 async function registerContact(newContact) {
     contacts.push(newContact);
-    await setItem('contacts', JSON.stringify(contacts));
-    showSuccessMessageAndRedirect();
+    try {
+        const response = await setRegisterUser('users', newContact);
+        if (response.success) {
+            showSuccessMessageAndRedirect();
+        } else {
+            throw new Error('Failed to register user: ' + response.message);
+        }
+    } catch (error) {
+        console.error('Error registering new contact:', error);
+    }
     resetForm();
 }
