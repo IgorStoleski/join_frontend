@@ -1,26 +1,5 @@
 let isChecked = false;
 
-
-/**
- * Initializes the registration process by loading user data.
- */
-/* async function initRegister() {
-    await loadAllContacts();
-} */
-
-
-/**
- * 
- */
-/* async function loadAllContacts() {
-    try {
-        contacts = JSON.parse(await getItem('contacts'));
-    } catch (e) {
-        console.error('Loading error:', e);
-    }
-} */
-
-
 /**
  * Listens for the form submission event and handles registration process.
  */
@@ -39,7 +18,7 @@ async function signUpUser() {
     const usersurname = document.getElementById('usersurname').value;
     const passWord = getPasswordInputValue();
     const confirmPassword = getConfirmPasswordInputValue();
-    const emailValue = email.value;
+    const emailValue = document.getElementById('email').value;
 
     resetSignUpFormStyle();
 
@@ -108,18 +87,13 @@ function isValidUsername(username) {
  * @returns {Object} Returns a new contact object.
  */
 function createNewContact(username, usersurname, email, password) {
-    let maxContactId = Math.max(...contacts.map(contact => contact.id), -1);
-    let nextContactId = maxContactId + 1;
-    
 
     return {
-        bgcolor: getRandomColor(),
-        id: nextContactId,
-        name: username,
-        surname: usersurname,
-        email,
-        telefon: '',
-        password,
+        username: username,
+        first_name: username,
+        last_name: usersurname,
+        email: email,
+        password: password,
     };
 }
 
@@ -142,13 +116,12 @@ function extractNameParts(username) {
  * @param {Object} newContact - The contact object to be registered.
  */
 async function registerContact(newContact) {
-    contacts.push(newContact);
     try {
-        const response = await setRegisterUser('users', newContact);
-        if (response.success) {
+        const response = await setRegisterUser(newContact);
+        if (response) {
             showSuccessMessageAndRedirect();
         } else {
-            throw new Error('Failed to register user: ' + response.message);
+            throw new Error('Failed to register user: ' + (response.message || JSON.stringify(response)));
         }
     } catch (error) {
         console.error('Error registering new contact:', error);

@@ -105,8 +105,8 @@ async function deleteContactBackend(pk) {
     });
 }
 
-async function setRegisterUser(key, value) {
-    const payload = { key, value };
+async function setRegisterUser(newUser) {
+    const payload = newUser;
     const headers = {
         'Content-Type': 'application/json'  
     };
@@ -117,7 +117,9 @@ async function setRegisterUser(key, value) {
     })
     .then(response => {
         if (!response.ok) {
-            throw new Error('Network response was not ok: ' + response.statusText);
+            return response.json().then(err => {
+                throw new Error('Network response was not ok: ' + JSON.stringify(err));
+            });
         }
         return response.json();
     });
