@@ -9,7 +9,7 @@ let todos = [];
 
 
 let STORAGE_TOKEN;
-const STORAGE_URL = 'http://localhost:8000/';
+const STORAGE_URL = 'http://127.0.0.1:8000/';
 
 
 async function loadAllContacts() {
@@ -30,7 +30,6 @@ async function loadAllContacts() {
         if (response.ok) {
             const data = await response.json();
             contacts = data; 
-            console.log('Contacts loaded successfully: Storage.js', contacts);
             return contacts; 
         } else {
             throw new Error('Failed to load contacts. Server responded with status: ' + response.status);
@@ -218,19 +217,22 @@ async function deleteTaskBackend(pk) {
 
 async function getTasks() {
     const token = getAuthToken();
-    const headers = new Headers({
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
+    const response = await fetch(STORAGE_URL + 'tasks/', {
+        method: 'GET',
+        headers: new Headers({
+            'Authorization': `Token ${token}`,
+            'Content-Type': 'application/json'
+        })    
     });
-
     try {
-        const response = await fetch(`${STORAGE_URL}tasks/`, { headers: headers });
-        if (!response.ok) {
-            throw new Error(`HTTP status ${response.status}`);
+        if (response.ok) {
+            const data = await response.json();
+            todos = data;
+            return todos;
+        } else {
+            throw new Error('Failed to fetch tasks. Server responded with status: ' + response.status);
         }
-        const data = await response.json();
-        todos = data;
-        return todos;
+        
     } catch (error) {
         console.error('Error fetching tasks:', error);
         throw new Error('Could not fetch tasks.');
