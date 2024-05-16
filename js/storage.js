@@ -43,13 +43,13 @@ async function loadAllContacts() {
 async function setContact(contact) {
     const token = getAuthToken();
     const payload = {
-        ...contact,  
-        token: token
+        ...contact
     };
     return fetch(STORAGE_URL + 'contacts/', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${token}`
         },
         body: JSON.stringify(payload)
     }).then(res => {
@@ -178,7 +178,6 @@ async function setTask(task) {
 async function setUpdateTask(task, pk) {
     const token = getAuthToken();
     const payload = { ...task};
-    console.log(payload);
     return fetch(STORAGE_URL + 'tasks/' + pk + '/', {
         method: 'PUT',
         body: JSON.stringify(payload),
@@ -188,7 +187,6 @@ async function setUpdateTask(task, pk) {
     }).then(async res => {
         const responseData = await res.json();
         if (!res.ok) {
-            console.error('Error updating task:', responseData.detail || 'Unknown error');
             throw new Error('Failed to update task. Status: ' + res.status);
         }
         return responseData;

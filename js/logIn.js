@@ -7,7 +7,6 @@ let userId;
  */
 async function initLogIn() {
     await loadAllContacts();
-    isAuthenticated();
 }
 
 function guestLogin() {

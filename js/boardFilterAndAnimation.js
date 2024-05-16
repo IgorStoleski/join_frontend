@@ -89,8 +89,10 @@ function closeCard() {
     setTimeout(() => {
         document.getElementById("task-slide").classList.add("d-none");
         document.getElementById("noscroll").classList.remove("noscroll");
+        location.reload();
     }, 100);
     document.body.style.overflow = 'auto';
+    
 }
 
 
