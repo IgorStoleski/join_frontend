@@ -66,12 +66,13 @@ async function setContact(contact) {
 
 async function setUpdateContact(contact, pk) {  
     const token = getAuthToken();
-    const payload = {...contact, token};    
+    const payload = {...contact};    
     return fetch(STORAGE_URL + 'contacts/' + pk + '/', {  
         method: 'PUT', 
         body: JSON.stringify(payload),
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${token}` 
         }
     }).then(async res => {
         const responseData = await res.json();
