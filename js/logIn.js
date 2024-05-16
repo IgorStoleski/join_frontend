@@ -7,6 +7,13 @@ let userId;
  */
 async function initLogIn() {
     await loadAllContacts();
+    isAuthenticated();
+}
+
+function guestLogin() {
+    let email = 'gast@login.de';
+    let password = 'gastlogin';
+    logIn(email, password, false);
 }
 
 

@@ -148,9 +148,11 @@ function logOut() {
         let loggedInUser = JSON.parse(loggedInUserJSON);
         if (!loggedInUser.rememberStatus) {
             removeAuthToken();
+            localStorage.removeItem('loggedInUser');
         }
     }
     removeAuthToken();
+    localStorage.removeItem('loggedInUser');
     window.location.replace('index.html');
 }
 
