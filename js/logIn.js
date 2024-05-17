@@ -37,6 +37,7 @@ async function logIn(email, password, formSubmitted = true) {
     let isLoggedIn = false;
     let userToken = null;
     let id = null;
+    let newUserContact = null;
 
     try {
         const response = await fetch(STORAGE_URL + 'login/', {
@@ -48,12 +49,15 @@ async function logIn(email, password, formSubmitted = true) {
         });
         const data = await response.json();
         if (response.ok) {
+            newUserContact = getContactData()
             userToken = data.token;
             id = data.user_id;
             saveAuthToken(userToken);
             isLoggedIn = true;
             userId = id;
             handleSuccessfulLogIn(id);
+            setContact(newUserContact);
+            localStorage.removeItem('userContact');
             
         } else {
             if (formSubmitted) shakePasswordInput(); 

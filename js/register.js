@@ -110,12 +110,29 @@ function extractNameParts(username) {
     return { newName, newsurname };
 }
 
+function createNewUserContact (username, usersurname, email) {
+    const bgcolor = getRandomColor();
+    return {
+        name: username,
+        surname: usersurname,
+        email: email,
+        telefon: '',
+        bgcolor: bgcolor
+    };
+}
+
 
 /**
  * Registers a new contact, updates the storage, and performs related actions.
  * @param {Object} newContact - The contact object to be registered.
  */
 async function registerContact(newContact) {
+    const userContact = createNewUserContact(
+        newContact.username,
+        newContact.last_name,
+        newContact.email
+    );
+    setContactData(userContact);
     try {
         const response = await setRegisterUser(newContact);
         if (response) {
@@ -127,4 +144,8 @@ async function registerContact(newContact) {
         console.error('Error registering new contact:', error);
     }
     resetForm();
+}
+
+function setContactData(contact) {
+    localStorage.setItem('userContact', JSON.stringify(contact));
 }

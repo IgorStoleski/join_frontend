@@ -107,22 +107,21 @@ async function deleteContactBackend(pk) {
 }
 
 async function setRegisterUser(newUser) {
-    const payload = newUser;
-    const headers = {
-        'Content-Type': 'application/json'  
-    };
-    return fetch(STORAGE_URL + "register/", {
+    return fetch(STORAGE_URL + 'register/', {
         method: 'POST',
-        headers: headers,  
-        body: JSON.stringify(payload)
-    })
-    .then(response => {
-        if (!response.ok) {
-            return response.json().then(err => {
-                throw new Error('Network response was not ok: ' + JSON.stringify(err));
-            });
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newUser)
+    }).then(res => {
+        if (res.ok) {
+            return res.json();
+        } else {
+            throw new Error(`Failed to register user: ${res.status}`);
         }
-        return response.json();
+    }).catch(error => {
+        console.error('Error registering user:', error.message);
+        return null;
     });
 }
 
@@ -253,6 +252,10 @@ function getAuthToken() {
 function removeAuthToken() {
     localStorage.removeItem('authToken');
     STORAGE_TOKEN = null; 
+}
+
+function getContactData() {
+    return JSON.parse(localStorage.getItem('userContact'));
 }
 
 
