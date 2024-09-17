@@ -9,7 +9,7 @@ let todos = [];
 
 
 let STORAGE_TOKEN;
-const STORAGE_URL = 'http://127.0.0.1:8000/';
+const STORAGE_URL = 'https://backend.kanban-join.de/';
 
 
 async function loadAllContacts() {
