@@ -53,7 +53,7 @@ function updateElementFromInput(element, inputId, prop) {
 function updateElementProperties(element) {
   updateElementFromInput(element, "edit-task-title", "title");
   updateElementFromInput(element, "edit-task-description", "description");
-  updateElementFromInput(element, "edit-due-date", "dueDate");
+  element.due_date = document.getElementById("edit-due-date").value;
   element.status = element.status;
   element.category = selectedCategory;
   element.priority = selectedPriority;
