@@ -10,31 +10,6 @@ async function initTask() {
   renderCategorys();
 }
 
-/**
- * Asynchronously loads contacts from storage.
- * Parses the stored JSON data for 'contacts' key and assigns it to the contacts variable.
- * Logs an error to the console if any exception occurs during the loading or parsing process.
- * @throws {Error} Throws an error if there's an issue loading or parsing the 'contacts' data.
- */
-/* async function loadContactsFromStorage() {
-    try {
-        contacts = JSON.parse(await getItem('contacts'));
-    } catch (e) {
-        console.error('Loading error:', e);
-    }
-} */
-
-/**
- * Asynchronously loads tasks from backend.
- * @throws {Error} When there's an issue parsing the tasks from JSON.
- */
-/* async function loadTasks() {
-    try {
-        todos = JSON.parse(await getItem('tasks'));
-    } catch (e) {
-        console.error('Loading error:', e);
-    }
-} */
 
 /**
  * Retrieves the value of a query parameter from a URL.
@@ -178,26 +153,6 @@ async function completeTaskCreation(newTodo) {
   renderGallery();
 }
 
-async function loadPreview(taskId) {
-    try {
-        const response = await fetch(`http://localhost:8000/api/tasks/${taskId}/`);
-        if (!response.ok) throw new Error('Task konnte nicht geladen werden');
-  
-        const task = await response.json();
-  
-        allImages = task.images.map(img => ({
-            id: img.id,
-            filename: img.image.split('/').pop(),
-            base64: img.image, // hier ist es eine URL!
-            fileType: 'image/jpeg',
-            isRemote: true
-        }));
-  
-        renderPreview();
-    } catch (error) {
-        console.error('Fehler beim Laden der Galerie:', error.message);
-    }
-  }
 
 /**
  * Shows a success message overlay and redirects to the index page.

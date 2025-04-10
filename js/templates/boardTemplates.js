@@ -202,6 +202,7 @@ function loadRenderSearchedContactsHTML(
       </div>`;
 }
 
+
 /**
  * Renders the HTML for a given contact, including initials and selected state.
  * @param {Object} contact - The contact to render.

@@ -1,3 +1,9 @@
+/**
+ * Renders a preview of all images inside the HTML element with the ID "preview".
+ * Clears any existing content in the preview container and appends new image elements
+ * created from the global `allImages` array. If the preview element is not found,
+ * a warning is logged and the function exits.
+ */
 function renderPreview() {
   const preview = document.getElementById("preview");
   if (!preview) {
@@ -13,10 +19,10 @@ function renderPreview() {
 }
 
 /**
- * Erstellt ein Wrapper-Element für ein Bild mit einem Mülleimer-Button
- * @param {Object} image - Das Bildobjekt aus allImages
- * @param {number} index - Der Index des Bildes im Array
- * @returns {HTMLElement} - Das erstellte Bild-Wrapper-Element
+ * Creates a wrapper element for an image with a trashcan button
+ * @param {Object} image - The image object from allImages
+ * @param {number} index - The index of the image in the array
+ * @returns {HTMLElement} - The created image wrapper element
  */
 function createPreviewElement(image, index) {
   // Äußere Card-Box
@@ -42,9 +48,9 @@ function createPreviewElement(image, index) {
 }
 
 /**
- * Erstellt einen Mülleimer-Button, der ein Bild löschen kann
- * @param {number} index - Der Index des Bildes im Array
- * @returns {HTMLElement} - Der erstellte Button
+ * Creates a trashcan button that can delete an image
+ * @param {number} index - The index of the image in the array
+ * @returns {HTMLElement} - The created button
  */
 function createDeleteButton(index) {
   const button = document.createElement("button");
@@ -55,11 +61,23 @@ function createDeleteButton(index) {
   return button;
 }
 
+
+/**
+ * Saves the current image gallery in the local memory.
+ * The gallery is saved as a JSON string under the key “allImages”.
+ */
 function saveGallery() {
   let arrayAsString = JSON.stringify(allImages);
   localStorage.setItem("allImages", arrayAsString);
 }
 
+
+/**
+ * Loads the image gallery from the local memory.
+ * If the parameter `isEditMode` is true, an edit preview is rendered,
+ * otherwise the gallery is displayed.
+ * @param {boolean} [isEditMode=false] - Specifies whether the edit mode is activated.
+ */
 function loadGallery(isEditMode = false) {
   let arrayAsString = localStorage.getItem("allImages");
   if (arrayAsString) {
@@ -72,6 +90,11 @@ function loadGallery(isEditMode = false) {
   }
 }
 
+
+/**
+ * Renders the image gallery in the DOM.
+ * Creates a DOM element for each image and adds it to the gallery.
+ */
 function renderGallery() {
   gallery.innerHTML = '';
   allImages.forEach((image, index) => {
@@ -80,9 +103,10 @@ function renderGallery() {
   });
 }
 
+
 /**
- * Löscht ein Bild aus dem Array und aktualisiert die Anzeige
- * @param {number} index - Der Index des zu löschenden Bildes
+ * Deletes an image from the array and updates the display
+ * @param {number} index - The index of the image to be deleted
  */
 function deleteImage(index, isEditMode = null) {
   const effectiveEditMode = isEditMode !== null ? isEditMode : globalIsEditMode;
@@ -104,6 +128,13 @@ function deleteImage(index, isEditMode = null) {
 }
 
 
+/**
+ * Converts a blob object into a Base64-encoded string.
+ * @param {Blob} blob - The blob object to be converted.
+ * @returns {Promise<string | ArrayBuffer | null>} A Promise that is resolved,
+ * as soon as the conversion is complete. The result is a Base64-encoded
+ * Data URL as a string or null if an error occurs.
+ */
 function blobToBase64(blob) {
   return new Promise((resolve, _) => {
     const reader = new FileReader();
@@ -113,12 +144,12 @@ function blobToBase64(blob) {
 }
 
 /**
- * Komprimiert ein Bild auf eine Zielgröße oder -qualität
- * @param {File} file - Die Bilddatei, die komprimiert werden soll
- * @param {number} maxWidth - Die maximale Breite des Bildes
- * @param {number} maxHeight - Die maximale Höhe des Bildes
- * @param {number} quality - Qualität des komprimierten Bildes (zwischen 0 und 1)
- * @returns {Promise<string>} - Base64-String des komprimierten Bildes
+ * Compresses an image to a target size or quality
+ * @param {File} file - The image file to be compressed
+ * @param {number} maxWidth - The maximum width of the image
+ * @param {number} maxHeight - The maximum height of the image
+ * @param {number} quality - Quality of the compressed image (between 0 and 1)
+ * @returns {Promise<string>} - Base64 string of the compressed image
  */
 function compressImage(file, maxWidth = 800, maxHeight = 800, quality = 0.8) {
   return new Promise((resolve, reject) => {
@@ -164,10 +195,22 @@ function compressImage(file, maxWidth = 800, maxHeight = 800, quality = 0.8) {
   });
 }
 
+
+/**
+ * Loads the preview view in edit mode.
+ * This function calls `renderEditPreview` to display the edit preview.
+ */
 function loadEditPreview() {
   renderEditPreview();
 }
 
+
+/**
+ * Renders the preview of the editable images in the HTML element with the ID "edit-preview".
+ * The function first empties the preview element and then adds a new image element for each image 
+ * from the global array `allImages`. 
+ * If the preview element is not found, a warning is displayed in the console.
+ */
 function renderEditPreview() {
   const editPreview = document.getElementById("edit-preview");
   if (!editPreview) {
@@ -183,6 +226,13 @@ function renderEditPreview() {
 }
 
 
+/**
+ * Initializes an event listener for the file input field with the ID "editfilepicker".
+ * When a file is selected, it is checked whether it is an image.
+ * Non-image files generate an error message in the element with the ID “edit-error”.
+ * Valid image files are compressed (max. 800x800px, quality 0.7) and saved as a Base64 string.
+ * The images are then added to the `allImages` list and the gallery is saved and reloaded.
+ */
 function aktiviereEditFilePickerListener() {
   const editfilepicker = document.getElementById("editfilepicker");
   const editerror = document.getElementById("edit-error");

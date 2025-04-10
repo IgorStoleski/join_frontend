@@ -117,6 +117,36 @@ function dataURLtoFile(dataurl, filename) {
 
 
 /**
+ * Lädt die Vorschau-Bilder eines bestimmten Tasks vom Server und bereitet sie zur Anzeige vor.
+ * @async
+ * @function loadPreview
+ * @param {number|string} taskId - Die ID des Tasks, dessen Bilder geladen werden sollen.
+ * @returns {Promise<void>} - Diese Funktion gibt kein Ergebnis zurück, führt jedoch ein Rendering der Vorschau durch.
+ * @throws {Error} Wenn die Anfrage an den Server fehlschlägt oder keine gültige Antwort zurückgegeben wird.
+ */
+async function loadPreview(taskId) {
+  try {
+      const response = await fetch(`${STORAGE_URL}tasks/${taskId}/`);
+      if (!response.ok) throw new Error('Task konnte nicht geladen werden');
+
+      const task = await response.json();
+
+      allImages = task.images.map(img => ({
+          id: img.id,
+          filename: img.image.split('/').pop(),
+          base64: img.image, // hier ist es eine URL!
+          fileType: 'image/jpeg',
+          isRemote: true
+      }));
+
+      renderPreview();
+  } catch (error) {
+      console.error('Fehler beim Laden der Galerie:', error.message);
+  }
+}
+
+
+/**
  * Lädt die Bildvorschau eines Tasks vom Backend und rendert sie. *
  * @async
  * @function

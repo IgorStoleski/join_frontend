@@ -3,6 +3,17 @@ const gallery = document.getElementById("gallery");
 const error = document.getElementById("error");
 let myGallery;
 
+
+/**
+ * Event listener for changing the file input.
+ * - Hides a possible error message.
+ * - Checks whether selected files are valid images.
+ * - Compresses valid images asynchronously with `compressImage`.
+ * Saves the compressed images in an array (`allImages`) including file name, type and Base64 data.
+ * Then updates the gallery display by calling `renderGallery`.
+ * Displays an error message if one or more files are not an image.
+ * @listens change
+ */
 filepicker.addEventListener("change", async () => {
   error.style.display = "none";
   error.textContent = "";
@@ -29,6 +40,13 @@ filepicker.addEventListener("change", async () => {
   }
 });
 
+
+/**
+ * Renders the gallery by emptying the existing content and
+ * Creates and adds a new image element for each image in `allImages`.
+ * Uses the `createImageElement` function to create HTML elements for each image.
+ * Adds these to the gallery container `gallery`.
+ */
 function renderGallery() {
   gallery.innerHTML = "";
   allImages.forEach((image, index) => {
@@ -38,10 +56,10 @@ function renderGallery() {
 }
 
 /**
- * Erstellt ein Wrapper-Element für ein Bild mit einem Mülleimer-Button
- * @param {Object} image - Das Bildobjekt aus allImages
- * @param {number} index - Der Index des Bildes im Array
- * @returns {HTMLElement} - Das erstellte Bild-Wrapper-Element
+ * Creates a wrapper element for an image with a trashcan button
+ * @param {Object} image - The image object from allImages
+ * @param {number} index - The index of the image in the array
+ * @returns {HTMLElement} - The created image wrapper element
  */
 function createImageElement(image, index) {
   // Äußere Card-Box
@@ -70,9 +88,9 @@ function createImageElement(image, index) {
 }
 
 /**
- * Erstellt einen Mülleimer-Button, der ein Bild löschen kann
- * @param {number} index - Der Index des Bildes im Array
- * @returns {HTMLElement} - Der erstellte Button
+ * Creates a trashcan button that can delete an image
+ * @param {number} index - The index of the image in the array
+ * @returns {HTMLElement} - The created button
  */
 function createDeleteButton(index) {
   const button = document.createElement("button");
@@ -84,14 +102,13 @@ function createDeleteButton(index) {
 }
 
 /**
- * Löscht ein Bild aus dem Array und aktualisiert die Anzeige
- * @param {number} index - Der Index des zu löschenden Bildes
+ * Deletes an image from the array and updates the display
+ * @param {number} index - The index of the image to be deleted
  */
 function deleteImage(index, isEditMode = null) {
   const effectiveEditMode = isEditMode !== null ? isEditMode : globalIsEditMode;
   const image = allImages[index];
 
-  // Vor dem Entfernen Backend-DELETE aufrufen
   if (effectiveEditMode && image.isRemote && image.id) {
     deleteSingleImageFromBackend(currentSelectedTask.id, image.id);
   }
@@ -106,6 +123,14 @@ function deleteImage(index, isEditMode = null) {
   }
 }
 
+
+/**
+ * Converts a blob object into a Base64-encoded string.
+ * @param {Blob} blob - The blob object to be converted.
+ * @returns {Promise<string | ArrayBuffer | null>} A Promise that is resolved,
+ * as soon as the conversion is complete. The result is a Base64-encoded
+ * Data URL as a string or null if an error occurs.
+ */
 function blobToBase64(blob) {
   return new Promise((resolve, _) => {
     const reader = new FileReader();
@@ -115,12 +140,12 @@ function blobToBase64(blob) {
 }
 
 /**
- * Komprimiert ein Bild auf eine Zielgröße oder -qualität
- * @param {File} file - Die Bilddatei, die komprimiert werden soll
- * @param {number} maxWidth - Die maximale Breite des Bildes
- * @param {number} maxHeight - Die maximale Höhe des Bildes
- * @param {number} quality - Qualität des komprimierten Bildes (zwischen 0 und 1)
- * @returns {Promise<string>} - Base64-String des komprimierten Bildes
+ * Compresses an image to a target size or quality
+ * @param {File} file - The image file to be compressed
+ * @param {number} maxWidth - The maximum width of the image
+ * @param {number} maxHeight - The maximum height of the image
+ * @param {number} quality - Quality of the compressed image (between 0 and 1)
+ * @returns {Promise<string>} - Base64 string of the compressed image
  */
 function compressImage(file, maxWidth = 800, maxHeight = 800, quality = 0.8) {
   return new Promise((resolve, reject) => {

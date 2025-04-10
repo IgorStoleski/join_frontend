@@ -5,6 +5,16 @@ const buttonsBoard = document.querySelectorAll(".addTaskViewerButton");
 let myGallery;
 
 
+/**
+ * Initializes an event listener for the file upload element "filepickerBoard".
+ * When selecting files, the system checks whether they are images.
+ * Invalid files are displayed with an error message in the “errorBoard”.
+ * Valid images are compressed, saved in Base64 format and uploaded to a gallery.
+ * Prerequisites: The function `compressImage`, as well as the functions `saveGalleryBoard`, 
+ * `renderGalleryBoard` and `loadGalleryBoard` must be available. 
+ * In addition, the global variable `allImages` is accessed.
+ * @function
+ */
 function aktiviereFilePickerListener() {
   const filepickerBoard = document.getElementById("filepickerBoard");
   const errorBoard = document.getElementById("errorBoard");
@@ -43,11 +53,25 @@ function aktiviereFilePickerListener() {
   });
 }
 
+
+/**
+ * Saves the current gallery board to localStorage.
+ * Converts the `allImages` array into a JSON string and stores it
+ * under the key "allImages" in the browser's localStorage.
+ * This allows the gallery state to persist across page reloads.
+ */
 function saveGalleryBoard() {
   let arrayAsString = JSON.stringify(allImages);
   localStorage.setItem("allImages", arrayAsString);
 }
 
+
+/**
+ * Loads the image gallery board from local storage.
+ * Retrieves a JSON string of all stored images from local storage,
+ * parses it into the `allImages` array, and renders the gallery board.
+ * If no images are found in local storage, the function does nothing.
+ */
 function loadGalleryBoard() {
   let arrayAsString = localStorage.getItem("allImages");
   if (arrayAsString) {
@@ -56,6 +80,14 @@ function loadGalleryBoard() {
   }
 }
 
+
+/**
+ * Renders the gallery board by clearing its current content and appending all images.
+ * This function retrieves the DOM element with the ID "galleryBoard". If the element
+ * is found, it clears its contents and iterates through the `allImages` array,
+ * creating and appending a new image element for each image using the `createImageElement` function.
+ * If the "galleryBoard" element is not found, a warning is logged to the console.
+ */
 function renderGalleryBoard() {
   const galleryBoard = document.getElementById("galleryBoard");
   if (!galleryBoard) {
@@ -72,10 +104,10 @@ function renderGalleryBoard() {
 
 
 /**
- * Erstellt ein Wrapper-Element für ein Bild mit einem Mülleimer-Button
- * @param {Object} image - Das Bildobjekt aus allImages
- * @param {number} index - Der Index des Bildes im Array
- * @returns {HTMLElement} - Das erstellte Bild-Wrapper-Element
+ * Creates a wrapper element for an image with a trashcan button
+ * @param {Object} image - The image object from allImages
+ * @param {number} index - The index of the image in the array
+ * @returns {HTMLElement} - The created image wrapper element
  */
 function createImageElement(image, index) {
   // Äußere Card-Box
@@ -104,9 +136,9 @@ function createImageElement(image, index) {
 }
 
 /**
- * Erstellt einen Mülleimer-Button, der ein Bild löschen kann
- * @param {number} index - Der Index des Bildes im Array
- * @returns {HTMLElement} - Der erstellte Button
+ * Creates a trashcan button that can delete an image
+ * @param {number} index - The index of the image in the array
+ * @returns {HTMLElement} - The created button
  */
 function createDeleteButton(index) {
   const button = document.createElement("button");
@@ -118,8 +150,8 @@ function createDeleteButton(index) {
 }
 
 /**
- * Löscht ein Bild aus dem Array und aktualisiert die Anzeige
- * @param {number} index - Der Index des zu löschenden Bildes
+ * Deletes an image from the array and updates the display
+ * @param {number} index - The index of the image to be deleted
  */
 function deleteImageBoard(index) {
   allImages.splice(index, 1);
@@ -127,6 +159,14 @@ function deleteImageBoard(index) {
   loadGalleryBoard();
 }
 
+
+/**
+ * Converts a blob object into a Base64-encoded string.
+ * @param {Blob} blob - The blob object to be converted.
+ * @returns {Promise<string | ArrayBuffer | null>} A Promise that is resolved,
+ * as soon as the conversion is complete. The result is a Base64-encoded
+ * Data URL as a string or null if an error occurs.
+ */
 function blobToBase64(blob) {
   return new Promise((resolve, _) => {
     const reader = new FileReader();
@@ -136,12 +176,12 @@ function blobToBase64(blob) {
 }
 
 /**
- * Komprimiert ein Bild auf eine Zielgröße oder -qualität
- * @param {File} file - Die Bilddatei, die komprimiert werden soll
- * @param {number} maxWidth - Die maximale Breite des Bildes
- * @param {number} maxHeight - Die maximale Höhe des Bildes
- * @param {number} quality - Qualität des komprimierten Bildes (zwischen 0 und 1)
- * @returns {Promise<string>} - Base64-String des komprimierten Bildes
+ * Compresses an image to a target size or quality.
+ * @param {File} file - The image file to be compressed.
+ * @param {number} maxWidth - The maximum width of the output image.
+ * @param {number} maxHeight - The maximum height of the output image.
+ * @param {number} quality - Compression quality (between 0 and 1).
+ * @returns {Promise<string>} - A promise that resolves to the base64 string of the compressed image.
  */
 function compressImage(file, maxWidth = 800, maxHeight = 800, quality = 0.8) {
   return new Promise((resolve, reject) => {
