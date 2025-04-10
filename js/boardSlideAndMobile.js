@@ -5,12 +5,11 @@
  * @param {string} label - The label or text to display on the link.
  */
 function getStatusLinkHTML(element, status, label) {
-    if(element.status === status) {
-        return ''; 
-    }
-    return `<a href="#" onclick="moveToMobile(${element.id}, '${status}')">${label}</a>`;
+  if (element.status === status) {
+    return "";
+  }
+  return `<a href="#" onclick="moveToMobile(${element.id}, '${status}')">${label}</a>`;
 }
-
 
 /**
  * Move a task with the specified ID to a new status for mobile.
@@ -18,18 +17,17 @@ function getStatusLinkHTML(element, status, label) {
  * @param {string} status - The new status to assign to the task.
  */
 async function moveToMobile(id, status) {
-    await loadData();
+  await loadData();
 
-    let currentMobiletask = todos.find((task) => task.id === id);
-    if (currentMobiletask) {
-        currentMobiletask.status = status;
-        await pushData();
-        refreshHTML();
-    } else {
-        console.error('Task with ID', id, 'not found.');
-    }
+  let currentMobiletask = todos.find((task) => task.id === id);
+  if (currentMobiletask) {
+    currentMobiletask.status = status;
+    await pushData();
+    refreshHTML();
+  } else {
+    console.error("Task with ID", id, "not found.");
+  }
 }
-
 
 /**
  * Renders the subtasks for a task in the slide view.
@@ -37,19 +35,18 @@ async function moveToMobile(id, status) {
  * @param {number} id - The ID of the task element.
  */
 function renderSlideSubtask(element, id) {
-    let subtasksHTML = '';
-    if (element.subtasks && Array.isArray(element.subtasks)) {
-        for (let i = 0; i < element.subtasks.length; i++) {
-            const subtask = element.subtasks[i];
-            if (subtask.title) {
-                subtasksHTML += renderSlideSubtaskHTML(subtask, i, id);
-                updateHTML();
-            };
-        }
+  let subtasksHTML = "";
+  if (element.subtasks && Array.isArray(element.subtasks)) {
+    for (let i = 0; i < element.subtasks.length; i++) {
+      const subtask = element.subtasks[i];
+      if (subtask.title) {
+        subtasksHTML += renderSlideSubtaskHTML(subtask, i, id);
+        updateHTML();
+      }
     }
-    return subtasksHTML;
+  }
+  return subtasksHTML;
 }
-
 
 /**
  * Generates the overall task HTML representation.
@@ -103,6 +100,7 @@ function renderSlideCardHTML(
                         ${subtasksHTML}
                     </div>
                 </div>
+                <div id="preview" class="gallery"></div>
             </div>
             <div class="task-slide-delete-edit-container">
                 <div class="task-slide-delete" onclick="deleteTask(${element.id})">

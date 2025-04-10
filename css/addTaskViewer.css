@@ -1,0 +1,109 @@
+.upload-container {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 16px;
+}
+
+.upload {
+    border-radius: 50%;
+    cursor: pointer;
+    width: 32px;
+}
+
+.upload:hover {
+    background-color: #b8d2ff;
+}
+
+.gallery {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 16px 0;
+    max-width: 400px;
+    margin-bottom: 10px;
+}
+
+.gallery img {
+    height: 80px;
+    width: 80px;
+    cursor: pointer;
+    object-fit: cover;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.gallery img:hover {
+    filter: brightness(1.2);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.delete-button {
+    position: absolute;
+    bottom: -28px;
+    right: 28px;
+    color: black;
+    border: none;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    background-image: url('/join/img/trash.png');
+    width: 24px;
+    height: 24px;
+    background-size: cover;
+}
+
+.delete-button:hover {
+    background-color: #b8d2ff;
+}
+
+.image-card-base {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: inline-block;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+
+.image-card {
+    height: 120px;
+}
+
+.image-card-small {
+    height: 120px;
+}
+
+.image-card-preview {
+    height: 100px;
+}
+
+.image-card-base:hover {
+    transform: scale(1.03);
+}
+
+.image-card img {
+    max-width: 120px;
+    border-radius: 4px;
+}
+
+
+.image-card-small img {
+    max-width: 80px;
+    border-radius: 4px;
+}
+
+
+.error {
+    display: none;  /* Versteckt den Fehlerbereich standardmäßig */
+    color: red;
+    background: rgba(255, 0, 0, 0.1);
+    padding: 10px;
+    border: 1px solid red;
+    margin-top: 10px;
+    border-radius: 5px;
+}

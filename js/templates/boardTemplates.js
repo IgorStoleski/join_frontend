@@ -5,7 +5,7 @@
  * @param {number} i - The index or ID associated with the subtask, used for data attributes and action handlers.
  */
 function subtaskToEditHTML(subtask, i) {
-    return /*html*/ `
+  return /*html*/ `
         <div id="subtask-container-${i}" class="edit-subtask-container">
             <div class="edit-subtask-item">
                 <span id="editDot" class="edit-subtask-dot"></span>           
@@ -23,13 +23,12 @@ function subtaskToEditHTML(subtask, i) {
     `;
 }
 
-
 /**
- * Generates the HTML markup for the task edit view. 
+ * Generates the HTML markup for the task edit view.
  * @param {number} id - The ID of the task to be edited.
  */
 function renderEditTask(task) {
-    return /* html */ `
+  return /* html */ `
         <div id="edit-slide-container" class="edit-slide-container">
             <form id="edit-taskForm" onsubmit="saveEditedTask(${task.id}); return false;" class="edit-task-slide-container">
                 <div class="edit-add-task-container scroll-slide-edit-container">
@@ -137,6 +136,24 @@ function renderEditTask(task) {
                         </div>
                         <div id="edit-subtask-add-container" class="edit-subtask-add-container"></div>
                     </div>
+                    <div class="upload-container">
+                        <span class="upload-text">Uplaoad a pic</span>
+                        <img
+                        src="./img/upload.png"
+                        class="upload"
+                        onclick="editfilepicker.click()"
+                        />
+                        <input
+                        type="file"
+                        id="editfilepicker"
+                        class="filepicker"
+                        style="display: none"
+                        accept="image/*"
+                        multiple
+                        />
+                    </div>
+                    <div id="edit-error" class="error"></div>
+                    <div id="edit-preview" class="gallery"></div> 
                 </div>
                 <div class="edit-add-task-buttons">
                     <div class="edit-add-task-buttons-inner">                            
@@ -145,12 +162,11 @@ function renderEditTask(task) {
                             <div class="edit-button-create-task-pic"><img src="./img/check.svg"></div>
                         </button>
                     </div>
-                </div>                
+                </div>            
             </form>
         </div>
     `;
 }
-
 
 /**
  * Renders the HTML for a given searched contact, including initials and selected state.
@@ -158,19 +174,33 @@ function renderEditTask(task) {
  * @param {string} initials - The initials of the contact.
  * @param {boolean} isSelected - Whether the contact is selected or not.
  */
-function loadRenderSearchedContactsHTML(contact, initials, isSelected, isCurrentUser) {
-    let userMarker = isCurrentUser ? " (you)" : "";
+function loadRenderSearchedContactsHTML(
+  contact,
+  initials,
+  isSelected,
+  isCurrentUser
+) {
+  let userMarker = isCurrentUser ? " (you)" : "";
 
-    return /*html*/`
-      <div class="contact-container ${isSelected ? 'selected' : ''}" onclick="toggleContactSelection('${contact.name}', '${contact.surname}')">
+  return /*html*/ `
+      <div class="contact-container ${
+        isSelected ? "selected" : ""
+      }" onclick="toggleContactSelection('${contact.name}', '${
+    contact.surname
+  }')">
           <div class="select-contact">
-              <div class="initial" style="background-color: ${contact.bgcolor}">${initials}</div>
-              <div class="select-name">${contact.name} ${contact.surname}${userMarker}</div>
+              <div class="initial" style="background-color: ${
+                contact.bgcolor
+              }">${initials}</div>
+              <div class="select-name">${contact.name} ${
+    contact.surname
+  }${userMarker}</div>
           </div>
-          <img class="select-icon" id="edit-select-check" src="${isSelected ? 'img/check_contact.png' : 'img/check-button.png'}"  alt="Check Button">
+          <img class="select-icon" id="edit-select-check" src="${
+            isSelected ? "img/check_contact.png" : "img/check-button.png"
+          }"  alt="Check Button">
       </div>`;
 }
-
 
 /**
  * Renders the HTML for a given contact, including initials and selected state.
@@ -179,18 +209,27 @@ function loadRenderSearchedContactsHTML(contact, initials, isSelected, isCurrent
  * @param {boolean} isSelected - Whether the contact is selected or not.
  */
 function renderAssignedToHTML(contact, initials, isSelected, isCurrentUser) {
-    let userMarker = isCurrentUser ? " (you)" : "";
+  let userMarker = isCurrentUser ? " (you)" : "";
 
-    return /* html */`
-      <div class="contact-container ${isSelected ? 'selected' : ''}" onclick="toggleContactSelection('${contact.name}', '${contact.surname}')">
+  return /* html */ `
+      <div class="contact-container ${
+        isSelected ? "selected" : ""
+      }" onclick="toggleContactSelection('${contact.name}', '${
+    contact.surname
+  }')">
           <div class="select-contact">
-              <div class="initial" style="background-color: ${contact.bgcolor}">${initials}</div>
-              <div class="select-name">${contact.name} ${contact.surname}${userMarker}</div>
+              <div class="initial" style="background-color: ${
+                contact.bgcolor
+              }">${initials}</div>
+              <div class="select-name">${contact.name} ${
+    contact.surname
+  }${userMarker}</div>
           </div>
-          <img class="select-icon" id="edit-select-check" src="${isSelected ? 'img/check_contact.png' : 'img/check-button.png'}"  alt="Check Button">
+          <img class="select-icon" id="edit-select-check" src="${
+            isSelected ? "img/check_contact.png" : "img/check-button.png"
+          }"  alt="Check Button">
       </div>`;
 }
-
 
 /**
  * Generates an HTML string for a subtask item based on the provided input value and index.
@@ -198,7 +237,7 @@ function renderAssignedToHTML(contact, initials, isSelected, isCurrentUser) {
  * @param {number} i - The unique index or identifier for the subtask.
  */
 function subtaskToAddHTML(subInputValue, i) {
-    return /*html*/ `
+  return /*html*/ `
         <div id="subtask-container-${i}" class="edit-subtask-container">
             <div class="edit-subtask-item">
                 <span id="editDot" class="edit-subtask-dot"></span>           
@@ -216,36 +255,34 @@ function subtaskToAddHTML(subInputValue, i) {
     `;
 }
 
-
 /**
  * Processes and saves subtasks based on elements with the class "edit-subtask-value".
  * @param {Object} task - The main task object that contains the subtasks.
  * @param {Array} task.subtasks - The list of subtasks. Each subtask is an object with at least a "title" attribute.
  */
 function processAndSaveSubtasks(task) {
-    let subtaskElements = document.querySelectorAll('.edit-subtask-value');
-    let updatedSubtasks = [];
+  let subtaskElements = document.querySelectorAll(".edit-subtask-value");
+  let updatedSubtasks = [];
 
-    subtaskElements.forEach((element, index) => {
-        let editedTitle = element.innerText;
+  subtaskElements.forEach((element, index) => {
+    let editedTitle = element.innerText;
 
-        if (index >= 0 && index < task.subtasks.length) {
-            let editedSubtask = task.subtasks[index];
-            editedSubtask.title = editedTitle;
+    if (index >= 0 && index < task.subtasks.length) {
+      let editedSubtask = task.subtasks[index];
+      editedSubtask.title = editedTitle;
 
-            let updatedTitle = {
-                title: editedTitle,
-                status: false
-            };
-            updatedSubtasks.push(updatedTitle);
-        } else {
-            console.error("Subtask mit dem Index", index, "wurde nicht gefunden.");
-        }
-    });
+      let updatedTitle = {
+        title: editedTitle,
+        status: false,
+      };
+      updatedSubtasks.push(updatedTitle);
+    } else {
+      console.error("Subtask mit dem Index", index, "wurde nicht gefunden.");
+    }
+  });
 
-    return updatedSubtasks;
+  return updatedSubtasks;
 }
-
 
 /**
  * Renders the HTML for a subtask in the slide view.
@@ -254,14 +291,15 @@ function processAndSaveSubtasks(task) {
  * @param {number} id - The ID of the parent task element.
  */
 function renderSlideSubtaskHTML(subtask, i, id) {
-    return /*html*/`
+  return /*html*/ `
         <div class="task-slide-subtask">
-            <input type="checkbox" id="subtaskCheckbox${i}" ${subtask.status ? 'checked' : ''} onchange="updateSubtaskStatus(${id}, ${i}, this.checked)">
+            <input type="checkbox" id="subtaskCheckbox${i}" ${
+    subtask.status ? "checked" : ""
+  } onchange="updateSubtaskStatus(${id}, ${i}, this.checked)">
             <label for="subtaskCheckbox${i}">${subtask.title}</label>
         </div>
     `;
 }
-
 
 /**
  * Renders the HTML for an assigned user in the slide view.
@@ -270,14 +308,13 @@ function renderSlideSubtaskHTML(subtask, i, id) {
  * @param {string} bgcolor - The background color for the user mark.
  */
 function renderSlideAssignedHTML(initials, name, bgcolor) {
-    return /*html*/`
+  return /*html*/ `
         <div class="task-slide-assigned-user">
             <div class="user-marked blue" style="background-color: ${bgcolor}">${initials}</div>
             <span class="task-slide-assigned-user-name">${name}</span>
         </div>
     `;
 }
-
 
 /**
  * Generates the HTML for a given task element.
@@ -288,28 +325,54 @@ function renderSlideAssignedHTML(initials, name, bgcolor) {
  * @param {string} numberTasks - The count of completed tasks.
  * @param {string} allTasks - The total count of tasks.
  */
-function generateTasksHTML(element, priorityImageSrc, assignedToHTML, progressBar, numberTasks, allTasks, allTasksCount) {
-    const backgroundColor = getCategoryBackgroundColor(element.category);
-    return /*html*/`
-    <div id="${element.id}" onclick="slideCard(${element.id})" draggable="true" ondragstart="startDragging(${element.id})" class="content-container task-touch">
+function generateTasksHTML(
+  element,
+  priorityImageSrc,
+  assignedToHTML,
+  progressBar,
+  numberTasks,
+  allTasks,
+  allTasksCount
+) {
+  const backgroundColor = getCategoryBackgroundColor(element.category);
+  return /*html*/ `
+    <div id="${element.id}" onclick="slideCard(${
+    element.id
+  })" draggable="true" ondragstart="startDragging(${
+    element.id
+  })" class="content-container task-touch">
         <div class="content-container-inner">
             <div class="card-header">
-                <div class="board-category" style="background-color: ${backgroundColor};">${element.category}</div>
+                <div class="board-category" style="background-color: ${backgroundColor};">${
+    element.category
+  }</div>
                 <div id="dropdown-mobile" class="dropdown hide">
                     <img src="./img/hamburger_menu.svg" alt="Dropdown Trigger" onclick="event.stopPropagation()">
                     <div class="dropdown-content"  onclick="event.stopPropagation()">
-                        ${getStatusLinkHTML(element, 'todo', 'Todo')}
-                        ${getStatusLinkHTML(element, 'inprogress', 'In progress')}
-                        ${getStatusLinkHTML(element, 'feedback', 'Await feedback')}
-                        ${getStatusLinkHTML(element, 'done', 'Done')}
+                        ${getStatusLinkHTML(element, "todo", "Todo")}
+                        ${getStatusLinkHTML(
+                          element,
+                          "inprogress",
+                          "In progress"
+                        )}
+                        ${getStatusLinkHTML(
+                          element,
+                          "feedback",
+                          "Await feedback"
+                        )}
+                        ${getStatusLinkHTML(element, "done", "Done")}
                     </div>
                 </div>
             </div>
             <div class="title-content">
                 <div class="title">${element.title}</div>
-                <div id="description" class="content">${element.description}</div>
+                <div id="description" class="content">${
+                  element.description
+                }</div>
             </div>
-            <div id="subtasks-board" class="board-subtasks-container" style="display: ${getSubtasksDisplayStyle(allTasksCount)};">
+            <div id="subtasks-board" class="board-subtasks-container" style="display: ${getSubtasksDisplayStyle(
+              allTasksCount
+            )};">
                 <div class="progress-bar-container">
                     ${progressBar}
                 </div>
@@ -330,14 +393,13 @@ function generateTasksHTML(element, priorityImageSrc, assignedToHTML, progressBa
  * @param {Object} subtask - The subtask data.
  */
 function generateSubtaskHTML(subtask) {
-    return /*html*/`
+  return /*html*/ `
         <div class="task-slide-subtask">
-            <input type="checkbox" ${subtask.status ? 'checked' : ''} disabled>
+            <input type="checkbox" ${subtask.status ? "checked" : ""} disabled>
             <label>${subtask.title}</label>
         </div>
     `;
 }
-
 
 /**
  * Generates the HTML representation of a progress bar.
@@ -345,29 +407,27 @@ function generateSubtaskHTML(subtask) {
  * @param {number} progress - The current progress percentage.
  */
 function progressBarHTML(element, progress) {
-    return /*html*/`
+  return /*html*/ `
         <div class="progress-bar" id="progress-bar${element.id}" style="width: ${progress}%;"></div>
     `;
 }
-
 
 /**
  * Generates the HTML representation showing the number of completed tasks.
  * @param {number} completedTasksCount - Count of completed tasks.
  */
 function numberTasksHTML(completedTasksCount) {
-    return /*html*/`
+  return /*html*/ `
         <span id="number-tasks">${completedTasksCount}</span>
     `;
 }
-
 
 /**
  * Generates the HTML representation showing the total number of tasks.
  * @param {number} allTasksCount - Total count of tasks.
  */
 function allTasksHTML(allTasksCount) {
-    return /*html*/`
+  return /*html*/ `
         <span id="all-tasks">${allTasksCount}</span>
     `;
 }

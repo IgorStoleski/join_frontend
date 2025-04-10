@@ -129,6 +129,7 @@ function slideCard(id) {
     document.body.style.overflow = 'hidden';
     const slideCard = document.getElementById("task-slide");
     slideCard.innerHTML = renderSlideCard(id);
+    loadPreviewFromBackend(id);
     slideCardAnimation();
     document.getElementById("noscroll").classList.add("noscroll");
 }
@@ -163,15 +164,16 @@ function renderSlideCard(id) {
  * @param {number} id - ID of the task to delete.
  */
 function deleteTask(id) {
-    const indexToDelete = todos.findIndex((task) => task.id === id);
+    const indexToDelete = todos.find((task) => task.id === id);
+    const pk = id;
     if (indexToDelete === -1) {
         return;
     }
     todos.splice(indexToDelete, 1);
-    deleteCard(id);
+    deleteCard(pk);
+    deleteTaskBackend(pk);
     updateIDs();
     closeCard();
-    pushData();
     loadData();
     updateHTML();
 }
@@ -197,9 +199,11 @@ function updateIDs() {
  * @param {string|number} id - The ID of the card element to be removed.
  */
 function deleteCard(id) {
-    const elementToRemove = document.getElementById(`board-card${id}`);
+    const elementToRemove = document.getElementById(`${id}`);
     if (elementToRemove) {
         elementToRemove.remove();
+        } else {
+            console.log('Element not found:', `${id}`);
     }
 }
 

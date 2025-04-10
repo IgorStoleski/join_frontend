@@ -8,18 +8,19 @@ let currentTaskId;
  * @param {number} id - The ID of the task to be edited.
  */
 function editTask(id) {
+  globalIsEditMode = true;
   const element = todos.find(todo => todo.id === id);
   document.body.style.overflow = 'hidden';
   const slideEditTask = document.getElementById("task-slide");
   slideEditTask.innerHTML = renderEditTask(element);
-  /* const element = todos[id]; */
-  /* currentTaskId = id; */
+  loadPreviewFromBackend(id, globalIsEditMode);
   currentSelectedTask = element;
   addSubtaskToEdit(element);
   loadSelectedPriority(element);
   loadDisplayChosenContacts();
   addToSelectedContacts(element);
   loadRenderCategory(element);
+  aktiviereEditFilePickerListener();
 }
 
 
@@ -73,6 +74,9 @@ async function saveEditedTask(id) {
   updateElementProperties(element);
   await setUpdateTask(element, pk);
   openEditedTask(id);
+  saveGalleryToBackend(id, true);
+  loadPreviewFromBackend(id);
+  globalIsEditMode = false;
   selectedContacts = [];
   document.body.style.overflow = 'auto';
 }

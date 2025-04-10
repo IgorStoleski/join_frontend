@@ -55,10 +55,7 @@ async function logIn(email, password, formSubmitted = true) {
             saveAuthToken(userToken);
             isLoggedIn = true;
             userId = id;
-            handleSuccessfulLogIn(id);
-            setContact(newUserContact);
-            localStorage.removeItem('userContact');
-            
+            handleSuccessfulLogIn(id);            
         } else {
             if (formSubmitted) shakePasswordInput(); 
         }

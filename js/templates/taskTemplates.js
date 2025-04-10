@@ -3,9 +3,9 @@
  * @returns {string} The HTML content of the modal.
  */
 function renderAddTask() {
-    const currentDate = new Date().toISOString().split('T')[0];
+  const currentDate = new Date().toISOString().split("T")[0];
 
-    return /* html */ `
+  return /* html */ `
 <div class="float-add-task-container">
     <div class="header">
         <h1 class="title-add-task">Add Task</h1>
@@ -132,7 +132,15 @@ function renderAddTask() {
             </div>
             <div id="addSubtask-add-container" class="subtask-add-container"></div>
         </div>
+        <div class="upload-container">
+            <span class="upload-text">Upload a pic</span>
+            <img src="./img/upload.png" class="upload" onclick="filepickerBoard.click()"/>
+            <input type="file" id="filepickerBoard" class="filepicker addTaskViewerButton" style="display: none" accept="image/*" multiple />
+        </div>
+        <div id="errorBoard" class="error error-hidden"></div>
+        <div id="galleryBoard" class="gallery"></div>
     </div>
+    
     <div class="add-task-bottom-container">
         <button type="submit" id="addCreateTaskButton" class="create-task-btn">
             Create Task
@@ -143,13 +151,12 @@ function renderAddTask() {
     `;
 }
 
-
 /**
  * Creates a success message template.
  * @returns {string} - The HTML template for a success message overlay.
  */
 function addCreatedTaskTemplate() {
-    return /*html*/ `
+  return /*html*/ `
         <div id="addCreateTaskOverlay" class="task-overlay">
             <div class="task-success-message">
                 <p>Task added to board</p>
@@ -158,7 +165,6 @@ function addCreatedTaskTemplate() {
         </div>
     `;
 }
-
 
 /**
  * Renders a contact as HTML with optional selection and current user indicator.
@@ -169,19 +175,28 @@ function addCreatedTaskTemplate() {
  * @returns {string} The HTML representation of the contact with optional selection and user indicator.
  */
 function addRenderAssignedToHTML(contact, initials, isSelected, isCurrentUser) {
-        let userMarker = isCurrentUser ? " (you)" : "";
+  let userMarker = isCurrentUser ? " (you)" : "";
 
-    return /*html*/`
-        <div class="contact-container ${isSelected ? 'selected' : ''}" onclick="addToggleContactSelection('${contact.name}', '${contact.surname}')">
+  return /*html*/ `
+        <div class="contact-container ${
+          isSelected ? "selected" : ""
+        }" onclick="addToggleContactSelection('${contact.name}', '${
+    contact.surname
+  }')">
             <div class="select-contact">
-                <div class="initial" style="background-color: ${contact.bgcolor}">${initials}</div>
-                <div class="select-name">${contact.name} ${contact.surname}${userMarker}</div>
+                <div class="initial" style="background-color: ${
+                  contact.bgcolor
+                }">${initials}</div>
+                <div class="select-name">${contact.name} ${
+    contact.surname
+  }${userMarker}</div>
             </div>
-            <img class="select-icon" id="addSelectCheck" src="${isSelected ? 'img/check_contact.png' : 'img/check-button.png'}"  alt="Check Button">
+            <img class="select-icon" id="addSelectCheck" src="${
+              isSelected ? "img/check_contact.png" : "img/check-button.png"
+            }"  alt="Check Button">
         </div>
     `;
 }
-
 
 /**
  * Generates HTML markup for rendering a contact in a search result.
@@ -194,20 +209,34 @@ function addRenderAssignedToHTML(contact, initials, isSelected, isCurrentUser) {
  * @param {boolean} isCurrentUser - Indicates whether the contact is the current user.
  * @returns {string} The HTML markup for rendering the contact.
  */
-function addRenderSearchedContactsHTML(contact, initials, isSelected, isCurrentUser) {
-        let userMarker = isCurrentUser ? " (you)" : "";
+function addRenderSearchedContactsHTML(
+  contact,
+  initials,
+  isSelected,
+  isCurrentUser
+) {
+  let userMarker = isCurrentUser ? " (you)" : "";
 
-    return /*html*/`
-        <div class="contact-container ${isSelected ? 'selected' : ''}" onclick="addToggleContactSelection('${contact.name}', '${contact.surname}')">
+  return /*html*/ `
+        <div class="contact-container ${
+          isSelected ? "selected" : ""
+        }" onclick="addToggleContactSelection('${contact.name}', '${
+    contact.surname
+  }')">
             <div class="select-contact">
-                <div class="initial" style="background-color: ${contact.bgcolor}">${initials}</div>
-                <div class="select-name">${contact.name} ${contact.surname}${userMarker}</div>
+                <div class="initial" style="background-color: ${
+                  contact.bgcolor
+                }">${initials}</div>
+                <div class="select-name">${contact.name} ${
+    contact.surname
+  }${userMarker}</div>
             </div>
-            <img class="select-icon" id="addSelectCheck" src="${isSelected ? 'img/check_contact.png' : 'img/check-button.png'}"  alt="Check Button">
+            <img class="select-icon" id="addSelectCheck" src="${
+              isSelected ? "img/check_contact.png" : "img/check-button.png"
+            }"  alt="Check Button">
         </div>
     `;
 }
-
 
 /**
  * Generates HTML for a subtask container with edit and delete buttons.
@@ -216,7 +245,7 @@ function addRenderSearchedContactsHTML(contact, initials, isSelected, isCurrentU
  * @returns {string} The HTML markup for the subtask container.
  */
 function addCreateSubtaskHTML(subtaskId, subtaskValue) {
-    return /*html*/`
+  return /*html*/ `
         <div id="add-subtask-container-${subtaskId}" class="subtask-container">
             <div class="subtask-item">
                 <span class="subtask-dot"></span>           

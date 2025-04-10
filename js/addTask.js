@@ -4,12 +4,11 @@
  * @throws {Error} Throws an error if any of the asynchronous operations fail.
  */
 async function initTask() {
-    await loadAllContacts();
-    //await getTasks();
-    await renderAssignedTo();
-    renderCategorys();
+  await loadAllContacts();
+  //await getTasks();
+  await renderAssignedTo();
+  renderCategorys();
 }
-
 
 /**
  * Asynchronously loads contacts from storage.
@@ -25,7 +24,6 @@ async function initTask() {
     }
 } */
 
-
 /**
  * Asynchronously loads tasks from backend.
  * @throws {Error} When there's an issue parsing the tasks from JSON.
@@ -38,7 +36,6 @@ async function initTask() {
     }
 } */
 
-
 /**
  * Retrieves the value of a query parameter from a URL.
  * @param {string} name - The name of the query parameter to retrieve.
@@ -46,25 +43,26 @@ async function initTask() {
  * @returns {string|null} The value of the query parameter, or null if it is not found.
  */
 function getParameterByName(name, url = window.location.href) {
-    name = name.replace(/[\[\]]/g, '\\$&');
-    let regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  name = name.replace(/[\[\]]/g, "\\$&");
+  let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+    results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return "";
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-let statusFromURL = getParameterByName('status');
-
+let statusFromURL = getParameterByName("status");
 
 /**
  * Event listener for the 'submit' event on the element with the ID 'taskForm'.
  * Prevents the default form submission and triggers the creation of a task.
  */
-document.getElementById('taskForm').addEventListener('submit', function (event) {
+document
+  .getElementById("taskForm")
+  .addEventListener("submit", function (event) {
     event.preventDefault();
     createTask();
-});
+  });
 
 /**
  * Asynchronously creates a task using the values from the provided input fields.
@@ -78,12 +76,11 @@ document.getElementById('taskForm').addEventListener('submit', function (event) 
  * });
  */
 async function createTask() {
-    const title = document.getElementById('taskTitle').value;
-    const description = document.getElementById('taskDescription').value;
-    const dueDate = document.getElementById('dueDate').value;
-    validateInput(title, description, dueDate);
+  const title = document.getElementById("taskTitle").value;
+  const description = document.getElementById("taskDescription").value;
+  const dueDate = document.getElementById("dueDate").value;
+  validateInput(title, description, dueDate);
 }
-
 
 /**
  * Validates the provided input values for title, description, and dueDate.
@@ -94,19 +91,20 @@ async function createTask() {
  * @param {string} dueDate - The due date for the task in a specified format (e.g., 'YYYY-MM-DD').
  */
 function validateInput(title, description, dueDate) {
-    if (!title) {
-        showTitleInputError();
-        return;
-    } if (!description) {
-        showDescriptionInputError();
-        return;
-    } if (!dueDate) {
-        showDateInputError();
-        return;
-    }
-    validateSelections(title, description, dueDate);
+  if (!title) {
+    showTitleInputError();
+    return;
+  }
+  if (!description) {
+    showDescriptionInputError();
+    return;
+  }
+  if (!dueDate) {
+    showDateInputError();
+    return;
+  }
+  validateSelections(title, description, dueDate);
 }
-
 
 /**
  * Validates the selections and calls appropriate error methods if selections are invalid.
@@ -116,16 +114,16 @@ function validateInput(title, description, dueDate) {
  * @param {string|Date} dueDate - The due date of the item. Can be a string representation of a date or a Date object.
  */
 function validateSelections(title, description, dueDate) {
-    if (!selectedPriority) {
-        showPriorityError();
-        return;
-    } if (!selectedCategory) {
-        showSelectCategoryError();
-        return;
-    }
-    processValidInput(title, description, dueDate);
+  if (!selectedPriority) {
+    showPriorityError();
+    return;
+  }
+  if (!selectedCategory) {
+    showSelectCategoryError();
+    return;
+  }
+  processValidInput(title, description, dueDate);
 }
-
 
 /**
  * Processes and adds a valid todo item to the list.
@@ -140,50 +138,80 @@ function validateSelections(title, description, dueDate) {
  *
  */
 function processValidInput(title, description, dueDate) {
-    const extractedBgcolors = extractBgcolor(selectedContacts);
-    const cleanedSelectedContacts = selectedContacts.filter(contact => contact !== null && contact !== undefined);
-    
-    const newTodo = {
-        title: title,
-        description: description,
-        category: selectedCategory, 
-        status: statusFromURL || 'todo',
-        priority: selectedPriority,
-        due_date: dueDate,
-        assignedTo: cleanedSelectedContacts,
-        bgcolor: extractedBgcolors,
-        subtasks: subtasks
-    };
-    todos.push(newTodo);
-    completeTaskCreation(newTodo);
-}
+  const extractedBgcolors = extractBgcolor(selectedContacts);
+  const cleanedSelectedContacts = selectedContacts.filter(
+    (contact) => contact !== null && contact !== undefined
+  );
 
+  const newTodo = {
+    title: title,
+    description: description,
+    category: selectedCategory,
+    status: statusFromURL || "todo",
+    priority: selectedPriority,
+    due_date: dueDate,
+    assignedTo: cleanedSelectedContacts,
+    bgcolor: extractedBgcolors,
+    subtasks: subtasks,
+  };
+  todos.push(newTodo);
+  completeTaskCreation(newTodo);
+}
 
 /**
  * Completes the task creation by storing the tasks and showing relevant messages.
  * @throws {Error} Throws an error if there's a problem during task creation completion.
  */
 async function completeTaskCreation(newTodo) {
-    await setTask(newTodo);
-    showCreatedTaskMessage();
-    resetTaskForm();
+  const savedTask = await setTask(newTodo);
+
+  if (!savedTask || !savedTask.id) {
+    console.error("Task wurde nicht korrekt erstellt oder ID fehlt.");
+    return;
+  }
+  
+  await saveGallery(savedTask.id); // ⬅ Jetzt sicher!
+
+  showCreatedTaskMessage();
+  resetTaskForm();
+  allImages = [];
+  renderGallery();
 }
 
+async function loadPreview(taskId) {
+    try {
+        const response = await fetch(`http://localhost:8000/api/tasks/${taskId}/`);
+        if (!response.ok) throw new Error('Task konnte nicht geladen werden');
+  
+        const task = await response.json();
+  
+        allImages = task.images.map(img => ({
+            id: img.id,
+            filename: img.image.split('/').pop(),
+            base64: img.image, // hier ist es eine URL!
+            fileType: 'image/jpeg',
+            isRemote: true
+        }));
+  
+        renderPreview();
+    } catch (error) {
+        console.error('Fehler beim Laden der Galerie:', error.message);
+    }
+  }
 
 /**
  * Shows a success message overlay and redirects to the index page.
  */
 function showCreatedTaskMessage() {
-    document.body.innerHTML += createdTaskTemplate();
+  document.body.innerHTML += createdTaskTemplate();
 
-    setTimeout(function () {
-        let successOverlay = document.getElementById('createTaskOverlay');
-        document.body.removeChild(successOverlay);
+  setTimeout(function () {
+    let successOverlay = document.getElementById("createTaskOverlay");
+    document.body.removeChild(successOverlay);
 
-        window.location.href = 'board.html';
-    }, 1600);
+    window.location.href = "board.html";
+  }, 1600);
 }
-
 
 /**
  * Searches through the list of contacts for matches based on the given query.
@@ -196,13 +224,13 @@ function showCreatedTaskMessage() {
  * (Note: The actual function provided does not have explicit error handling, so this is a speculative error type.)
  */
 function searchContacts(query) {
-    let filteredContacts = contacts.filter(contact => {
-        return (
-            contact.name.toLowerCase().startsWith(query.toLowerCase()) ||
-            contact.surname.toLowerCase().startsWith(query.toLowerCase())
-        );
-    });
-    renderSearchedContact(filteredContacts);
+  let filteredContacts = contacts.filter((contact) => {
+    return (
+      contact.name.toLowerCase().startsWith(query.toLowerCase()) ||
+      contact.surname.toLowerCase().startsWith(query.toLowerCase())
+    );
+  });
+  renderSearchedContact(filteredContacts);
 }
 
 /**
@@ -214,24 +242,24 @@ function searchContacts(query) {
  * toggleContactSelection('John', 'Doe');
  */
 function toggleContactSelection(name, surname) {
-    const contact = contacts.find(c => c.name === name && c.surname === surname);
-    if (!contact) {
-        return;
-    }
-    const contactId = contact.id;
-    const contactKey = `${contact.name} ${contact.surname}`;
+  const contact = contacts.find(
+    (c) => c.name === name && c.surname === surname
+  );
+  if (!contact) {
+    return;
+  }
+  const contactId = contact.id;
+  const contactKey = `${contact.name} ${contact.surname}`;
 
-    if (selectedContacts[contactId]) {
-        delete selectedContacts[contactId];
-    } else {
-        selectedContacts[contactId] = contactKey;
-    }
-    renderAssignedTo();
-    renderSearchedContact(contacts);
-    displayChosenContacts();
+  if (selectedContacts[contactId]) {
+    delete selectedContacts[contactId];
+  } else {
+    selectedContacts[contactId] = contactKey;
+  }
+  renderAssignedTo();
+  renderSearchedContact(contacts);
+  displayChosenContacts();
 }
-
-
 
 /**
  * Extracts background colors from the provided list of selected contact names.
@@ -245,24 +273,25 @@ function toggleContactSelection(name, surname) {
  * extractBgcolor(['John Doe', 'Jane Doe']); // returns ['#ff0000', '#00ff00']
  */
 function extractBgcolor(selectedContacts) {
-    const bgcolors = [];
-    const validContacts = selectedContacts.filter(contactName => contactName);
+  const bgcolors = [];
+  const validContacts = selectedContacts.filter((contactName) => contactName);
 
-    for (const contactName of validContacts) {
-        const foundContact = contacts.find(c => `${c.name} ${c.surname}` === contactName);
-        if (foundContact && foundContact.bgcolor) {
-            bgcolors.push(foundContact.bgcolor);
-        }
+  for (const contactName of validContacts) {
+    const foundContact = contacts.find(
+      (c) => `${c.name} ${c.surname}` === contactName
+    );
+    if (foundContact && foundContact.bgcolor) {
+      bgcolors.push(foundContact.bgcolor);
     }
-    return bgcolors;
+  }
+  return bgcolors;
 }
-
 
 /**
  * Sets up the 'dueDate' input field by setting the minimum date to the current date.
  * Listens for changes to ensure selected dates are not in the past.
  */
-document.addEventListener('DOMContentLoaded', function () {
-    let today = new Date().toISOString().split('T')[0];
-    document.getElementById('dueDate').min = today;
+document.addEventListener("DOMContentLoaded", function () {
+  let today = new Date().toISOString().split("T")[0];
+  document.getElementById("dueDate").min = today;
 });

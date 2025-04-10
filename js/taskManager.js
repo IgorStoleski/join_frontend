@@ -159,8 +159,9 @@ function addTask(status) {
         modal.classList.add('edditModal-slide-in');
         let overlay = document.querySelector(".task-background-overlay");
         overlay.style.display = "block";
+        aktiviereFilePickerListener();
     } else {
-        window.location.href = 'addTask.html?status='  + encodeURIComponent(status);
+        window.location.href = 'addTask.html?status='  + encodeURIComponent(status); 
     }
 }
 
