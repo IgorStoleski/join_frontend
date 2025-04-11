@@ -73,16 +73,24 @@ async function uploadImage(file, image, taskId) {
 
   const method = isUpdate ? "PUT" : "POST";
 
-  const formData = new FormData();
-  formData.append("image", file);
+  try {
+    const base64Image = await blobToBase64(file); // <--- deine Funktion
 
-  const response = await fetch(url, {
-    method: method,
-    body: formData,
-  });
+    const response = await fetch(url, {
+      method: method,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        image: base64Image,
+      }),
+    });
 
-  if (!response.ok) {
-    console.error(`${method} fehlgeschlagen für ${image.filename}`);
+    if (!response.ok) {
+      console.error(`${method} fehlgeschlagen für ${image.filename}`);
+    }
+  } catch (err) {
+    console.error("Fehler beim Konvertieren oder Senden der Datei:", err);
   }
 }
 
@@ -116,6 +124,11 @@ function dataURLtoFile(dataurl, filename) {
 }
 
 
+function joinUrl(base, path) {
+  return `${base.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
+}
+
+
 /**
  * Lädt die Vorschau-Bilder eines bestimmten Tasks vom Server und bereitet sie zur Anzeige vor.
  * @async
@@ -134,7 +147,7 @@ async function loadPreview(taskId) {
       allImages = task.images.map(img => ({
           id: img.id,
           filename: img.image.split('/').pop(),
-          base64: img.image, // hier ist es eine URL!
+          base64: img.image, 
           fileType: 'image/jpeg',
           isRemote: true
       }));
@@ -163,7 +176,7 @@ async function loadPreviewFromBackend(taskId, isEditMode = false) {
     allImages = images.map((img) => ({
       id: img.id,
       filename: img.image.split("/").pop(),
-      base64: `${STORAGE_URL}${img.image}`,
+      base64: joinUrl(STORAGE_URL, img.image),
       fileType: "image/jpeg",
       isRemote: true,
     }));

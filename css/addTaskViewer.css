@@ -49,7 +49,7 @@
     padding: 5px;
     cursor: pointer;
     font-size: 14px;
-    background-image: url('/join/img/trash.png');
+    background-image: url('./../img/trash.png');
     width: 24px;
     height: 24px;
     background-size: cover;

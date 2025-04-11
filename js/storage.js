@@ -9,8 +9,8 @@ let todos = [];
 let allImages = [];
 
 let STORAGE_TOKEN;
-/* const STORAGE_URL = 'https://backend.kanban-join.de/'; */
-const STORAGE_URL = "http://localhost:8000/";
+const STORAGE_URL = 'https://backend.kanban-join.de/';
+/* const STORAGE_URL = "http://localhost:8000/"; */
 
 async function loadAllContacts() {
   const authToken = getAuthToken();
