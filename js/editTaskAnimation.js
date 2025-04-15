@@ -92,7 +92,6 @@ function openEditedTask(id) {
   slideCard.innerHTML = renderSlideCard(id);
   document.getElementById('task-slide').classList.remove('d-none');
   document.getElementById('slide-container').classList.add('open-task');
-
 }
 
 

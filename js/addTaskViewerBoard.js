@@ -67,6 +67,15 @@ function saveGalleryBoard() {
 
 
 /**
+ * Deletes the gallery board from local storage.
+ * This function removes the "allImages" key from local storage,
+ */
+function deleteGalleryBoard() {
+  localStorage.removeItem("allImages");
+}
+
+
+/**
  * Loads the image gallery board from local storage.
  * Retrieves a JSON string of all stored images from local storage,
  * parses it into the `allImages` array, and renders the gallery board.

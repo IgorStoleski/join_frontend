@@ -9,8 +9,8 @@ let todos = [];
 let allImages = [];
 
 let STORAGE_TOKEN;
-const STORAGE_URL = 'https://backend.kanban-join.de/';
-/* const STORAGE_URL = "http://localhost:8000/"; */
+/* const STORAGE_URL = 'https://backend.kanban-join.de/'; */
+const STORAGE_URL = "http://localhost:8000/";
 
 async function loadAllContacts() {
   const authToken = getAuthToken();
@@ -187,6 +187,7 @@ async function setTask(task) {
       const data = await res.json();
       if (res.ok) {
         saveGalleryToBackend(data.id);
+        deleteGalleryBoard();
         return data;
       } else {
         throw new Error(`Task konnte nicht erstellt werden: ${res.status}`);
@@ -267,6 +268,10 @@ async function getTasks() {
     console.error("Error fetching tasks:", error);
     throw new Error("Could not fetch tasks.");
   }
+}
+
+function deleteGalleryBoard() {
+  localStorage.removeItem("allImages");
 }
 
 function saveAuthToken(token) {

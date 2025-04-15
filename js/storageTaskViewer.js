@@ -27,6 +27,7 @@ async function saveGalleryToBackend(taskId) {
 
     await uploadImage(file, image, taskId);
   }
+  loadPreviewFromBackend(taskId);
 }
 
 
@@ -88,6 +89,8 @@ async function uploadImage(file, image, taskId) {
 
     if (!response.ok) {
       console.error(`${method} fehlgeschlagen für ${image.filename}`);
+    } else {
+      deleteGalleryBoard();
     }
   } catch (err) {
     console.error("Fehler beim Konvertieren oder Senden der Datei:", err);
@@ -137,7 +140,7 @@ function joinUrl(base, path) {
  * @returns {Promise<void>} - Diese Funktion gibt kein Ergebnis zurück, führt jedoch ein Rendering der Vorschau durch.
  * @throws {Error} Wenn die Anfrage an den Server fehlschlägt oder keine gültige Antwort zurückgegeben wird.
  */
-async function loadPreview(taskId) {
+/* async function loadPreview(taskId) {
   try {
       const response = await fetch(`${STORAGE_URL}tasks/${taskId}/`);
       if (!response.ok) throw new Error('Task konnte nicht geladen werden');
@@ -147,7 +150,7 @@ async function loadPreview(taskId) {
       allImages = task.images.map(img => ({
           id: img.id,
           filename: img.image.split('/').pop(),
-          base64: img.image, 
+          base64: joinUrl(STORAGE_URL, img.image),
           fileType: 'image/jpeg',
           isRemote: true
       }));
@@ -157,7 +160,7 @@ async function loadPreview(taskId) {
       console.error('Fehler beim Laden der Galerie:', error.message);
   }
 }
-
+ */
 
 /**
  * Lädt die Bildvorschau eines Tasks vom Backend und rendert sie. *
@@ -234,7 +237,6 @@ async function deleteSingleImageFromBackend(taskId, imageId) {
     );
 
     if (!response.ok) throw new Error("Bild konnte nicht gelöscht werden");
-    console.log("Bild erfolgreich im Backend gelöscht:", imageId);
   } catch (error) {
     console.error("Fehler beim Löschen des Bildes:", error.message);
   }

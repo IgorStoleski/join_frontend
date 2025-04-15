@@ -72,6 +72,10 @@ function saveGallery() {
 }
 
 
+function deleteGalleryBoard() {
+  localStorage.removeItem("allImages");
+}
+
 /**
  * Loads the image gallery from the local memory.
  * If the parameter `isEditMode` is true, an edit preview is rendered,

@@ -20,11 +20,11 @@
   </head>
 
   <body onload="init(), initTask()">
-    <div w3-include-html="./templates/header.html"></div>
-    <div w3-include-html="./templates/aside.html"></div>
+    <header w3-include-html="./templates/header.html"></header>
+    <aside w3-include-html="./templates/aside.html"></aside>
     <form id="taskForm">
-      <div class="add-task-container">
-        <div class="add-task-container-first">
+      <section class="add-task-container">
+        <section class="add-task-container-first">
           <div class="add-task-container-titel">
             <div class="add-task-titel-textcontainer">
               <input
@@ -33,12 +33,12 @@
                 placeholder="Enter a title"
               />
             </div>
-            <div id="requiredTitle" class="add-task-field-required">
+            <span id="requiredTitle" class="add-task-field-required">
               This field is required
-            </div>
+            </span>
           </div>
-          <div class="add-task-container-description">
-            <div class="add-task-description-header">Description</div>
+          <section class="add-task-container-description">
+            <span class="add-task-description-header">Description</span>
             <textarea
               id="taskDescription"
               class="add-task-description-textfield"
@@ -46,22 +46,22 @@
               cols="30"
               rows="4"
             ></textarea>
-            <div id="requiredDescription" class="add-task-field-required">
+            <p id="requiredDescription" class="add-task-field-required">
               This field is required
-            </div>
-          </div>
+            </p>
+          </section>
           <div class="due-date-container">
-            <div class="due-date-header">Due date</div>
+            <span class="due-date-header">Due date</span>
             <div class="due-date-input-container">
               <input id="dueDate" class="due-date-textfield" type="date" />
             </div>
-            <div id="requiredDate" class="add-task-field-required">
+            <span id="requiredDate" class="add-task-field-required">
               This field is required
-            </div>
+            </span>
           </div>
-        </div>
-        <div class="add-task-container-priority">
-          <div class="add-task-priority-header">Priority</div>
+        </section>
+        <section class="add-task-container-priority">
+          <span class="add-task-priority-header">Priority</span>
           <div class="priority-choice">
             <button
               type="button"
@@ -112,12 +112,12 @@
               </div>
             </button>
           </div>
-          <div id="requiredPriority" class="add-task-field-required">
+          <span id="requiredPriority" class="add-task-field-required">
             This field is required
-          </div>
-        </div>
-        <div class="assigned-to-container">
-          <div class="assigned-to-header">Assigned to</div>
+          </span>
+        </section>
+        <section class="assigned-to-container">
+          <span class="assigned-to-header">Assigned to</span>
           <div class="assigned-to-choicefield" id="assigned-to-choicefield">
             <div
               class="assigned-to-dropdown"
@@ -148,9 +148,9 @@
             </button>
           </div>
           <div id="chosenContacts" class="chosen-contacts"></div>
-        </div>
-        <div class="category-container">
-          <div class="category-header">Category</div>
+        </section>
+        <section class="category-container">
+          <span class="category-header">Category</span>
           <div class="category-choicefield" id="categoryChoicefield">
             <div class="category-dropdown" onclick="toggleCategoryContainer()">
               <div class="dropdown-header" id="dropdownHeader">
@@ -160,13 +160,13 @@
               <div class="dropdown-arrow"></div>
             </div>
           </div>
-          <div id="requiredCategory" class="add-task-field-required">
+          <span id="requiredCategory" class="add-task-field-required">
             This field is required
-          </div>
+          </span>
           <div id="loadedCategories" class="loaded-categories"></div>
-        </div>
-        <div class="subtasks-container">
-          <div class="subtasks-header">Subtasks</div>
+        </section>
+        <section class="subtasks-container">
+          <span class="subtasks-header">Subtasks</span>
           <div class="add-subtask-input">
             <input
               onclick="openSubtaskInput()"
@@ -195,29 +195,28 @@
             />
           </div>
           <div id="subtask-add-container" class="subtask-add-container"></div>
-        </div>
-        <div id="upload1" class="upload-container">
-            <span class="upload-text">Uplaoad a pic</span>
-            <img
-              src="./img/upload.png"
-              class="upload"
-              onclick="filepicker.click()"
-            />
-            <input
-              type="file"
-              id="filepicker"
-              class="filepicker"
-              style="display: none"
-              accept="image/*"
-              multiple
-            />
-          </div>
-          <div id="error" class="error"></div>
-          <div id="gallery" class="gallery"></div>
-      </div>
-      
+        </section>
+        <section id="upload1" class="upload-container">
+          <span class="upload-text">Uplaoad a pic</span>
+          <img
+            src="./img/upload.png"
+            class="upload"
+            onclick="filepicker.click()"
+          />
+          <input
+            type="file"
+            id="filepicker"
+            class="filepicker"
+            style="display: none"
+            accept="image/*"
+            multiple
+          />
+        </section>
+        <span id="error" class="error"></span>
+        <span id="gallery" class="gallery"></span>
+      </section>
 
-      <div class="add-task-buttons">
+      <section class="add-task-buttons">
         <div class="add-task-buttons-inner">
           <button
             onclick="resetTaskForm()"
@@ -233,7 +232,7 @@
             <img class="button-create-task-pic" src="./img/check.svg" />
           </button>
         </div>
-      </div>
+      </section>
     </form>
 
     <form
