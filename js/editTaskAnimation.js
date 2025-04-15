@@ -192,18 +192,22 @@ function highlightButton(button, bgColor, imageSrc) {
  */
 function addNewSubtask() {
   const subInput = document.getElementById('edit-subtask-input');
-  const subInputValue = subInput.value.trim();
+  const subInputValue = subInput.value.trim(); 
+
+  if (!subInputValue) {
+    subInput.classList.add("input-error"); 
+    setTimeout(() => subInput.classList.remove("input-error"), 1000);
+    return;
+  }
+
   const subtaskContainer = document.getElementById("edit-subtask-add-container");
 
   if (!currentSelectedTask.subtasks) {
     currentSelectedTask.subtasks = [];
   }
-
   const newSubtaskId = currentSelectedTask.subtasks.length + 1;
   subtaskContainer.innerHTML += subtaskToAddHTML(subInputValue, newSubtaskId);
-
   currentSelectedTask.subtasks.push({ id: newSubtaskId, title: subInputValue, status: false });
-
   subInput.value = '';
   closeSubtaskInput();
 }

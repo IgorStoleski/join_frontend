@@ -45,7 +45,7 @@ async function loadData() {
     todos = await getTasks();
   } catch (e) {
     console.error("Loading error:", e);
-  }
+  }  
 }
 
 
@@ -350,13 +350,13 @@ function allowDrop(ev) {
  * Moves a task to a specified status and updates the UI.
  * @param {string} status - The new status for the dragged task.
  */
-function moveTo(status) {
+async function moveTo(status) {
   currentDraggedElement.status = status;
   const pk = currentDraggedElement.id;
   const task = currentDraggedElement;
-  pushData(task, pk);
-  loadData();
-  updateHTML();
+  await pushData(task, pk);
+  await loadData();
+  await updateHTML();
 }
 
 

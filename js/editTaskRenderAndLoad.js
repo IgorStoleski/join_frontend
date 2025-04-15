@@ -281,7 +281,7 @@ function finishEditing(i) {
     if (subtaskContainer) {
         removeEditingClasses(subtaskContainer);
     }
-    saveEditedTitle();
+    saveEditedTitle(i);
 }
 
 
@@ -330,13 +330,22 @@ function removeEditingClasses(container) {
  * an error is displayed in the console.
  * @throws {Error} If currentTask is not defined or has no subtasks.
  */
-function saveEditedTitle() {
-    let currentTask = todos[currentTaskId];
-    if (!currentTask || !currentTask.subtasks) {
-        console.error("currentTask ist nicht definiert oder hat keine subtasks.");
+function saveEditedTitle(i) {
+    let subtaskElement = document.getElementById(i);
+    let editedTitle = subtaskElement.textContent.trim();
+
+    if (!editedTitle) {
+        currentSelectedTask.subtasks = currentSelectedTask.subtasks.filter(sub => sub.id !== i);
+        const subtaskContainer = document.getElementById(`subtask-container-${i}`);
+        if (subtaskContainer) {
+            subtaskContainer.remove();
+        }
         return;
     }
-    currentTask.subtasks = processAndSaveSubtasks(currentTask);
+    let subtask = currentSelectedTask.subtasks.find(sub => sub.id === i);
+    if (subtask) {
+        subtask.title = editedTitle;
+    }
 }
 
 

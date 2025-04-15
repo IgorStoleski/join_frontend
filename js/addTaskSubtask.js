@@ -9,6 +9,8 @@ function addSubtask() {
     let subtaskValue = subtaskInput.value.trim();
 
     if (!subtaskValue) {
+        subtaskInput.classList.add("input-error"); 
+        setTimeout(() => subtaskInput.classList.remove("input-error"), 1000);
         return;
     }
     subtaskIdCounter++;
@@ -55,6 +57,7 @@ function addSubtaskToContainer(subtaskId, subtaskValue) {
 }
 
 
+//TODO - delete subtask check why it is not working
 /**
  * Deletes a subtask with the given ID from the subtasks array and removes its corresponding element from the DOM.
  * @param {string|number} subtaskId - The ID of the subtask to delete.
@@ -131,7 +134,14 @@ function finishEditing(subtaskId) {
  */
 function saveEditedTitle(subtaskId) {
     let subtaskElement = document.getElementById(subtaskId);
-    let editedTitle = subtaskElement.textContent;
+    let editedTitle = subtaskElement.textContent.trim(); // 👈 trimmt Leerzeichen
+
+    if (!editedTitle) {
+        subtasks = subtasks.filter(sub => sub.id !== subtaskId); // Aus Liste löschen
+        let container = document.getElementById(`subtask-container-${subtaskId}`);
+        if (container) container.remove(); // Auch aus DOM löschen
+        return;
+    }
 
     let editedSubtask = subtasks.find(subtask => subtask.id === subtaskId);
 

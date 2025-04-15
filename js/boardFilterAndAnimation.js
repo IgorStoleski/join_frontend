@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
 /**
  * Close the task card with a slide out animation.
  */
-function closeCard() {
+async function closeCard() {
     document.getElementById("slide-container").classList.remove("slide-in-board");
     setTimeout(() => {
         document.getElementById("task-slide").classList.add("d-none");
@@ -92,7 +92,7 @@ function closeCard() {
         location.reload();
     }, 100);
     document.body.style.overflow = 'auto';
-    
+    await updateHTML();
 }
 
 

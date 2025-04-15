@@ -29,10 +29,10 @@ function subtaskToEditHTML(subtask, i) {
  */
 function renderEditTask(task) {
   return /* html */ `
-        <div id="edit-slide-container" class="edit-slide-container">
+        <section id="edit-slide-container" class="edit-slide-container">
             <form id="edit-taskForm" onsubmit="saveEditedTask(${task.id}); return false;" class="edit-task-slide-container">
-                <div class="edit-add-task-container scroll-slide-edit-container">
-                    <div class="edit-add-task-container-first">
+                <section class="edit-add-task-container scroll-slide-edit-container">
+                    <section class="edit-add-task-container-first">
                         <div class="edit-add-task-container-titel">
                             <div class="edit-add-task-titel-textcontainer">
                                 <input id="edit-task-title" class="edit-add-task-titel-textfield" placeholder="Enter a title" value="${task.title}">
@@ -41,16 +41,16 @@ function renderEditTask(task) {
                         <div id="edit-required-title" class="edit-add-task-field-required">
                             This field is required
                         </div>
-                    </div>
-                    <div class="edit-add-task-container-description">
+                    </section>
+                    <section class="edit-add-task-container-description">
                         <div class="edit-add-task-description-header">Description</div>
                         <textarea id="edit-task-description" class="edit-add-task-description-textfield"
                             placeholder="Enter a Description" cols="30" rows="4">${task.description}</textarea>
                         <div id="edit-required-description" class="edit-add-task-field-required">
                             This field is required
                         </div>
-                    </div>
-                    <div class="edit-due-date-container">
+                    </section>
+                    <section class="edit-due-date-container">
                         <div class="edit-due-date-header">
                             Due date
                         </div>
@@ -60,13 +60,13 @@ function renderEditTask(task) {
                         <div id="edit-required-date" class="edit-add-task-field-required">
                             This field is required
                         </div>
-                    </div>
-                    <div class="edit-add-task-container-priority">
+                    </section>
+                    <section class="edit-add-task-container-priority">
                         <div class="edit-add-task-priority-header">
                         Priority
                         </div>
-                    </div>
-                    <div class="edit-priority-choice">
+                    </section>
+                    <section class="edit-priority-choice">
                         <button type="button" onclick="priority(this)" id="edit-prio-urgent"
                             class="edit-priority-choice-inner prio-urgent">
                             Urgent
@@ -90,16 +90,16 @@ function renderEditTask(task) {
                                     data-image="prio-low.png">
                             </div>
                         </button>
-                    </div>
-                    <div id="edit-required-priority" class="edit-add-task-field-required">
+                    </section>
+                    <section id="edit-required-priority" class="edit-add-task-field-required">
                         This field is required
-                    </div>
-                    <div class="edit-assigned-to-container">
+                    </section>
+                    <section class="edit-assigned-to-container">
                         <div class="edit-assigned-to-header">
                         Assigned to
                         </div>
-                    </div>
-                    <div class="edit-assigned-to-choicefield">
+                    </section>
+                    <section class="edit-assigned-to-choicefield">
                         <div class="edit-assigned-to-dropdown" onclick="loadToggleAssignedToContainer()">
                             <div class="edit-assigned-dropdown-header">
                                 <input oninput="loadSearchContacts(this.value)" id="edit-search-input" class="edit-assigned-select-text"
@@ -107,36 +107,36 @@ function renderEditTask(task) {
                             </div>
                             <div class="edit-assigned-dropdown-arrow"></div>
                         </div>
-                    </div>
-                    <div id="edit-required-contact" class="edit-add-task-field-required">
+                    </section>
+                    <section id="edit-required-contact" class="edit-add-task-field-required">
                         This field is required
-                    </div>
-                    <div class="edit-contacts-container">
+                    </section>
+                    <section class="edit-contacts-container">
                         <div id="edit-loaded-contacts" class="loaded-contacts">
                         </div>
                         <button id="edit-addContactBtn" onclick="openModal()" class="add-person-btn">
                             Add new contact
                             <img src="./img/person_add.svg" class="button-icon">
                         </button>
-                    </div>
-                    <div id="edit-chosen-contacts" class="chosen-contacts"></div>
-                    <div class="edit-subtasks-container">
+                    </section>
+                    <section id="edit-chosen-contacts" class="chosen-contacts"></section>
+                    <section class="edit-subtasks-container">
                         <div class="edit-subtasks-header">
                             Subtasks
                         </div>
-                        <div class="add-subtask-input">
+                        <section id="editSubTaskInput" class="add-subtask-input">
                             <input onclick="openSubtaskInput()" type="text" id="edit-subtask-input" class="edit-new-subtask-textfield" placeholder="Add new subtask">
                             <img onclick="openSubtaskInput()" class="open-subtask-button" src="./img/open_subtask.png">
                             <img onclick="closeSubtaskInput()" class="add-subtask-button hidden" id="edit-close-subtask" src="./img/close_subtask.png"> 
                             <span class="separator" id="edit-separator">|</span> 
                             <img onclick="addNewSubtask()" class="add-subtask-button hidden" id="edit-add-new-subtask" src="./img/add_subtask.png">
-                        </div>
-                        <div id="edit-required-subtask" class="edit-add-task-field-required">
+                        </section>
+                        <section id="edit-required-subtask" class="edit-add-task-field-required">
                             This field is required
-                        </div>
-                        <div id="edit-subtask-add-container" class="edit-subtask-add-container"></div>
-                    </div>
-                    <div class="upload-container">
+                        </section>
+                        <section id="edit-subtask-add-container" class="edit-subtask-add-container"></section>
+                    </section>
+                    <section class="upload-container">
                         <span class="upload-text">Uplaoad a pic</span>
                         <img
                         src="./img/upload.png"
@@ -151,20 +151,20 @@ function renderEditTask(task) {
                         accept="image/*"
                         multiple
                         />
-                    </div>
-                    <div id="edit-error" class="error"></div>
-                    <div id="edit-preview" class="gallery"></div> 
-                </div>
-                <div class="edit-add-task-buttons">
+                    </section>
+                    <section id="edit-error" class="error"></section>
+                    <section id="edit-preview" class="gallery"></section> 
+                </section>
+                <section class="edit-add-task-buttons">
                     <div class="edit-add-task-buttons-inner">                            
                         <button type="submit" id="createTaskButton" class="edit-button-create-task">
                             <div class="edit-button-create-task-text">Ok</div>
                             <div class="edit-button-create-task-pic"><img src="./img/check.svg"></div>
                         </button>
                     </div>
-                </div>            
+                </section>            
             </form>
-        </div>
+        </section>
     `;
 }
 
