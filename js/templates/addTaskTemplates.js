@@ -3,16 +3,15 @@
  * @returns {string} - The HTML template for a success message overlay.
  */
 function createdTaskTemplate() {
-    return /*html*/ `
-        <div id="createTaskOverlay" class="task-overlay">
+  return /*html*/ `
+        <section id="createTaskOverlay" class="task-overlay">
             <div class="task-success-message">
                 <p>Task added to board</p>
                 <img class="send-check" src="./img/added_task.png" alt="">
             </div>
-        </div>
+        </section>
     `;
 }
-
 
 /**
  * Renders an assigned contact as an HTML element.
@@ -29,19 +28,28 @@ function createdTaskTemplate() {
  * const htmlString = renderAssignedToHTML(contact, 'JD', true, false);
  */
 function renderAssignedToHTML(contact, initials, isSelected, isCurrentUser) {
-    let userMarker = isCurrentUser ? " (you)" : "";
+  let userMarker = isCurrentUser ? " (you)" : "";
 
-    return /*html*/`
-        <div class="contact-container ${isSelected ? 'selected' : ''}" onclick="toggleContactSelection('${contact.name}', '${contact.surname}')">
+  return /*html*/ `
+        <section class="contact-container ${
+          isSelected ? "selected" : ""
+        }" onclick="toggleContactSelection('${contact.name}', '${
+    contact.surname
+  }')">
             <div class="select-contact">
-                <div class="initial" style="background-color: ${contact.bgcolor}">${initials}</div>
-                <div class="select-name">${contact.name} ${contact.surname}${userMarker}</div>
+                <div class="initial" style="background-color: ${
+                  contact.bgcolor
+                }">${initials}</div>
+                <div class="select-name">${contact.name} ${
+    contact.surname
+  }${userMarker}</div>
             </div>
-            <img class="select-icon" id="selectCheck" src="${isSelected ? 'img/check_contact.png' : 'img/check-button.png'}"  alt="Check Button">
-        </div>
+            <img class="select-icon" id="selectCheck" src="${
+              isSelected ? "img/check_contact.png" : "img/check-button.png"
+            }"  alt="Check Button">
+        </section>
     `;
 }
-
 
 /**
  * Generates an HTML string for a contact based on the provided details.
@@ -55,20 +63,34 @@ function renderAssignedToHTML(contact, initials, isSelected, isCurrentUser) {
  * @param {boolean} isCurrentUser - A flag indicating if the contact is the current user.
  * @returns {string} The generated HTML string for the contact.
  */
-function renderSearchedContactsHTML(contact, initials, isSelected, isCurrentUser) {
-    let userMarker = isCurrentUser ? " (you)" : "";
+function renderSearchedContactsHTML(
+  contact,
+  initials,
+  isSelected,
+  isCurrentUser
+) {
+  let userMarker = isCurrentUser ? " (you)" : "";
 
-    return /*html*/`
-        <div class="contact-container ${isSelected ? 'selected' : ''}" onclick="toggleContactSelection('${contact.name}', '${contact.surname}')">
+  return /*html*/ `
+        <section class="contact-container ${
+          isSelected ? "selected" : ""
+        }" onclick="toggleContactSelection('${contact.name}', '${
+    contact.surname
+  }')">
             <div class="select-contact">
-                <div class="initial" style="background-color: ${contact.bgcolor}">${initials}</div>
-                <div class="select-name">${contact.name} ${contact.surname}${userMarker}</div>
+                <div class="initial" style="background-color: ${
+                  contact.bgcolor
+                }">${initials}</div>
+                <div class="select-name">${contact.name} ${
+    contact.surname
+  }${userMarker}</div>
             </div>
-            <img class="select-icon" id="selectCheck" src="${isSelected ? 'img/check_contact.png' : 'img/check-button.png'}"  alt="Check Button">
-        </div>
+            <img class="select-icon" id="selectCheck" src="${
+              isSelected ? "img/check_contact.png" : "img/check-button.png"
+            }"  alt="Check Button">
+        </section>
     `;
 }
-
 
 /**
  * Generates HTML markup for a subtask with the given ID and value.
@@ -80,20 +102,55 @@ function renderSearchedContactsHTML(contact, initials, isSelected, isCurrentUser
  * // Returns the HTML markup for the subtask with ID 1 and value "Do laundry".
  */
 function createSubtaskHTML(subtaskId, subtaskValue) {
-    return /*html*/`
-        <div id="subtask-container-${subtaskId}" class="subtask-container">
+  return /*html*/ `
+          <li id="subtask-container-${subtaskId}" class="subtask-container" data-subtask-id="${subtaskId}">
             <div class="subtask-item">
-                <span class="subtask-dot"></span>           
-                <span id="${subtaskId}" data-subtask-id="${subtaskId}" class="subtask-value" contenteditable="false">${subtaskValue}</span>
+              <span class="subtask-dot" aria-hidden="true"></span>
+              <span
+                id="${subtaskId}"
+                class="subtask-value"
+                data-subtask-id="${subtaskId}"
+                contenteditable="false"
+                role="textbox"
+                aria-readonly="true"
+              >
+                ${subtaskValue}
+              </span>
             </div>
+      
+            <!-- nur beim Hover -->
             <div class="hover-content">
-                <img onclick="editSubtask('${subtaskId}')" src="./img/edit_subtask.png" class="edit-subtask-button">
-                <span class="separator2" id="separator2">|</span> 
-                <img onclick="deleteSubtask('${subtaskId}')" data-subtask-id="${subtaskId}" src="./img/delete_subtask.png" class="delete-subtask-button">
+              <button 
+                type="button"
+                class="edit-subtask-button"
+                aria-label="Subtask bearbeiten"
+                onclick="editSubtask('${subtaskId}')"
+              ><img src="./img/edit_subtask.png" alt=""></button>
+              <span class="separator2">|</span>
+              <button
+                type="button"
+                class="delete-subtask-button"
+                aria-label="Subtask löschen"
+                onclick="deleteSubtask('${subtaskId}')"
+              ><img src="./img/delete_subtask.png" alt=""></button>
             </div>
-            <img onclick="deleteSubtask('${subtaskId}')" data-subtask-id="${subtaskId}" src="./img/delete_subtask.png" class="edit-delete-subtask-button">
-            <span class="separator3" id="separator3">|</span> 
-            <img onclick="finishEditing('${subtaskId}')" src="./img/add_subtask.png" class="save-subtask-button">
-        </div>
-    `;
+      
+            <!-- nur im Bearbeiten‑Modus -->
+            <div class="edit-subtaskContent">
+              <button
+                type="button"
+                class="cancel-subtask-button"
+                aria-label="Bearbeitung abbrechen"
+                onclick="deleteSubtask('${subtaskId}')"
+              ><img src="./img/delete_subtask.png" alt=""></button>
+              <span class="separator3">|</span>
+              <button
+                type="button"
+                class="save-subtask-button"
+                aria-label="Änderungen speichern"
+                onclick="finishEditing('${subtaskId}')"
+              ><img src="./img/add_subtask.png" alt=""></button>
+            </div>
+          </li>
+        `;
 }

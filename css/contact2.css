@@ -206,6 +206,7 @@
 
 .modal-input-frame {
     display: flex;
+    flex-direction: column;
     width: 422px;
     padding: 12px 21px;
     align-items: center;

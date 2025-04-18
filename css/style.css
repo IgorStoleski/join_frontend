@@ -42,12 +42,121 @@ body {
 }
 
 .fade-out {
-    animation: fadeOut 0.4s ease-out forwards;
+  animation: fadeOut 0.4s ease-out forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: scale(0.95);
   }
-  
-  @keyframes fadeOut {
-    to {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-  }
+}
+
+.error-msg {
+  color: red;
+  font-size: 0.8em;
+  margin-top: 2px;
+  min-height: 1em; /* sorgt dafür, dass sich das Layout nicht springt */
+}
+.modal-input-field.invalid {
+  border-color: red;
+}
+
+.modal-input-dflex {
+  display: flex;
+  justify-content: space-between;
+  width: 422px;
+}
+
+/* Buttons sind „unsichtbar“, nur Icons zeigen */
+.subtask-container button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  cursor: pointer;
+}
+
+.subtask-container .hover-content {
+  display: none;
+}
+
+.subtask-container:hover .hover-content {
+  display: flex;          
+  align-items: center;
+}
+
+.subtask-container .edit-subtaskContent {
+  display: none;
+}
+
+.subtask-container.editing-mode .edit-subtaskContent {
+  display: flex;          
+  align-items: center;
+}
+
+.subtask-container.editing-mode:hover .hover-content {
+  display: none;
+}
+
+.subtask-container.editing-mode .subtask-dot {
+  display: none;
+}
+
+.subtask-container.editing-mode {
+  border-bottom: 1px solid #4589FF;
+}
+
+/* Liste ohne Standard-Punkte */
+.edit-subtask-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Buttons sind „unsichtbar“, nur das Icon */
+.edit-subtask-container button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* --- Hover-Content --- */
+/* verstecken */
+.edit-subtask-container .hover-content {
+  display: none;
+}
+/* beim Hover einblenden */
+.edit-subtask-container:hover .hover-content {
+  display: flex;
+  align-items: center;
+}
+
+/* --- Edit-Content (Save/Cancel) --- */
+/* verstecken */
+.edit-subtask-container .edit-subtaskContent {
+  display: none;
+}
+/* im Bearbeiten-Modus einblenden */
+.edit-subtask-container.editing-mode .edit-subtaskContent {
+  display: flex;
+  align-items: center;
+}
+
+/* wenn edit-mode aktiv, soll Hover-Content aus sein */
+.edit-subtask-container.editing-mode:hover .hover-content {
+  display: none;
+}
+
+/* Punkt ausblenden im Bearbeiten-Modus */
+.edit-subtask-container.editing-mode .edit-subtask-dot {
+  display: none;
+}
+
+/* Rahmen-Linie im Bearbeiten-Modus */
+.edit-subtask-container.editing-mode {
+  border-bottom: 1px solid #4589FF;
+}

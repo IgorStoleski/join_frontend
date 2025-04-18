@@ -16,11 +16,6 @@ async function initContact() {
 }
 
 
-
-
-
-
-
 /**
  * Sorts the contacts array alphabetically by name. 
  */
@@ -201,6 +196,10 @@ function openModal() {
     overlay.style.display = "flex";
     modalContainer.classList.remove('modal-slide-out');
     modalContainer.classList.add('modal-slide-in');
+    ['Name','Surname','newEmail','newTelefon'].forEach(id => {
+        const inp = document.getElementById(id);
+        inp.addEventListener('input', () => clearError(inp));
+      });
 }
 
 

@@ -4,8 +4,8 @@
  * @param {string} subtask.title - The title of the subtask.
  * @param {number} i - The index or ID associated with the subtask, used for data attributes and action handlers.
  */
-function subtaskToEditHTML(subtask, i) {
-  return /*html*/ `
+/* function subtaskToEditHTML(subtask, i) {
+  return /*html*`
         <div id="subtask-container-${i}" class="edit-subtask-container">
             <div class="edit-subtask-item">
                 <span id="editDot" class="edit-subtask-dot"></span>           
@@ -21,6 +21,72 @@ function subtaskToEditHTML(subtask, i) {
             <img onclick="finishEditing(${i})" data-index="${i}" src="./img/add_subtask.png" class="edit-save-subtask-button">
         </div>
     `;
+} */
+
+function subtaskToEditHTML(subtask, i) {
+  return /*html*/ `
+          <li
+            id="subtask-container-${i}"
+            class="edit-subtask-container"
+            data-index="${i}"
+          >
+            <div class="edit-subtask-item">
+              <span class="edit-subtask-dot" aria-hidden="true"></span>
+              <span
+                id="edit-value-${i}"
+                class="edit-subtask-value"
+                data-index="${i}"
+                contenteditable="false"
+                role="textbox"
+                aria-readonly="true"
+              >
+                ${subtask.title}
+              </span>
+            </div>
+      
+            <!-- nur beim Hover -->
+            <div class="hover-content">
+              <button
+                type="button"
+                class="edit-edit-subtask-button"
+                aria-label="Subtask bearbeiten"
+                onclick="editEditedSubtask(${i})"
+              >
+                <img src="./img/edit_subtask.png" alt="">
+              </button>
+              <span class="separator2">|</span>
+              <button
+                type="button"
+                class="edit-delete-subtask-button"
+                aria-label="Subtask löschen"
+                onclick="deleteEditSubtask(${i})"
+              >
+                <img src="./img/delete_subtask.png" alt="">
+              </button>
+            </div>
+      
+            <!-- nur im Bearbeiten‑Modus -->
+            <div class="edit-subtaskContent">
+              <button
+                type="button"
+                class="edit-edit-delete-subtask-button"
+                aria-label="Bearbeitung abbrechen"
+                onclick="deleteEditSubtask(${i})"
+              >
+                <img src="./img/delete_subtask.png" alt="">
+              </button>
+              <span class="separator3" aria-hidden="true">|</span>
+              <button
+                type="button"
+                class="edit-save-subtask-button"
+                aria-label="Änderungen speichern"
+                onclick="finishEditing(${i})"
+              >
+                <img src="./img/add_subtask.png" alt="">
+              </button>
+            </div>
+          </li>
+        `;
 }
 
 /**
@@ -134,7 +200,8 @@ function renderEditTask(task) {
                         <section id="edit-required-subtask" class="edit-add-task-field-required">
                             This field is required
                         </section>
-                        <section id="edit-subtask-add-container" class="edit-subtask-add-container"></section>
+                        <div id="edit-subtask-add-container" class="edit-subtask-add-container"></div>
+                        <ul class="edit-subtask-list"></ul>
                     </section>
                     <section class="upload-container">
                         <span class="upload-text">Uplaoad a pic</span>
@@ -202,7 +269,6 @@ function loadRenderSearchedContactsHTML(
       </div>`;
 }
 
-
 /**
  * Renders the HTML for a given contact, including initials and selected state.
  * @param {Object} contact - The contact to render.
@@ -237,8 +303,8 @@ function renderAssignedToHTML(contact, initials, isSelected, isCurrentUser) {
  * @param {string} subInputValue - The value of the subtask to be displayed.
  * @param {number} i - The unique index or identifier for the subtask.
  */
-function subtaskToAddHTML(subInputValue, i) {
-  return /*html*/ `
+/* function subtaskToAddHTML(subInputValue, i) {
+  return /*html `
         <div id="subtask-container-${i}" class="edit-subtask-container">
             <div class="edit-subtask-item">
                 <span id="editDot" class="edit-subtask-dot"></span>           
@@ -254,6 +320,67 @@ function subtaskToAddHTML(subInputValue, i) {
             <img onclick="finishEditing(${i})" data-subtask-id="${i}" src="./img/add_subtask.png" class="edit-save-subtask-button">
         </div>
     `;
+} */
+function subtaskToAddHTML(subInputValue, i) {
+  return /*html*/ `
+          <li
+            id="subtask-container-${i}"
+            class="edit-subtask-container"
+            data-subtask-id="${i}"
+          >
+            <div class="edit-subtask-item">
+              <span class="edit-subtask-dot" aria-hidden="true"></span>
+              <span
+                id="edit-value-${i}"
+                class="edit-subtask-value"
+                data-subtask-id="${i}"
+                contenteditable="false"
+                role="textbox"
+                aria-readonly="true"
+              >
+                ${subInputValue}
+              </span>
+            </div>
+      
+            <!-- NUR beim Hover sichtbar -->
+            <div class="hover-content">
+              <button
+                type="button"
+                class="edit-edit-subtask-button"
+                aria-label="Subtask bearbeiten"
+                onclick="editEditedSubtask(${i})"
+              ><img src="./img/edit_subtask.png" alt=""></button>
+              <span class="separator2">|</span>
+              <button
+                type="button"
+                class="edit-delete-subtask-button"
+                aria-label="Subtask löschen"
+                onclick="deleteEditSubtask(${i})"
+              ><img src="./img/delete_subtask.png" alt=""></button>
+            </div>
+      
+            <!-- NUR im Bearbeiten‑Modus sichtbar -->
+            <div class="edit-subtaskContent">
+              <button
+                type="button"
+                class="edit-edit-delete-subtask-button"
+                aria-label="Bearbeitung abbrechen"
+                onclick="deleteEditSubtask(${i})"
+              >
+                <img src="./img/delete_subtask.png" alt="">
+              </button>
+              <span class="separator3" aria-hidden="true">|</span>
+              <button
+                type="button"
+                class="edit-save-subtask-button"
+                aria-label="Änderungen speichern"
+                onclick="finishEditing(${i})"
+              >
+                <img src="./img/add_subtask.png" alt="">
+              </button>
+            </div>
+          </li>
+        `;
 }
 
 /**

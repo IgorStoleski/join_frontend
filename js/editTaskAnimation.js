@@ -190,7 +190,7 @@ function highlightButton(button, bgColor, imageSrc) {
 /** 
  * Adds a new subtask to the UI based on the value of the input field.
  */
-function addNewSubtask() {
+/* function addNewSubtask() {
   const subInput = document.getElementById('edit-subtask-input');
   const subInputValue = subInput.value.trim(); 
 
@@ -210,7 +210,28 @@ function addNewSubtask() {
   currentSelectedTask.subtasks.push({ id: newSubtaskId, title: subInputValue, status: false });
   subInput.value = '';
   closeSubtaskInput();
-}
+} */
+  function addNewSubtask() {
+    const subInput = document.getElementById('edit-subtask-input');
+    const value = subInput.value.trim();
+    if (!value) {
+      subInput.classList.add("input-error");
+      setTimeout(() => subInput.classList.remove("input-error"), 1000);
+      return;
+    }
+  
+    subtaskIdCounter++;
+    const id = subtaskIdCounter;
+  
+    const container = document.getElementById("edit-subtask-add-container");
+    container.insertAdjacentHTML('beforeend', subtaskToAddHTML(value, id));
+  
+    if (!currentSelectedTask.subtasks) currentSelectedTask.subtasks = [];
+    currentSelectedTask.subtasks.push({ id, title: value, status: false });
+  
+    subInput.value = '';
+    closeSubtaskInput();
+  }
 
 
 /**

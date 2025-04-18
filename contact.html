@@ -23,11 +23,11 @@
 </head>
 
 <body onload="init(), initContact()">
-    <div w3-include-html="./templates/header.html"></div>
-    <div w3-include-html="./templates/aside.html"></div>
+    <header w3-include-html="./templates/header.html"></header>
+    <section w3-include-html="./templates/aside.html"></section>
 
-    <div class="all-content">
-        <div class="container">
+    <section class="all-content">
+        <section class="container">
             <button id="addContactBtn" onclick="openModal()" class="add-person-button">
                 <p class="addContactBtnText"> Add new contact </p>
                 <img src="./img/person_add.svg" class="button-icon">
@@ -36,19 +36,19 @@
                 <div id="container-letter" class="container-letters"></div>
                 <div class="underlineLetters"></div>
             </div>
-        </div>
+        </section>
         <div id="contact-details" class="contact-details">
         </div>
-    </div>
+    </section>
 
     <form id="contactModal" onclick="closeModalBackAddContact(event)" class="modal" onsubmit="saveNewContact(); return false;"></form>
     <form id="editModal" onclick="closeModalBackEditContact(event)" class="edit-modal"></form>
-    <div class="background-overlay"></div>
+    <section class="background-overlay"></section>
 
-    <div id="contact-list-container"></div>
+    <section id="contact-list-container"></section>
 
-    <div id="contact-details-mobile" class="contact-details-mobile-class" style="display:none;"></div>
-    <div id="contactAddedContainer" class="contact-added"></div>
+    <section id="contact-details-mobile" class="contact-details-mobile-class" style="display:none;"></section>
+    <section id="contactAddedContainer" class="contact-added"></section>
 
 
     <script src="./js/includeHTML.js"></script>

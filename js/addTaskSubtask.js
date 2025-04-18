@@ -1,3 +1,5 @@
+let currentSelectedTask;
+
 /**
  * Adds a subtask based on the input from the '.new-subtask-textfield' element.
  * If the input is empty or just whitespace, the function returns without adding a subtask.
@@ -5,23 +7,22 @@
  * After adding the subtask, the input field is cleared and closed.
  */
 function addSubtask() {
-    let subtaskInput = document.querySelector('.new-subtask-textfield');
-    let subtaskValue = subtaskInput.value.trim();
+  let subtaskInput = document.querySelector(".new-subtask-textfield");
+  let subtaskValue = subtaskInput.value.trim();
 
-    if (!subtaskValue) {
-        subtaskInput.classList.add("input-error"); 
-        setTimeout(() => subtaskInput.classList.remove("input-error"), 1000);
-        return;
-    }
-    subtaskIdCounter++;
+  if (!subtaskValue) {
+    subtaskInput.classList.add("input-error");
+    setTimeout(() => subtaskInput.classList.remove("input-error"), 1000);
+    return;
+  }
+  subtaskIdCounter++;
 
-    let subtaskId = 'subtask-' + subtaskIdCounter;
+  let subtaskId = "subtask-" + subtaskIdCounter;
 
-    addSubtaskToContainer(subtaskId, subtaskValue);
-    subtaskInput.value = '';
-    closeSubtaskInput();
+  addSubtaskToContainer(subtaskId, subtaskValue);
+  subtaskInput.value = "";
+  closeSubtaskInput();
 }
-
 
 /**
  * Handles the input event for a subtask. If the user presses 'Enter' on an input
@@ -30,15 +31,17 @@ function addSubtask() {
  * @param {Event} event - The event object triggered by the input action.
  */
 function handleSubtaskInput(event) {
-    if (event.key === 'Enter' && event.target.classList.contains('new-subtask-textfield')) {
-        event.preventDefault();
-        addSubtask();
-        document.activeElement.blur();
-    }
+  if (
+    event.key === "Enter" &&
+    event.target.classList.contains("new-subtask-textfield")
+  ) {
+    event.preventDefault();
+    addSubtask();
+    document.activeElement.blur();
+  }
 }
-let subtaskInput = document.querySelector('.new-subtask-textfield');
-subtaskInput.addEventListener('keypress', handleSubtaskInput);
-
+let subtaskInput = document.querySelector(".new-subtask-textfield");
+subtaskInput.addEventListener("keypress", handleSubtaskInput);
 
 /**
  * Adds a subtask to the global subtasks array and appends its HTML representation
@@ -47,17 +50,16 @@ subtaskInput.addEventListener('keypress', handleSubtaskInput);
  * @param {string} subtaskValue - The title or value of the subtask.
  */
 function addSubtaskToContainer(subtaskId, subtaskValue) {
-    subtasks.push({
-        id: subtaskId,
-        title: subtaskValue,
-        status: false
-    });
-    let subtasksContainer = document.getElementById('subtask-add-container');
-    subtasksContainer.innerHTML += createSubtaskHTML(subtaskId, subtaskValue);
+  subtasks.push({
+    id: subtaskId,
+    title: subtaskValue,
+    status: false,
+  });
+  let subtasksContainer = document.getElementById("subtask-add-container");
+  subtasksContainer.innerHTML += createSubtaskHTML(subtaskId, subtaskValue);
 }
 
 
-//TODO - delete subtask check why it is not working
 /**
  * Deletes a subtask with the given ID from the subtasks array and removes its corresponding element from the DOM.
  * @param {string|number} subtaskId - The ID of the subtask to delete.
@@ -76,6 +78,13 @@ function deleteSubtask(subtaskId) {
     }
 }
 
+function addEditingClasses(container) {
+  container.classList.add("editing-mode");
+}
+function removeEditingClasses(container) {
+  container.classList.remove("editing-mode");
+}
+
 
 /**
  * Makes the specified subtask editable and focuses on it. Also adds editing classes to its container.
@@ -85,18 +94,11 @@ function deleteSubtask(subtaskId) {
  * editSubtask('subtask1');  // This will make the "subtask1" element editable and add editing classes to its container.
  */
 function editSubtask(subtaskId) {
-    let subtaskElement = document.getElementById(subtaskId);
-
-    if (subtaskElement) {
-        subtaskElement.contentEditable = true;
-        subtaskElement.focus();
-}
-
-    let subtaskContainer = document.getElementById(`subtask-container-${subtaskId}`);
-    if (subtaskContainer) {
-        addEditingClasses(subtaskContainer);
-    }
-}
+  const li = document.getElementById(`subtask-container-${subtaskId}`);
+  li.querySelector('.subtask-value').contentEditable = 'true';
+  li.querySelector('.subtask-value').focus();
+  addEditingClasses(li);
+  }
 
 
 /**
@@ -108,17 +110,10 @@ function editSubtask(subtaskId) {
  * finishEditing('subtask-1');
  */
 function finishEditing(subtaskId) {
-    let subtaskElement = document.getElementById(subtaskId);
-
-    if (subtaskElement) {
-        subtaskElement.contentEditable = false;
-    }
-
-    let subtaskContainer = document.getElementById(`subtask-container-${subtaskId}`);
-    if (subtaskContainer) {
-        removeEditingClasses(subtaskContainer);
-    }
-    saveEditedTitle(subtaskId);
+  const li = document.getElementById(`subtask-container-${subtaskId}`);
+  li.querySelector('.subtask-value').contentEditable = 'false';
+  removeEditingClasses(li);
+  saveEditedTitle(subtaskId);
 }
 
 
@@ -133,38 +128,36 @@ function finishEditing(subtaskId) {
  * saveEditedTitle('subtask1');
  */
 function saveEditedTitle(subtaskId) {
-    let subtaskElement = document.getElementById(subtaskId);
-    let editedTitle = subtaskElement.textContent.trim(); // 👈 trimmt Leerzeichen
+  let subtaskElement = document.getElementById(subtaskId);
+  let editedTitle = subtaskElement.textContent.trim(); // 👈 trimmt Leerzeichen
 
-    if (!editedTitle) {
-        subtasks = subtasks.filter(sub => sub.id !== subtaskId); // Aus Liste löschen
-        let container = document.getElementById(`subtask-container-${subtaskId}`);
-        if (container) container.remove(); // Auch aus DOM löschen
-        return;
-    }
+  if (!editedTitle) {
+    subtasks = subtasks.filter((sub) => sub.id !== subtaskId); // Aus Liste löschen
+    let container = document.getElementById(`subtask-container-${subtaskId}`);
+    if (container) container.remove(); // Auch aus DOM löschen
+    return;
+  }
 
-    let editedSubtask = subtasks.find(subtask => subtask.id === subtaskId);
+  let editedSubtask = subtasks.find((subtask) => subtask.id === subtaskId);
 
-    if (editedSubtask) {
-        editedSubtask.title = editedTitle;
-    }
+  if (editedSubtask) {
+    editedSubtask.title = editedTitle;
+  }
 }
 
-
 /**
- * Opens the subtask input by hiding the 'open-subtask-button', focusing the 'subtaskInput', 
+ * Opens the subtask input by hiding the 'open-subtask-button', focusing the 'subtaskInput',
  * and displaying the separator and all 'add-subtask-button' elements.
  */
 function openSubtaskInput() {
-    document.querySelector('.open-subtask-button').style.display = 'none';
-    document.getElementById('subtaskInput').focus();
-    document.getElementById('separator').style.display = 'inline-flex';
-    let otherButtons = document.querySelectorAll('.add-subtask-button');
-    for (let i = 0; i < otherButtons.length; i++) {
-        otherButtons[i].style.display = 'inline-block';
-    }
+  document.querySelector(".open-subtask-button").style.display = "none";
+  document.getElementById("subtaskInput").focus();
+  document.getElementById("separator").style.display = "inline-flex";
+  let otherButtons = document.querySelectorAll(".add-subtask-button");
+  for (let i = 0; i < otherButtons.length; i++) {
+    otherButtons[i].style.display = "inline-block";
+  }
 }
-
 
 /**
  * Closes the subtask input field and updates the display of related UI elements.
@@ -174,16 +167,16 @@ function openSubtaskInput() {
  * - Hides all add-subtask-buttons.
  */
 function closeSubtaskInput() {
-    document.querySelector('.open-subtask-button').style.display = 'inline-block';
-    document.querySelector('.new-subtask-textfield').value = '';
-    document.querySelector('.add-subtask-input').style.borderBottom = "1px solid #D1D1D1";
-    document.getElementById('separator').style.display = 'none';
-    let otherButtons = document.querySelectorAll('.add-subtask-button');
-    for (let i = 0; i < otherButtons.length; i++) {
-        otherButtons[i].style.display = 'none';
-    }
+  document.querySelector(".open-subtask-button").style.display = "inline-block";
+  document.querySelector(".new-subtask-textfield").value = "";
+  document.querySelector(".add-subtask-input").style.borderBottom =
+    "1px solid #D1D1D1";
+  document.getElementById("separator").style.display = "none";
+  let otherButtons = document.querySelectorAll(".add-subtask-button");
+  for (let i = 0; i < otherButtons.length; i++) {
+    otherButtons[i].style.display = "none";
+  }
 }
-
 
 /**
  * Adds editing classes and styles to a given container element.
@@ -195,32 +188,31 @@ function closeSubtaskInput() {
  */
 
 function addEditingClasses(container) {
-    container.classList.add("editing-mode");
-    container.classList.add("no-hover");
-    container.style.borderBottom = "1px solid #4589FF";
+  container.classList.add("editing-mode");
+  container.classList.add("no-hover");
+  container.style.borderBottom = "1px solid #4589FF";
 
-    let dot = container.querySelector(".subtask-dot");
-    let saveButton = container.querySelector(".save-subtask-button");
-    let cancelButton = container.querySelector(".edit-delete-subtask-button");
-    let separator3 = container.querySelector(".separator3");
+  let dot = container.querySelector(".subtask-dot");
+  let saveButton = container.querySelector(".save-subtask-button");
+  let cancelButton = container.querySelector(".edit-delete-subtask-button");
+  let separator3 = container.querySelector(".separator3");
 
-    if (dot) {
-        dot.style.display = "none";
-    }
+  if (dot) {
+    dot.style.display = "none";
+  }
 
-    if (saveButton) {
-        saveButton.style.display = "block";
-    }
+  if (saveButton) {
+    saveButton.style.display = "block";
+  }
 
-    if (cancelButton) {
-        cancelButton.style.display = "block";
-    }
+  if (cancelButton) {
+    cancelButton.style.display = "block";
+  }
 
-    if (separator3) {
-        separator3.style.display = "block";
-    }
+  if (separator3) {
+    separator3.style.display = "block";
+  }
 }
-
 
 /**
  * Removes editing-related classes and styles from a given container element.
@@ -230,28 +222,28 @@ function addEditingClasses(container) {
  * removeEditingClasses(container);
  */
 function removeEditingClasses(container) {
-    container.classList.remove("editing-mode");
-    container.classList.remove("no-hover");
-    container.style.borderBottom = "";
+  container.classList.remove("editing-mode");
+  container.classList.remove("no-hover");
+  container.style.borderBottom = "";
 
-    let dot = container.querySelector(".subtask-dot");
-    let saveButton = container.querySelector(".save-subtask-button");
-    let cancelButton = container.querySelector(".edit-delete-subtask-button");
-    let separator3 = container.querySelector(".separator3");
+  let dot = container.querySelector(".subtask-dot");
+  let saveButton = container.querySelector(".save-subtask-button");
+  let cancelButton = container.querySelector(".edit-delete-subtask-button");
+  let separator3 = container.querySelector(".separator3");
 
-    if (dot) {
-        dot.style.display = "inline-block";
-    }
+  if (dot) {
+    dot.style.display = "inline-block";
+  }
 
-    if (saveButton) {
-        saveButton.style.display = "none";
-    }
+  if (saveButton) {
+    saveButton.style.display = "none";
+  }
 
-    if (cancelButton) {
-        cancelButton.style.display = "none";
-    }
+  if (cancelButton) {
+    cancelButton.style.display = "none";
+  }
 
-    if (separator3) {
-        separator3.style.display = "none";
-    }
+  if (separator3) {
+    separator3.style.display = "none";
+  }
 }

@@ -52,7 +52,6 @@
     cursor: pointer;
 }
 
-.edit-delete-subtask-button,
 .save-subtask-button {
     display: none;
     cursor: pointer;

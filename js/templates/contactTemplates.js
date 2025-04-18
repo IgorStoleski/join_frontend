@@ -2,13 +2,13 @@
  * Generates an HTML string for a letter container.
  * @param {string} letter - The letter to be used in the HTML template.
  * @returns {string} The generated HTML string for the letter container.
- * 
+ *
  * @example
  * // returns a string containing an HTML template for letter 'A'
  * generateLetterListHTML('A');
  */
 function generateLetterListHTML(letter) {
-    return /*html*/`
+  return /*html*/ `
     <div id="container-${letter}" class="container-letter-item">
         <div class="letter-title"> ${letter} </div>
         <div class="letter-title-underline"> </div>
@@ -16,7 +16,6 @@ function generateLetterListHTML(letter) {
     </div>
     `;
 }
-
 
 /**
  * Generates and returns an HTML representation of a contact's detailed view.
@@ -31,16 +30,20 @@ function generateLetterListHTML(letter) {
  * @returns {string} - The HTML string representing the contact's detailed view.
  */
 function showContactDetailsHTML(contact, initials, index) {
-    return /*html*/`
+  return /*html*/ `
     <div class="contact-detailed-container">
         <div class="contact-detailed-top">
             <div>
-                <div class="initial-big" style="background-color: ${contact.bgcolor || getRandomColor()}">
+                <div class="initial-big" style="background-color: ${
+                  contact.bgcolor || getRandomColor()
+                }">
                     ${initials}
                 </div>
             </div>
             <div class="contact-detailed-mid">
-                <div class="contact-detailed-name">${contact.name} ${contact.surname}</div>
+                <div class="contact-detailed-name">${contact.name} ${
+    contact.surname
+  }</div>
                 <div class="contact-detailed-edit-delete">
                     <div class="contact-detailed-images" onclick="editContact(${index})"><img class="edit-img" src="./img/edit.png">Edit</div>
                     <div class="contact-detailed-images" onclick="deleteContact(${index})"><img class="delete-img" src="./img/delete.png">Delete</div>
@@ -48,12 +51,15 @@ function showContactDetailsHTML(contact, initials, index) {
             </div>
         </div>
         <div class="contact-detailed-information"> Contact Information </div>             
-            <div class="contact-detailed-text">Email: </div> <div class="email"> ${contact.email}</div>
-            <div class="contact-detailed-text">Telefon: </div> <div class="phone"> ${contact.telefon}</div> 
+            <div class="contact-detailed-text">Email: </div> <div class="email"> ${
+              contact.email
+            }</div>
+            <div class="contact-detailed-text">Telefon: </div> <div class="phone"> ${
+              contact.telefon
+            }</div> 
     </div>
     `;
 }
-
 
 /**
  * Generate an HTML string to display detailed contact information in a mobile view.
@@ -68,21 +74,29 @@ function showContactDetailsHTML(contact, initials, index) {
  * @returns {string} HTML string representation of the contact details.
  */
 function showContactDetailsMobileHTML(contact, initials, index) {
-    return /*html*/`
+  return /*html*/ `
     <div class="contact-detailed-container">
         <div class="contact-detailed-top">
             <div>
-                <div class="initial-big" style="background-color: ${contact.bgcolor || getRandomColor()}">
+                <div class="initial-big" style="background-color: ${
+                  contact.bgcolor || getRandomColor()
+                }">
                     ${initials}
                 </div>
             </div>
             <div class="contact-detailed-mid">
-                <div class="contact-detailed-name">${contact.name} ${contact.surname}</div>
+                <div class="contact-detailed-name">${contact.name} ${
+    contact.surname
+  }</div>
             </div>
         </div>
         <div class="contact-detailed-information"> Contact Information </div>             
-            <div class="contact-detailed-text">Email: </div> <div class="email"> ${contact.email}</div>
-            <div class="contact-detailed-text">Telefon: </div> <div class="phone"> ${contact.telefon}</div> 
+            <div class="contact-detailed-text">Email: </div> <div class="email"> ${
+              contact.email
+            }</div>
+            <div class="contact-detailed-text">Telefon: </div> <div class="phone"> ${
+              contact.telefon
+            }</div> 
         </div>    
             <div class="contact-detailed-mobile-return" onclick="returnToContactsMobile()"><img src="./img/arrow-left-line.png">
         </div> 
@@ -99,7 +113,6 @@ function showContactDetailsMobileHTML(contact, initials, index) {
     `;
 }
 
-
 /**
  * Generates an HTML string to display a contact.
  * @param {number} i - The index of the contact in the contacts list.
@@ -113,9 +126,9 @@ function showContactDetailsMobileHTML(contact, initials, index) {
  * @returns {string} An HTML string representation of the contact.
  */
 function showContactsHTML(i, color, initials, contact, isCurrentUser) {
-    let userMarker = isCurrentUser ? " (you)" : "";
+  let userMarker = isCurrentUser ? " (you)" : "";
 
-    return /*html*/ `
+  return /*html*/ `
         <div class="contact" data-contact-index="${i}" onclick="handleContactClick(${i})">
             <div class="initial" style="background-color: ${color}">${initials}</div>
             <div class="container-name-email">
@@ -126,47 +139,58 @@ function showContactsHTML(i, color, initials, contact, isCurrentUser) {
     `;
 }
 
-
 /**
- * Generates the HTML string for the "Add Contact" modal. 
+ * Generates the HTML string for the "Add Contact" modal.
  * @returns {string} The HTML content for the "Add Contact" modal.
  * @example
  * const modalHTML = generateAddContactModalHTML();
  * document.body.insertAdjacentHTML('beforeend', modalHTML);
  */
 function generateAddContactModalHTML() {
-    return /*html*/ `
-    <div class="modal-content">
-            <div class="modal-content-top">
+  return /*html*/ `
+    <section class="modal-content">
+            <section class="modal-content-top">
                 <div id="closeContactModalBtn" onclick="closeModal()"><img class="close" src="./img/close_contact.png"
                         alt="Close Modal"></div>
                 <div class="modal-logo"><img src="./img/join_logo.png"></div>
                 <div class="modal-headline">Add contact</div>
                 <div class="modal-text">Tasks are better with a team!</div>
-            </div>
-            <div class="modal-input-container">
+            </section>
+            <section class="modal-input-container">
                 <div class="modal-input-img">
                     <img src="./img/person_add.png">
                 </div>
-                <div class="modal-input-row">
+                <section class="modal-input-row">
                     <div class="modal-input-frame">
-                        <input class="modal-input-field" required type="text" id="Name" placeholder="Name" pattern="[A-Za-z].*" title="Das erste Zeichen muss ein Buchstabe sein.">
-                        <img class="modal-input-icon" src="img/person.png" alt="Name">
+                        <div class="error-msg" id="error-Name"></div>
+                        <section class="modal-input-dflex">
+                            <input class="modal-input-field"  type="text" id="Name" placeholder="Name">
+                            <img class="modal-input-icon" src="img/person.png" alt="Name">
+                        </section>
                     </div>
                     <div class="modal-input-frame">
-                        <input class="modal-input-field" required type="text" id="Surname" placeholder="Surname" pattern="[A-Za-z].*" title="Das erste Zeichen muss ein Buchstabe sein.">
-                        <img class="modal-input-icon" src="img/person.png" alt="Name">
+                        <div class="error-msg" id="error-Surname"></div>
+                        <section class="modal-input-dflex">
+                            <input class="modal-input-field"  type="text" id="Surname" placeholder="Surname">
+                            <img class="modal-input-icon" src="img/person.png" alt="Name">
+                        </section>
                     </div>
                     <div class="modal-input-frame">
-                        <input class="modal-input-field" type="email" id="newEmail" placeholder="Email" required>
-                        <img class="modal-input-icon" src="img/mail.png" alt="Email">
+                        <div class="error-msg" id="error-newEmail"></div>
+                        <section class="modal-input-dflex">
+                            <input class="modal-input-field" type="text" id="newEmail" placeholder="Email" >
+                            <img class="modal-input-icon" src="img/mail.png" alt="Email">
+                        </section>
                     </div>
                     <div class="modal-input-frame">
-                        <input class="modal-input-field" required type="number" id="newTelefon" placeholder="Phone">
-                        <img class="modal-input-icon" src="img/call.svg" alt="Phone">
+                        <div class="error-msg" id="error-newTelefon"></div>
+                        <section class="modal-input-dflex">
+                            <input class="modal-input-field"  type="tel" id="newTelefon" placeholder="Phone">
+                            <img class="modal-input-icon" src="img/call.svg" alt="Phone">
+                        </section>
                     </div>
-                </div>
-                <div class="add-contact-buttons">
+                </section>
+                <section class="add-contact-buttons">
                     <div class="add-contact-buttons-inner">
                         <button onclick="closeModal()" type="button" class="button-clear">
                             Cancel
@@ -177,12 +201,11 @@ function generateAddContactModalHTML() {
                             <img class="button-create-task-pic" src="./img/check.svg">
                         </button>
                     </div>
-                </div>
-            </div>
-        </div>
+                </section>
+            </section>
+        </section>
     `;
 }
-
 
 /**
  * Generates the HTML content for the edit contact modal.
@@ -195,7 +218,7 @@ function generateAddContactModalHTML() {
  * const htmlContent = generateEditContactModalHTML(0, 'AB', { bgcolor: '#ff0000' });
  */
 function generateEditContactModalHTML(index, initials, contact) {
-    return /*html*/ `
+  return /*html*/ `
  <div class="edit-content" data-index="${index}">
      <div class="edit-content-top">
          <div id="closeEditModalBtn" onclick="closeEditModal()"><img class="close" src="./img/close_contact.png" alt="Close Modal"></div>
@@ -208,21 +231,33 @@ function generateEditContactModalHTML(index, initials, contact) {
          </div>
          <div class="modal-input-row">
              <div class="modal-input-frame">
-                     <input class="modal-input-field" required type="text" id="editName" placeholder="Name" pattern="[A-Za-z].*" title="Das erste Zeichen muss ein Buchstabe sein.">
-                     <img class="modal-input-icon" src="img/person.png" alt="Name"> 
+                 <div class="error-msg" id="error-editName"></div>
+                     <section class="modal-input-dflex">
+                         <input class="modal-input-field"  type="text" id="editName" placeholder="Name">
+                         <img class="modal-input-icon" src="img/person.png" alt="Name"> 
+                     </section>
              </div>
              <div class="modal-input-frame">
-                     <input class="modal-input-field" required type="text" id="editSurname" placeholder="Surname" pattern="[A-Za-z].*" title="Das erste Zeichen muss ein Buchstabe sein.">
-                     <img class="modal-input-icon" src="img/person.png" alt="Name"> 
+                 <div class="error-msg" id="error-editSurname"></div>                     
+                     <section class="modal-input-dflex">
+                         <input class="modal-input-field"  type="text" id="editSurname" placeholder="Surname">
+                         <img class="modal-input-icon" src="img/person.png" alt="Name"> 
+                     </section>
              </div>
              <div class="modal-input-frame">
-                 <input class="modal-input-field" type="email" name="email" title="Bitte geben Sie eine gültige E-Mail-Adresse ein." id="editNewEmail" 
-                     placeholder="Email: example@hotmail.com" required>
-                 <img class="modal-input-icon" src="img/mail.png" alt="Email">
+                 <div class="error-msg" id="error-editNewEmail"></div>
+                 <section class="modal-input-dflex">
+                     <input class="modal-input-field" type="email" name="email"id="editNewEmail" 
+                         placeholder="Email: example@hotmail.com" required>
+                     <img class="modal-input-icon" src="img/mail.png" alt="Email">
+                 </section>
              </div>
              <div class="modal-input-frame">
-                 <input class="modal-input-field" required type="number" id="editNewTelefon" placeholder="Phone">
-                 <img class="modal-input-icon" src="img/call.svg" alt="Phone">
+                 <div class="error-msg" id="error-editNewTelefon"></div>
+                 <section class="modal-input-dflex">
+                     <input class="modal-input-field"  type="tel" id="editNewTelefon" placeholder="Phone">
+                     <img class="modal-input-icon" src="img/call.svg" alt="Phone">
+                 </section>
              </div>
          </div>
          <div class="add-contact-buttons">
@@ -241,7 +276,6 @@ function generateEditContactModalHTML(index, initials, contact) {
 `;
 }
 
-
 /**
  * Generates the HTML string for the edit contact modal on mobile.
  * @param {number} index - The index of the contact in the list.
@@ -254,7 +288,7 @@ function generateEditContactModalHTML(index, initials, contact) {
  * const html = generateEditContactMobileHTML(0, 'AB', contact);
  */
 function generateEditContactMobileHTML(index, initials, contact) {
-    return /*html*/`
+  return /*html*/ `
     <div class="edit-content" data-index="${index}">
         <div class="edit-content-top">
             <div id="closeEditModalBtn" onclick="closeEditModal()"><img class="close" src="./img/close_contact.png" alt="Close Modal"></div>
@@ -267,17 +301,20 @@ function generateEditContactMobileHTML(index, initials, contact) {
             </div>
             <div class="modal-input-row">
                 <div class="modal-input-frame">
-                        <input class="modal-input-field" required type="text" id="editFullName" placeholder="Name" pattern="[A-Za-z].*" title="Das erste Zeichen muss ein Buchstabe sein.">>
+                        <input class="modal-input-field"  type="text" id="editFullName" placeholder="Name">
                         <img class="modal-input-icon" src="img/person.png" alt="Name"> 
+                        <div class="error-msg" id="error-editName"></div>
                 </div>
                 <div class="modal-input-frame">
-                    <input class="modal-input-field" required type="email" id="editNewEmail" name="email" autocomplete="email"
+                    <input class="modal-input-field" type="email" id="editNewEmail" name="email" autocomplete="email"
                         placeholder="Email">
                     <img class="modal-input-icon" src="img/mail.png" alt="Email">
+                    <div class="error-msg" id="error-editNewEmail"></div>
                 </div>
                 <div class="modal-input-frame">
-                    <input class="modal-input-field" required type="email" id="editNewTelefon" placeholder="Phone">
+                    <input class="modal-input-field" type="email" id="editNewTelefon" placeholder="Phone">
                     <img class="modal-input-icon" src="img/call.svg" alt="Phone">
+                    <div class="error-msg" id="error-editNewTelefon"></div>
                 </div>
             </div>
             <div class="add-contact-buttons">
