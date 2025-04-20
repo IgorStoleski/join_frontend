@@ -257,11 +257,11 @@ confirmPasswordIcon.addEventListener('click', function () {
  */
 function createSuccessMessageTemplate() {
     return /*html*/ `
-        <div id="successOverlay" class="overlay">
+        <section id="successOverlay" class="overlay">
             <div class="success-message">
                 <p>You Signed Up successfully</p>
             </div>
-        </div>
+        </section>
     `;
 }
 

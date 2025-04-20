@@ -26,7 +26,7 @@
     <header w3-include-html="./templates/header.html"></header>
     <section w3-include-html="./templates/aside.html"></section>
 
-    <section class="all-content">
+    <main class="all-content">
         <section class="container">
             <button id="addContactBtn" onclick="openModal()" class="add-person-button">
                 <p class="addContactBtnText"> Add new contact </p>
@@ -39,7 +39,7 @@
         </section>
         <div id="contact-details" class="contact-details">
         </div>
-    </section>
+    </main>
 
     <form id="contactModal" onclick="closeModalBackAddContact(event)" class="modal" onsubmit="saveNewContact(); return false;"></form>
     <form id="editModal" onclick="closeModalBackEditContact(event)" class="edit-modal"></form>

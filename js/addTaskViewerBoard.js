@@ -1,5 +1,4 @@
 const filepickerBoard = document.getElementById("filepickerBoard");
-/* const galleryBoard = document.getElementById("galleryBoard"); */
 const errorBoard = document.getElementById("errorBoard");
 const buttonsBoard = document.querySelectorAll(".addTaskViewerButton");
 let myGallery;

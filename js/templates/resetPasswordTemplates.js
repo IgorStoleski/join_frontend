@@ -40,12 +40,12 @@ function generateForgotContent() {
  */
 function createForgotTemplate() {
     return /*html*/ `
-        <div id="forgotOverlay" class="overlay">
+        <section id="forgotOverlay" class="overlay">
             <div class="message">
                 <img class="send-check" src="img/send_check.png" alt="">
                 <p>An E-Mail has been sent to you</p>
             </div>
-        </div>
+        </section>
     `;
 }
 
@@ -61,10 +61,10 @@ function generateResetContent() {
         <a href="index.html" class="arrow-left-icon"></a>
         </section>
         <section class="reset-info-container">
-            <div class="reset-info-title">Reset your password</div>
-            <div class="reset-info-line"></div>
+            <span class="reset-info-title">Reset your password</span>
+            <span class="reset-info-line"></span>
         </section>
-        <section class="change-password-info">Change your account password here</section>
+        <span class="change-password-info">Change your account password here</span>
         <section class="password-input-container">
             <div class="password-input-frame">
                 <div class="password-input-section">
@@ -79,7 +79,7 @@ function generateResetContent() {
                         <input id="confirmResetPassword" required type="text" class="password-input" placeholder="Confirm password" autocomplete="current-password" minlength="4">
                     </div>
                 </div>
-                <div class="reset-match-error" id="resetMatchError">Your Passwords don´t match. Try again</div>
+                <span class="reset-match-error" id="resetMatchError">Your Passwords don´t match. Try again</span>
             </div>
         </section>
         <section class="continue-btn-container">
@@ -96,10 +96,10 @@ function generateResetContent() {
  */
 function createResetTemplate() {
     return /*html*/ `
-        <div id="resetOverlay" class="overlay">
+        <section id="resetOverlay" class="overlay">
             <div class="message">
                 <p>You reset your password</p>
             </div>
-        </div>
+        </section>
     `;
 }

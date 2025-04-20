@@ -19,18 +19,18 @@
     </header>
 
     <form id="signUpForm" class="sign-up-container">
-        <div class="arrow-container">
+        <section class="arrow-container">
             <a href="index.html" class="arrow-left-icon"></a>
-        </div>
+        </section>
 
-        <div class="sign-up-main-header">
+        <section class="sign-up-main-header">
             <div class="sign-up-sub-header">
-                <div class="sign-up-header-title">Sign up</div>
+                <span class="sign-up-header-title">Sign up</span>
                 <div class="sign-up-header-line"></div>
             </div>
-        </div>
+        </section>
 
-        <section class="sign-up-formular">
+        <main class="sign-up-formular">
             <section class="sign-up-formular-container">
                 <section class="sign-up-info-box">
                     <div class="sign-up-input-frame">
@@ -75,7 +75,10 @@
                 <p class="privacy-accept-text">I accept the</p>
                 <a class="privacy-policy-link" href="privacyPolicy.html" target="_blank">Privacy Policy</a>
             </section>
-        </section>
+            <section id="privacyError" class="privacy-error-msg" style="display: none;">
+                Please accept the privacy policy to continue.
+            </section>
+        </main>
 
         <section class="sign-up-btn-container">
             <button type="submit" class="sign-up-btn">Sign up</button>

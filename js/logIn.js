@@ -88,6 +88,8 @@ function handleLogIn() {
     handleFailedLogIn();
   }
 }
+
+
 /**
  * Handles the actions after a successful login.
  * @param {string} email - The user's email.
@@ -109,6 +111,7 @@ async function handleSuccessfulLogIn(pk) {
     };
     saveLoggedInUserData(userData);
     window.location.href = "summary.html";
+    saveContactToBackend();
   } else {
     console.error("Could not retrieve user data");
   }
@@ -183,3 +186,19 @@ function addLoginButtonListener() {
   let loginButton = document.getElementById("loginBtn");
   loginButton.addEventListener("click", handleLogIn);
 }
+
+
+async function saveContactToBackend() {
+  const contactData = getContactData();
+
+  if (!contactData) {
+    return;
+  }
+
+  try {
+    await setContact(contactData);
+  } catch (error) {
+    console.error("Error saving contact:", error);
+  }
+}
+

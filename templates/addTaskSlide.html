@@ -1,6 +1,6 @@
-<div class="add-task-container">
-  <div class="add-task-container-first">
-    <div class="add-task-container-titel">
+<main class="add-task-container">
+  <section class="add-task-container-first">
+    <section class="add-task-container-titel">
       <div class="add-task-titel-textcontainer">
         <input
           id="taskTitle"
@@ -8,10 +8,10 @@
           placeholder="Enter a title"
         />
       </div>
-      <div class="add-task-field-required">This field is required</div>
-    </div>
-    <div class="add-task-container-describtion">
-      <div class="add-task-describtion-header">Description</div>
+      <span class="add-task-field-required">This field is required</span>
+    </section>
+    <section class="add-task-container-describtion">
+      <span class="add-task-describtion-header">Description</span>
       <div class="add-task-describtion-inner">
         <input
           id="taskDescription"
@@ -24,8 +24,8 @@
           </div>
         </div>
       </div>
-      <div class="add-task-field-required">This field is required</div>
-    </div>
+      <span class="add-task-field-required">This field is required</span>
+    </section>
     <div class="due-date-container">
       <div class="due-date-header">Due date</div>
       <input
@@ -35,33 +35,33 @@
         placeholder="dd/mm/yyyy"
       />
     </div>
-  </div>
-  <div class="add-task-container-priority">
-    <div class="add-task-priority-header">Priority</div>
+  </section>
+  <section class="add-task-container-priority">
+    <span class="add-task-priority-header">Priority</span>
     <div class="priority-choice">
       <div class="priority-choice-inner">
-        <div class="priority-choice-inner-text">Urgent</div>
+        <span class="priority-choice-inner-text">Urgent</span>
         <div class="priority-choice-inner-pic">
           <img src="./img/prio-high.png" />
         </div>
       </div>
       <div class="priority-choice-inner">
-        <div class="priority-choice-inner-text">Medium</div>
+        <span class="priority-choice-inner-text">Medium</span>
         <div class="priority-choice-inner-pic">
           <img src="./img/prio-medium.png" />
         </div>
       </div>
       <div class="priority-choice-inner">
-        <div class="priority-choice-inner-text">Low</div>
+        <span class="priority-choice-inner-text">Low</span>
         <div class="priority-choice-inner-pic">
           <img src="./img/prio-low.png" />
         </div>
       </div>
     </div>
-  </div>
-  <div class="assigned-to-container">
-    <div class="assigned-to-header">Assigned to</div>
-    <div class="assigned-to-choicefield">
+  </section>
+  <section class="assigned-to-container">
+    <span class="assigned-to-header">Assigned to</span>
+    <section class="assigned-to-choicefield">
       <select class="assigned-to-dropdown">
         <option value="" disabled selected>Select contacts to assign</option>
         <option value="contact1">Contact 1</option>
@@ -69,10 +69,10 @@
         <option value="contact3">Contact 3</option>
         <!-- Add more contacts as needed -->
       </select>
-    </div>
-  </div>
-  <div class="category-container">
-    <div class="category-header">Category</div>
+    </section>
+  </section>
+  <section class="category-container">
+    <span class="category-header">Category</span>
     <div class="category-choicefield">
       <select class="category-dropdown">
         <option value="" disabled selected>Select task category</option>
@@ -82,9 +82,9 @@
         <!-- Add more categories as needed -->
       </select>
     </div>
-  </div>
-  <div class="subtasks-container">
-    <div class="subtasks-header">Subtasks</div>
+  </section>
+  <section class="subtasks-container">
+    <span class="subtasks-header">Subtasks</span>
     <div class="add-subtask-input">
       <input
         type="text"
@@ -93,9 +93,9 @@
       />
       <img class="add-subtask-button" src="./img/subtask.svg" />
     </div>
-  </div>
-</div>
-<div class="add-task-buttons">
+  </section>
+</main>
+<section class="add-task-buttons">
   <div class="add-task-buttons-inner">
     <button class="button-clear">
       <div class="button-clear-text">Clear</div>
@@ -110,4 +110,4 @@
       <div class="button-create-task-pic"><img src="./img/check.svg" /></div>
     </button>
   </div>
-</div>
+</section>

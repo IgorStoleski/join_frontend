@@ -9,11 +9,11 @@
  */
 function generateLetterListHTML(letter) {
   return /*html*/ `
-    <div id="container-${letter}" class="container-letter-item">
-        <div class="letter-title"> ${letter} </div>
-        <div class="letter-title-underline"> </div>
-        <div id="container-contact-${letter}" class="container-contacts"></div>
-    </div>
+    <section id="container-${letter}" class="container-letter-item">
+        <span class="letter-title"> ${letter} </span>
+        <span class="letter-title-underline"> </span>
+        <span id="container-contact-${letter}" class="container-contacts"></span>
+    </section>
     `;
 }
 
@@ -31,33 +31,25 @@ function generateLetterListHTML(letter) {
  */
 function showContactDetailsHTML(contact, initials, index) {
   return /*html*/ `
-    <div class="contact-detailed-container">
-        <div class="contact-detailed-top">
-            <div>
-                <div class="initial-big" style="background-color: ${
-                  contact.bgcolor || getRandomColor()
-                }">
+    <main class="contact-detailed-container">
+        <section class="contact-detailed-top">
+            <section>
+                <div class="initial-big" style="background-color: ${contact.bgcolor || getRandomColor()}">
                     ${initials}
                 </div>
-            </div>
-            <div class="contact-detailed-mid">
-                <div class="contact-detailed-name">${contact.name} ${
-    contact.surname
-  }</div>
+            </section>
+            <section class="contact-detailed-mid">
+                <div class="contact-detailed-name">${contact.name} ${contact.surname}</div>
                 <div class="contact-detailed-edit-delete">
                     <div class="contact-detailed-images" onclick="editContact(${index})"><img class="edit-img" src="./img/edit.png">Edit</div>
                     <div class="contact-detailed-images" onclick="deleteContact(${index})"><img class="delete-img" src="./img/delete.png">Delete</div>
                 </div>
-            </div>
-        </div>
-        <div class="contact-detailed-information"> Contact Information </div>             
-            <div class="contact-detailed-text">Email: </div> <div class="email"> ${
-              contact.email
-            }</div>
-            <div class="contact-detailed-text">Telefon: </div> <div class="phone"> ${
-              contact.telefon
-            }</div> 
-    </div>
+            </section>
+        </section>
+        <span class="contact-detailed-information"> Contact Information </span>             
+        <span class="contact-detailed-text">Email: </span> <span class="email"> ${contact.email}</span>
+        <span class="contact-detailed-text">Telefon: </span> <span class="phone"> ${contact.telefon}</span> 
+    </main>
     `;
 }
 
@@ -75,41 +67,38 @@ function showContactDetailsHTML(contact, initials, index) {
  */
 function showContactDetailsMobileHTML(contact, initials, index) {
   return /*html*/ `
-    <div class="contact-detailed-container">
-        <div class="contact-detailed-top">
+    <main class="contact-detailed-container">
+        <section class="contact-detailed-top">
             <div>
-                <div class="initial-big" style="background-color: ${
-                  contact.bgcolor || getRandomColor()
-                }">
+                <div class="initial-big" style="background-color: ${contact.bgcolor || getRandomColor()}">
                     ${initials}
                 </div>
             </div>
             <div class="contact-detailed-mid">
-                <div class="contact-detailed-name">${contact.name} ${
-    contact.surname
-  }</div>
+                <div class="contact-detailed-name">${contact.name} ${contact.surname}</div>
             </div>
-        </div>
-        <div class="contact-detailed-information"> Contact Information </div>             
+        </section>
+        <section class="contact-detailed-information"> Contact Information </section>             
             <div class="contact-detailed-text">Email: </div> <div class="email"> ${
               contact.email
             }</div>
             <div class="contact-detailed-text">Telefon: </div> <div class="phone"> ${
               contact.telefon
             }</div> 
-        </div>    
+           
             <div class="contact-detailed-mobile-return" onclick="returnToContactsMobile()"><img src="./img/arrow-left-line.png">
         </div> 
         <div id="contact-detailed-head" onclick="showEditContactsButtonsMobile()">
             <div class="contact-detailed-images-head"><img src="./img/more_vert.svg"></div>
         </div>
-        <div id="contact-mobile-buttons" class="contact-detailed-mobile-buttons, hide-it">
+        <section id="contact-mobile-buttons" class="contact-detailed-mobile-buttons, hide-it">
             <div id="contact-detailed-button-edit" class="contact-detailed-images-mobile" onclick="editContact(${index})"><img src="./img/edit.png">Edit</div>
             <div id="contact-detailed-button-delete" class="contact-detailed-images-mobile" onclick="deleteContact(${index})"><img src="./img/delete.png">Delete</div>
-        </div>
+        </section>
         <div class="add-Contact-Mobile-button">
             <div> </div>
         </div>
+    </main> 
     `;
 }
 
@@ -129,13 +118,13 @@ function showContactsHTML(i, color, initials, contact, isCurrentUser) {
   let userMarker = isCurrentUser ? " (you)" : "";
 
   return /*html*/ `
-        <div class="contact" data-contact-index="${i}" onclick="handleContactClick(${i})">
+        <section class="contact" data-contact-index="${i}" onclick="handleContactClick(${i})">
             <div class="initial" style="background-color: ${color}">${initials}</div>
             <div class="container-name-email">
                 <div class="name">${contact.name} ${contact.surname}${userMarker}</div>
                 <div class="email">${contact.email}</div>
             </div>
-        </div>
+        </section>
     `;
 }
 
@@ -219,17 +208,17 @@ function generateAddContactModalHTML() {
  */
 function generateEditContactModalHTML(index, initials, contact) {
   return /*html*/ `
- <div class="edit-content" data-index="${index}">
-     <div class="edit-content-top">
+ <main class="edit-content" data-index="${index}">
+     <section class="edit-content-top">
          <div id="closeEditModalBtn" onclick="closeEditModal()"><img class="close" src="./img/close_contact.png" alt="Close Modal"></div>
          <div class="modal-logo"><img src="./img/join_logo.png"></div>
          <div class="modal-headline">Edit contact</div>
-     </div>
-     <div class="modal-input-container">
+     </section>
+     <section class="modal-input-container">
          <div class="initial-big" style="background-color: ${contact.bgcolor}">
              ${initials}
          </div>
-         <div class="modal-input-row">
+         <section class="modal-input-row">
              <div class="modal-input-frame">
                  <div class="error-msg" id="error-editName"></div>
                      <section class="modal-input-dflex">
@@ -259,8 +248,8 @@ function generateEditContactModalHTML(index, initials, contact) {
                      <img class="modal-input-icon" src="img/call.svg" alt="Phone">
                  </section>
              </div>
-         </div>
-         <div class="add-contact-buttons">
+         </section>
+         <section class="add-contact-buttons">
              <div class="add-contact-buttons-inner">
                  <button onclick="deleteContact(${index})" class="button-clear">
                      <div class="button-clear-text">Delete</div>
@@ -270,9 +259,9 @@ function generateEditContactModalHTML(index, initials, contact) {
                      <div class="button-create-task-pic"> <img src="./img/check.svg"></div>
                  </button>
              </div>
-         </div>
-     </div>
- </div>
+         </section>
+     </section>
+ </main>
 `;
 }
 
@@ -289,17 +278,17 @@ function generateEditContactModalHTML(index, initials, contact) {
  */
 function generateEditContactMobileHTML(index, initials, contact) {
   return /*html*/ `
-    <div class="edit-content" data-index="${index}">
-        <div class="edit-content-top">
+    <main class="edit-content" data-index="${index}">
+        <section class="edit-content-top">
             <div id="closeEditModalBtn" onclick="closeEditModal()"><img class="close" src="./img/close_contact.png" alt="Close Modal"></div>
             <div class="modal-logo"><img src="./img/join_logo.png"></div>
             <div class="modal-headline">Edit contact</div>
-        </div>
-        <div class="modal-input-container">
+        </section>
+        <section class="modal-input-container">
             <div class="initial-big" style="background-color: ${contact.bgcolor}">
                 ${initials}
             </div>
-            <div class="modal-input-row">
+            <section class="modal-input-row">
                 <div class="modal-input-frame">
                         <input class="modal-input-field"  type="text" id="editFullName" placeholder="Name">
                         <img class="modal-input-icon" src="img/person.png" alt="Name"> 
@@ -316,8 +305,8 @@ function generateEditContactMobileHTML(index, initials, contact) {
                     <img class="modal-input-icon" src="img/call.svg" alt="Phone">
                     <div class="error-msg" id="error-editNewTelefon"></div>
                 </div>
-            </div>
-            <div class="add-contact-buttons">
+            </section>
+            <section class="add-contact-buttons">
                 <div class="add-contact-buttons-inner">
                     <button onclick="deleteContact(${index})" class="button-clear">
                         <div class="button-clear-text">Delete</div>
@@ -327,8 +316,8 @@ function generateEditContactMobileHTML(index, initials, contact) {
                         <div class="button-create-task-pic"> <img src="./img/check.svg"></div>
                     </button>
                 </div>
-            </div>
-        </div>
-    </div>
+            </section>
+        </section>
+    </main>
     `;
 }

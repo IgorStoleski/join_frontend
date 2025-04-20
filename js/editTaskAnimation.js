@@ -2,15 +2,14 @@ let currentSelectedTask;
 let updatedSubtasks = [];
 let currentTaskId;
 
-
-/** 
+/**
  * Starts the task editing process by rendering the task and starting the slide animation.
  * @param {number} id - The ID of the task to be edited.
  */
 function editTask(id) {
   globalIsEditMode = true;
-  const element = todos.find(todo => todo.id === id);
-  document.body.style.overflow = 'hidden';
+  const element = todos.find((todo) => todo.id === id);
+  document.body.style.overflow = "hidden";
   const slideEditTask = document.getElementById("task-slide");
   slideEditTask.innerHTML = renderEditTask(element);
   loadPreviewFromBackend(id, globalIsEditMode);
@@ -23,7 +22,6 @@ function editTask(id) {
   aktiviereEditFilePickerListener();
 }
 
-
 /**
  * Aktualisiert das gegebene Eigenschaft des Elements mit dem Wert eines Input-Elements.
  * @param {HTMLElement} element - Das zu aktualisierende Element.
@@ -33,7 +31,6 @@ function editTask(id) {
 function updateElementFromInput(element, inputId, prop) {
   element[prop] = document.getElementById(inputId).value;
 }
-
 
 /**
  * Updates the properties of a given element based on various input sources.
@@ -58,18 +55,19 @@ function updateElementProperties(element) {
   element.status = element.status;
   element.category = selectedCategory;
   element.priority = selectedPriority;
-  element.assignedTo = selectedContacts.filter(contact => contact !== undefined);
+  element.assignedTo = selectedContacts.filter(
+    (contact) => contact !== undefined
+  );
   element.bgcolor = extractColor(element);
   element.subtasks = processAndSaveSubtasks(element);
 }
 
-
-/** 
+/**
  * Saves the edited task by overwriting its properties and updating the local storage.
  * @param {number} id - The ID of the task being saved.
  */
 async function saveEditedTask(id) {
-  const element = todos.find(todo => todo.id === id);
+  const element = todos.find((todo) => todo.id === id);
   const pk = id;
   updateElementProperties(element);
   await setUpdateTask(element, pk);
@@ -78,9 +76,8 @@ async function saveEditedTask(id) {
   loadPreviewFromBackend(id);
   globalIsEditMode = false;
   selectedContacts = [];
-  document.body.style.overflow = 'auto';
+  document.body.style.overflow = "auto";
 }
-
 
 /**
  * Opens the edited task by rendering the slide card based on the given task id.
@@ -88,12 +85,11 @@ async function saveEditedTask(id) {
  * @param {string|number} id - The ID of the task to be opened.
  */
 function openEditedTask(id) {
-  const slideCard = document.getElementById('task-slide');
+  const slideCard = document.getElementById("task-slide");
   slideCard.innerHTML = renderSlideCard(id);
-  document.getElementById('task-slide').classList.remove('d-none');
-  document.getElementById('slide-container').classList.add('open-task');
+  document.getElementById("task-slide").classList.remove("d-none");
+  document.getElementById("slide-container").classList.add("open-task");
 }
-
 
 /**
  * Loads and highlights the priority of a given task in the UI.
@@ -107,18 +103,18 @@ function loadSelectedPriority(task) {
     high: {
       buttonId: "edit-prio-urgent",
       color: "#FF3D00",
-      img: "./img/prio_high_active.png"
+      img: "./img/prio_high_active.png",
     },
     medium: {
       buttonId: "edit-prio-medium",
       color: "#FFA800",
-      img: "./img/prio_medium_active.png"
+      img: "./img/prio_medium_active.png",
     },
     low: {
       buttonId: "edit-prio-low",
       color: "#7AE229",
-      img: "./img/prio_low_active.png"
-    }
+      img: "./img/prio_low_active.png",
+    },
   };
 
   resetButtons();
@@ -130,7 +126,6 @@ function loadSelectedPriority(task) {
     selectedPriority = task.priority;
   }
 }
-
 
 /**
  * Sets the priority based on the clicked button.
@@ -152,8 +147,7 @@ function priority(button) {
   }
 }
 
-
-/** 
+/**
  * Resets the style of the priority buttons to their default state.
  */
 function resetButtons() {
@@ -166,11 +160,12 @@ function resetButtons() {
     btn.style.backgroundColor = "";
     btn.style.color = "black";
 
-    let originalImage = btn.querySelector(".edit-priority-choice-inner-pic img");
+    let originalImage = btn.querySelector(
+      ".edit-priority-choice-inner-pic img"
+    );
     originalImage.src = "./img/" + originalImage.getAttribute("data-image");
   }
 }
-
 
 /**
  * Highlights a given button by changing its background color, image source, and text color.
@@ -186,53 +181,30 @@ function highlightButton(button, bgColor, imageSrc) {
   button.style.color = "white";
 }
 
-
-/** 
+/**
  * Adds a new subtask to the UI based on the value of the input field.
  */
-/* function addNewSubtask() {
-  const subInput = document.getElementById('edit-subtask-input');
-  const subInputValue = subInput.value.trim(); 
-
-  if (!subInputValue) {
-    subInput.classList.add("input-error"); 
+function addNewSubtask() {
+  const subInput = document.getElementById("edit-subtask-input");
+  const value = subInput.value.trim();
+  if (!value) {
+    subInput.classList.add("input-error");
     setTimeout(() => subInput.classList.remove("input-error"), 1000);
     return;
   }
 
-  const subtaskContainer = document.getElementById("edit-subtask-add-container");
+  subtaskIdCounter++;
+  const id = subtaskIdCounter;
 
-  if (!currentSelectedTask.subtasks) {
-    currentSelectedTask.subtasks = [];
-  }
-  const newSubtaskId = currentSelectedTask.subtasks.length + 1;
-  subtaskContainer.innerHTML += subtaskToAddHTML(subInputValue, newSubtaskId);
-  currentSelectedTask.subtasks.push({ id: newSubtaskId, title: subInputValue, status: false });
-  subInput.value = '';
+  const container = document.getElementById("edit-subtask-add-container");
+  container.insertAdjacentHTML("beforeend", subtaskToAddHTML(value, id));
+
+  if (!currentSelectedTask.subtasks) currentSelectedTask.subtasks = [];
+  currentSelectedTask.subtasks.push({ id, title: value, status: false });
+
+  subInput.value = "";
   closeSubtaskInput();
-} */
-  function addNewSubtask() {
-    const subInput = document.getElementById('edit-subtask-input');
-    const value = subInput.value.trim();
-    if (!value) {
-      subInput.classList.add("input-error");
-      setTimeout(() => subInput.classList.remove("input-error"), 1000);
-      return;
-    }
-  
-    subtaskIdCounter++;
-    const id = subtaskIdCounter;
-  
-    const container = document.getElementById("edit-subtask-add-container");
-    container.insertAdjacentHTML('beforeend', subtaskToAddHTML(value, id));
-  
-    if (!currentSelectedTask.subtasks) currentSelectedTask.subtasks = [];
-    currentSelectedTask.subtasks.push({ id, title: value, status: false });
-  
-    subInput.value = '';
-    closeSubtaskInput();
-  }
-
+}
 
 /**
  * Handles the Enter key press event on the edit-new-subtask textfield.
@@ -241,16 +213,18 @@ function highlightButton(button, bgColor, imageSrc) {
  * @param {KeyboardEvent} event - The keyboard event object.
  */
 function handleEditSubtaskInput(event) {
-  if (event.key === 'Enter' && event.target.classList.contains('edit-new-subtask-textfield')) {
+  if (
+    event.key === "Enter" &&
+    event.target.classList.contains("edit-new-subtask-textfield")
+  ) {
     event.preventDefault();
     addNewSubtask();
     document.activeElement.blur();
   }
 }
-document.addEventListener('keypress', handleEditSubtaskInput);
+document.addEventListener("keypress", handleEditSubtaskInput);
 
-
-/** 
+/**
  * Renders subtasks of a given task for editing.
  * @param {Object} element - The task object containing subtasks.
  */
@@ -263,11 +237,12 @@ function addSubtaskToEdit(element) {
         subtasksHTML += subtaskToEditHTML(subtask, i);
       }
     }
-    const subtaskContainer = document.getElementById("edit-subtask-add-container");
+    const subtaskContainer = document.getElementById(
+      "edit-subtask-add-container"
+    );
     subtaskContainer.innerHTML = subtasksHTML;
   }
 }
-
 
 /**
  * Adds contacts to the selected contacts based on the given element's assigned contacts.
@@ -277,7 +252,7 @@ function addToSelectedContacts(element) {
   const assigneds = element.assignedTo;
 
   for (let name of assigneds) {
-    const contact = contacts.find(c => `${c.name} ${c.surname}` === name);
+    const contact = contacts.find((c) => `${c.name} ${c.surname}` === name);
     if (contact) {
       if (!selectedContacts[contact.id]) {
         selectedContacts[contact.id] = `${contact.name} ${contact.surname}`;
@@ -288,15 +263,13 @@ function addToSelectedContacts(element) {
   loadDisplayChosenContacts();
 }
 
-
 /**
  * Retrieves the logged-in user's data from local storage.
  * @returns {Object} The logged-in user's data, or an empty object if no data is found.
  */
 function getLoggedInUserData() {
-  return JSON.parse(localStorage.getItem('loggedInUser')) || {};
+  return JSON.parse(localStorage.getItem("loggedInUser")) || {};
 }
-
 
 /**
  * Asynchronously renders the selected contacts to the UI.
@@ -305,19 +278,26 @@ function getLoggedInUserData() {
 async function loadRenderAssignedTo(selectedContacts) {
   let loggedInUserData = getLoggedInUserData();
 
-  let assignedToContainer = document.getElementById('edit-loaded-contacts');
-  assignedToContainer.innerHTML = '';
+  let assignedToContainer = document.getElementById("edit-loaded-contacts");
+  assignedToContainer.innerHTML = "";
 
   for (let i = 0; i < contacts.length; i++) {
     let contact = contacts[i];
-    let initials = `${contact.name.charAt(0)}${contact.surname.charAt(0)}`.toUpperCase();
+    let initials = `${contact.name.charAt(0)}${contact.surname.charAt(
+      0
+    )}`.toUpperCase();
     const isSelected = selectedContacts[contact.id] || false;
-    let isCurrentUser = loggedInUserData && contact.email === loggedInUserData.email;
+    let isCurrentUser =
+      loggedInUserData && contact.email === loggedInUserData.email;
 
-    assignedToContainer.innerHTML += renderAssignedToHTML(contact, initials, isSelected, isCurrentUser);
+    assignedToContainer.innerHTML += renderAssignedToHTML(
+      contact,
+      initials,
+      isSelected,
+      isCurrentUser
+    );
   }
 }
-
 
 /**
  * Renders the searched contacts to the UI.
@@ -326,26 +306,33 @@ async function loadRenderAssignedTo(selectedContacts) {
 function loadSearchedContact(contacts) {
   let loggedInUserData = getLoggedInUserData();
 
-  let loadAssignedToContainer = document.getElementById('edit-loaded-contacts');
-  loadAssignedToContainer.innerHTML = '';
+  let loadAssignedToContainer = document.getElementById("edit-loaded-contacts");
+  loadAssignedToContainer.innerHTML = "";
 
   for (let i = 0; i < contacts.length; i++) {
     let contact = contacts[i];
-    let initials = `${contact.name.charAt(0)}${contact.surname.charAt(0)}`.toUpperCase();
+    let initials = `${contact.name.charAt(0)}${contact.surname.charAt(
+      0
+    )}`.toUpperCase();
     const isSelected = selectedContacts[contact.id] || false;
-    let isCurrentUser = loggedInUserData && contact.email === loggedInUserData.email;
+    let isCurrentUser =
+      loggedInUserData && contact.email === loggedInUserData.email;
 
-    loadAssignedToContainer.innerHTML += loadRenderSearchedContactsHTML(contact, initials, isSelected, isCurrentUser);
+    loadAssignedToContainer.innerHTML += loadRenderSearchedContactsHTML(
+      contact,
+      initials,
+      isSelected,
+      isCurrentUser
+    );
   }
 }
 
-
-/** 
+/**
  * Search and display contacts based on a given query.
  * @param {string} query - The query string to search for.
  */
 function loadSearchContacts(query) {
-  let filteredContacts = contacts.filter(contact => {
+  let filteredContacts = contacts.filter((contact) => {
     return (
       contact.name.toLowerCase().startsWith(query.toLowerCase()) ||
       contact.surname.toLowerCase().startsWith(query.toLowerCase())
@@ -353,7 +340,6 @@ function loadSearchContacts(query) {
   });
   loadSearchedContact(filteredContacts);
 }
-
 
 /**
  * Toggles the selection of a contact based on the given name and surname. If the contact is already selected,
@@ -366,7 +352,9 @@ function loadSearchContacts(query) {
  * @see renderDisplayChosenContacts
  */
 function loadToggleContactSelection(name, surname) {
-  const contact = contacts.find(c => c.name === name && c.surname === surname);
+  const contact = contacts.find(
+    (c) => c.name === name && c.surname === surname
+  );
 
   if (!contact) {
     return;
@@ -382,14 +370,15 @@ function loadToggleContactSelection(name, surname) {
   renderDisplayChosenContacts();
 }
 
-
-/** 
+/**
  * Toggles the selection state of a given contact.
  * @param {string} name - The first name of the contact.
  * @param {string} surname - The surname of the contact.
  */
 function toggleContactSelection(name, surname) {
-  const contact = contacts.find(c => c.name === name && c.surname === surname);
+  const contact = contacts.find(
+    (c) => c.name === name && c.surname === surname
+  );
 
   if (!contact) {
     return;

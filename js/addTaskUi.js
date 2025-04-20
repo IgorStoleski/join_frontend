@@ -268,9 +268,9 @@ function displayChosenContacts() {
         if (isSelected) {
             let initials = `${contact.name.charAt(0)}${contact.surname.charAt(0)}`.toUpperCase();
             chosenContactsContainer.innerHTML += /*html*/`
-                <div class="chosen-contact">
+                <section class="chosen-contact">
                     <div class="initial" style="background-color: ${contact.bgcolor}">${initials}</div>
-                </div>
+                </section>
             `;
         }
     }

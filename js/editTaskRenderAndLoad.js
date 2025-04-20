@@ -80,9 +80,9 @@ function loadDisplayChosenContacts() {
  */
 function loadDisplayChosenContactsHTML(contact, initials) {
     return /*html*/`
-        <div class="chosen-contact">
+        <section class="chosen-contact">
             <div class="initial" style="background-color: ${contact.bgcolor}">${initials}</div>
-        </div>
+        </section>
     `;
 }
 
@@ -245,7 +245,6 @@ function addClasses(container) {
     container.classList.add("editing-mode", "no-hover");
     container.style.borderBottom = "1px solid #4589FF";
 }
-
 
 
 /**

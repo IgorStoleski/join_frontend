@@ -225,11 +225,6 @@ form {
     cursor: pointer;
 }
 
-.remember-me-icon:hover {
-    background-image: url(/img/check-button-hover.png);
-    cursor: pointer;
-}
-
 .remember-me-text {
     color: var(--menu, #42526E);
     font-size: 16px;

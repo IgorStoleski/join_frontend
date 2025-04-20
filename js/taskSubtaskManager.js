@@ -8,18 +8,14 @@ function addAddSubtask() {
     const subtaskInput = document.querySelector(".new-subtask-textfield");
     const subtaskValue = subtaskInput.value.trim();
   
-    // 1) Leere Eingabe abfangen und visuelles Feedback geben
     if (!subtaskValue) {
       subtaskInput.classList.add("input-error");
       setTimeout(() => subtaskInput.classList.remove("input-error"), 1000);
       return;
     }
-  
-    // 2) Eindeutige ID generieren
     subtaskIdCounter++;
     const subtaskId = "subtask-" + subtaskIdCounter;
   
-    // 3) In dein Frontend‑Modell einfügen
     if (!currentSelectedTask.subtasks) {
       currentSelectedTask.subtasks = [];
     }
@@ -29,10 +25,8 @@ function addAddSubtask() {
       status: false
     });
   
-    // 4) Im DOM anzeigen
     addAddSubtaskToContainer(subtaskId, subtaskValue);
   
-    // 5) Input zurücksetzen und schließen
     subtaskInput.value = "";
     addCloseSubtaskInput();
   }
@@ -73,11 +67,9 @@ function addAddSubtaskToContainer(subtaskId, subtaskValue) {
  * @param {string} subtaskId - The ID of the subtask to be deleted.
  */
 function addDeleteSubtask(subtaskId) {
-  // aus dem Array entfernen
   currentSelectedTask.subtasks = currentSelectedTask.subtasks.filter(
     (s) => s.id !== subtaskId
   );
-  // aus dem DOM entfernen
   const el = document.getElementById(`subtask-container-${subtaskId}`);
   if (el) el.remove();
 }

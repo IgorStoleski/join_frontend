@@ -344,3 +344,9 @@ body {
 .shake-password {
     animation: shake 0.5s ease-in-out;
 }
+
+.privacy-error-msg {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 4px;
+}

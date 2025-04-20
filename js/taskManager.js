@@ -8,20 +8,6 @@ async function initAddTask() {
 
 
 /**
- * Asynchronously loads contacts data from storage and assigns it to the 'contacts' variable.
- * @throws {Error} Throws an error if there's an issue parsing or loading the data.
- */
-/* async function addLoadContactsFromStorage() {
-    try {
-        contacts = await loadAllContacts();
-        console.log('load contacts for add TAsk:', contacts);
-    } catch (e) {
-        console.error('Loading error:', e);
-    }
-} */
-
-
-/**
  * Asynchronously loads tasks from local storage and populates the 'todos' array.
  * If loading fails, it logs an error message to the console.
  * @throws {Error} If there is an issue with parsing the stored tasks.

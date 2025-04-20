@@ -165,11 +165,26 @@ async function saveNewContact() {
   showContactAdded();
 }
 
+
+/**
+ * Displays an error message for a specific input element.
+ * Adds the "invalid" CSS class to the input element and sets the corresponding error message
+ * in the element with the ID `error-[inputEl.id]`.
+ * @param {HTMLElement} inputEl - The input element where the error occurred.
+ * @param {string} message - The error message to be displayed.
+ */
 function showError(inputEl, message) {
   inputEl.classList.add("invalid");
   document.getElementById(`error-${inputEl.id}`).textContent = message;
 }
 
+
+/**
+ * Clears the error message for a specific input element.
+ * Removes the "invalid" CSS class from the input element and clears the content
+ * of the corresponding error message element with the ID `error-[inputEl.id]`.
+ * @param {HTMLElement} inputEl - The input element whose error should be cleared.
+ */
 function clearError(inputEl) {
   inputEl.classList.remove("invalid");
   document.getElementById(`error-${inputEl.id}`).textContent = "";
@@ -314,12 +329,9 @@ async function saveContact(newContact) {
  * @param {number} index - The index of the contact to update.
  */
 async function updateContact(index) {
-  // Validierung
   if (!validateEditAll()) {
-    return; // Abbruch, weil mindestens ein Feld ungültig ist
+    return;
   }
-
-  // Nur wenn alles OK ist, weiter:
   let newName = document.getElementById("editName").value.trim();
   let newsurname = document.getElementById("editSurname").value.trim();
   let newEmail = document.getElementById("editNewEmail").value.trim();
@@ -336,15 +348,39 @@ async function updateContact(index) {
   await updateAndSaveContact(index, updatedContact);
 }
 
+
+/**
+ * Displays an error message for a specific input element.
+ * Adds the "invalid" CSS class to the input element and sets the corresponding error message
+ * in the element with the ID `error-[inputEl.id]`.
+ * @param {HTMLElement} inputEl - The input element where the error occurred.
+ * @param {string} message - The error message to be displayed.
+ */
 function showError(inputEl, message) {
   inputEl.classList.add("invalid");
   document.getElementById(`error-${inputEl.id}`).textContent = message;
 }
+
+
+/**
+ * Clears the error message for a specific input element.
+ * Removes the "invalid" CSS class from the input element and clears the content
+ * of the corresponding error message element with the ID `error-[inputEl.id]`.
+ * @param {HTMLElement} inputEl - The input element whose error should be cleared.
+ */
 function clearError(inputEl) {
   inputEl.classList.remove("invalid");
   document.getElementById(`error-${inputEl.id}`).textContent = "";
 }
 
+
+/**
+ * Validates multiple input fields from an edit form.
+ * This function checks the validity of name, surname, email, and phone input fields
+ * using corresponding validation functions. If a field is invalid, it displays an
+ * appropriate error message and sets the validation state to false.
+ * @returns {boolean} Returns `true` if all fields are valid, otherwise `false`.
+ */
 function validateEditAll() {
   const fields = [
     {

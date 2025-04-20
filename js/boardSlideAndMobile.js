@@ -65,13 +65,13 @@ function renderSlideCardHTML(
 ) {
   const backgroundColor = getCategoryBackgroundColor(element.category);
   return /*html*/ `
-    <div id="slide-container" class="slide-container">
-        <div id="task-slide-container${element.id}" class="task-slide-container" onclick="event.stopPropagation()">
-            <div class="task-slide-headline">
+    <main id="slide-container" class="slide-container">
+        <section id="task-slide-container${element.id}" class="task-slide-container" onclick="event.stopPropagation()">
+            <section class="task-slide-headline">
                 <div class="task-slide-headline-left" style="background-color: ${backgroundColor};"><span class="task-slide-category">${element.category}</span></div>
                 <div id="task-slide-close" onclick="closeCard(${element.id}), loadData()" class="task-slide-headline-right"><img src="./img/close.png" alt="Schließen"></div>
-            </div>
-            <div class="scroll-slide-container">
+            </section>
+            <section class="scroll-slide-container">
                 <span id="task-slide-title" class="task-slide-title">${element.title}</span>
                 <span id="task-slide-description" class="task-slide-description">${element.description}</span>
                 <div class="task-slide-due-date-container">
@@ -82,7 +82,7 @@ function renderSlideCardHTML(
                     <span class="task-slide-prio-text">Priority: </span>
                     <div class="task-slide-prio-text-img">
                         <span class="task-slide-prio-text-">${element.priority}</span>
-                        <img id="task-slide-prio-img" src="${priorityImageSrc}" alt="">
+                        <img id="task-slide-prio-img" src="${priorityImageSrc}" alt="Priorität">
                     </div>
                 </div>
                 <div class="task-slide-assigned-container">
@@ -101,20 +101,20 @@ function renderSlideCardHTML(
                     </div>
                 </div>
                 <div id="preview" class="gallery"></div>
-            </div>
-            <div class="task-slide-delete-edit-container">
+            </section>
+            <section class="task-slide-delete-edit-container">
                 <div class="task-slide-delete" onclick="deleteTask(${element.id})">
-                    <img class="task-slide-delete-edit-img" src="./img/delete.png" alt="">
+                    <img class="task-slide-delete-edit-img" src="./img/delete.png" alt="Löschen">
                     <span class="task-slide-delete-text">Delete</span>
                 </div>
                 <div class="task-slide-placeholder"></div>
                 <div class="task-slide-edit" onclick="editTask(${element.id})">
-                    <img class="task-slide-delete-edit-img" src="./img/edit.png" alt="">
+                    <img class="task-slide-delete-edit-img" src="./img/edit.png" alt="Editieren">
                     <span class="task-slide-edit-text">Edit</span>
                 </div>
-            </div>
-        </div>
-    </div>
+            </section>
+        </section>
+    </main>
     
     `;
 }

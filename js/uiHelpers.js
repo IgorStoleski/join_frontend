@@ -149,6 +149,7 @@ function logOut() {
         if (!loggedInUser.rememberStatus) {
             removeAuthToken();
             localStorage.removeItem('loggedInUser');
+            localStorage.removeItem('userContact')
         }
     }
     removeAuthToken();

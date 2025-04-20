@@ -1,4 +1,19 @@
 let isChecked = false;
+let isPrivacyChecked = false;
+
+document.getElementById("privacyCheck").addEventListener("click", () => {
+  const checkIcon = document.getElementById("privacyCheck");
+  isPrivacyChecked = !isPrivacyChecked;
+
+  if (isPrivacyChecked) {
+    checkIcon.classList.add("checked");
+  } else {
+    checkIcon.classList.remove("checked");
+  }
+
+  // Button aktivieren/deaktivieren
+  document.querySelector(".sign-up-btn").disabled = !isPrivacyChecked;
+});
 
 /**
  * Listens for the form submission event and handles registration process.
@@ -14,6 +29,8 @@ document.getElementById('signUpForm').addEventListener('submit', function (event
  * @throws {Error} An error if the registration fails.
  */
 async function signUpUser() {
+    const privacyError = document.getElementById('privacyError');
+    privacyError.style.display = 'none'; 
     const username = document.getElementById('username').value;
     const usersurname = document.getElementById('usersurname').value;
     const passWord = getPasswordInputValue();
@@ -21,6 +38,7 @@ async function signUpUser() {
     const emailValue = document.getElementById('email').value;
 
     resetSignUpFormStyle();
+    privacyError.style.display = 'none';
 
     if (!validatePasswordMatch(passWord, confirmPassword)) {
         return;
@@ -31,7 +49,8 @@ async function signUpUser() {
         return;
     }
 
-    if (!isChecked) {
+    if (!isPrivacyChecked) {
+        privacyError.style.display = 'block';
         return;
     }
 

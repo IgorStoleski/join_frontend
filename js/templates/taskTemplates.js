@@ -6,13 +6,13 @@ function renderAddTask() {
   const currentDate = new Date().toISOString().split("T")[0];
 
   return /* html */ `
-<div class="float-add-task-container">
-    <div class="header">
+<main class="float-add-task-container">
+    <section class="header">
         <h1 class="title-add-task">Add Task</h1>
         <img class="close-add-task" onclick="closeAddTaskModal()" src="./img/close_subtask.png" alt="Close Task">
-    </div>
-    <div class="add-task-content">
-        <div class="add-task-container-first">
+    </section>
+    <section class="add-task-content">
+        <section class="add-task-container-first">
             <div class="add-task-container-titel">
                 <div id="add-task-titel-textcontainer" class="add-task-titel-textcontainer">
                     <input id="addTaskTitle" class="add-task-titel-textfield" placeholder="Enter a title">
@@ -40,8 +40,8 @@ function renderAddTask() {
                     This field is required
                 </div>
             </div>
-        </div>
-        <div class="add-task-container-priority">
+        </section>
+        <section class="add-task-container-priority">
             <div class="add-task-priority-header">
                 Priority
             </div>
@@ -74,8 +74,8 @@ function renderAddTask() {
             <div id="addRequiredPriority" class="add-task-field-required">
                 This field is required
             </div>
-        </div>
-        <div class="assigned-to-container">
+        </section>
+        <section class="assigned-to-container">
             <div class="assigned-to-header">
                 Assigned to
             </div>
@@ -97,8 +97,8 @@ function renderAddTask() {
                 </button>
             </div>
             <div id="addChosenContacts" class="chosen-contacts"></div>
-        </div>
-        <div class="category-container">
+        </section>
+        <section class="category-container">
             <div class="category-header">
                 Category
             </div>
@@ -115,8 +115,8 @@ function renderAddTask() {
                 This field is required
             </div>
             <div id="addLoadedCategories" class="loaded-categories"></div>
-        </div>
-        <div class="subtasks-container">
+        </section>
+        <section class="subtasks-container">
             <div class="subtasks-header">
                 Subtasks
             </div>
@@ -131,23 +131,23 @@ function renderAddTask() {
                     src="./img/add_subtask.png">
             </div>
             <div id="addSubtask-add-container" class="subtask-add-container"></div>
-        </div>
-        <div class="upload-container">
+        </section>
+        <section class="upload-container">
             <span class="upload-text">Upload a pic</span>
             <img src="./img/upload.png" class="upload" onclick="filepickerBoard.click()"/>
             <input type="file" id="filepickerBoard" class="filepicker addTaskViewerButton" style="display: none" accept="image/*" multiple />
-        </div>
-        <div id="errorBoard" class="error error-hidden"></div>
-        <div id="galleryBoard" class="gallery"></div>
-    </div>
+        </section>
+        <span id="errorBoard" class="error error-hidden"></span>
+        <section id="galleryBoard" class="gallery"></section>
+    </section>
     
-    <div class="add-task-bottom-container">
+    <section class="add-task-bottom-container">
         <button type="submit" id="addCreateTaskButton" class="create-task-btn">
             Create Task
             <img class="button-create-task-pic" src="./img/check.svg">
         </button>
-    </div>
-</div>
+    </section>
+</main>
     `;
 }
 
@@ -157,12 +157,12 @@ function renderAddTask() {
  */
 function addCreatedTaskTemplate() {
   return /*html*/ `
-        <div id="addCreateTaskOverlay" class="task-overlay">
+        <section id="addCreateTaskOverlay" class="task-overlay">
             <div class="task-success-message">
                 <p>Task added to board</p>
                 <img class="send-check" src="./img/added_task.png" alt="">
             </div>
-        </div>
+        </section>
     `;
 }
 
@@ -178,23 +178,13 @@ function addRenderAssignedToHTML(contact, initials, isSelected, isCurrentUser) {
   let userMarker = isCurrentUser ? " (you)" : "";
 
   return /*html*/ `
-        <div class="contact-container ${
-          isSelected ? "selected" : ""
-        }" onclick="addToggleContactSelection('${contact.name}', '${
-    contact.surname
-  }')">
-            <div class="select-contact">
-                <div class="initial" style="background-color: ${
-                  contact.bgcolor
-                }">${initials}</div>
-                <div class="select-name">${contact.name} ${
-    contact.surname
-  }${userMarker}</div>
-            </div>
-            <img class="select-icon" id="addSelectCheck" src="${
-              isSelected ? "img/check_contact.png" : "img/check-button.png"
-            }"  alt="Check Button">
-        </div>
+        <section class="contact-container ${isSelected ? "selected" : ""}" onclick="addToggleContactSelection('${contact.name}', '${contact.surname}')">
+            <section class="select-contact">
+                <span class="initial" style="background-color: ${contact.bgcolor}">${initials}</span>
+                <span class="select-name">${contact.name} ${contact.surname}${userMarker}</span>
+            </section>
+            <img class="select-icon" id="addSelectCheck" src="${isSelected ? "img/check_contact.png" : "img/check-button.png"}" alt="Check Button">
+        </section>
     `;
 }
 
@@ -218,23 +208,13 @@ function addRenderSearchedContactsHTML(
   let userMarker = isCurrentUser ? " (you)" : "";
 
   return /*html*/ `
-        <div class="contact-container ${
-          isSelected ? "selected" : ""
-        }" onclick="addToggleContactSelection('${contact.name}', '${
-    contact.surname
-  }')">
+        <section class="contact-container ${isSelected ? "selected" : ""}" onclick="addToggleContactSelection('${contact.name}', '${contact.surname}')">
             <div class="select-contact">
-                <div class="initial" style="background-color: ${
-                  contact.bgcolor
-                }">${initials}</div>
-                <div class="select-name">${contact.name} ${
-    contact.surname
-  }${userMarker}</div>
+                <div class="initial" style="background-color: ${contact.bgcolor}">${initials}</div>
+                <div class="select-name">${contact.name} ${contact.surname}${userMarker}</div>
             </div>
-            <img class="select-icon" id="addSelectCheck" src="${
-              isSelected ? "img/check_contact.png" : "img/check-button.png"
-            }"  alt="Check Button">
-        </div>
+            <img class="select-icon" id="addSelectCheck" src="${isSelected ? "img/check_contact.png" : "img/check-button.png"}"  alt="Check Button">
+        </section>
     `;
 }
 
@@ -246,7 +226,7 @@ function addRenderSearchedContactsHTML(
  */
 function addCreateSubtaskHTML(subtaskId, subtaskValue) {
   return /*html*/ `
-        <div id="add-subtask-container-${subtaskId}" class="subtask-container">
+        <section id="add-subtask-container-${subtaskId}" class="subtask-container">
             <div class="subtask-item">
                 <span class="subtask-dot"></span>           
                 <span id="${subtaskId}" data-subtask-id="${subtaskId}" class="subtask-value" contenteditable="false">${subtaskValue}</span>
@@ -259,6 +239,6 @@ function addCreateSubtaskHTML(subtaskId, subtaskValue) {
             <img onclick="addDeleteSubtask('${subtaskId}')" data-subtask-id="${subtaskId}" src="./img/delete_subtask.png" class="edit-delete-subtask-button">
             <span class="separator3" id="separator3">|</span> 
             <img onclick="addFinishEditing('${subtaskId}')" src="./img/add_subtask.png" class="save-subtask-button">
-        </div>
+        </section>
     `;
 }

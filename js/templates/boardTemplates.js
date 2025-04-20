@@ -4,25 +4,6 @@
  * @param {string} subtask.title - The title of the subtask.
  * @param {number} i - The index or ID associated with the subtask, used for data attributes and action handlers.
  */
-/* function subtaskToEditHTML(subtask, i) {
-  return /*html*`
-        <div id="subtask-container-${i}" class="edit-subtask-container">
-            <div class="edit-subtask-item">
-                <span id="editDot" class="edit-subtask-dot"></span>           
-                <span id="${i}" class="edit-subtask-value" data-index="${i}" contenteditable="false" value="${subtask.title}">${subtask.title}</span>
-            </div>
-            <div class="hover-content">
-                <img onclick="editEditedSubtask(${i})" data-index="${i}" src="./img/edit_subtask.png" class="edit-edit-subtask-button">
-                <span class="separator2" id="separator2">|</span> 
-                <img onclick="deleteEditSubtask(${i})" data-index="${i}" src="./img/delete_subtask.png" class="edit-delete-subtask-button">
-            </div>
-            <img onclick="deleteEditSubtask(${i})" data-index="${i}" src="./img/delete_subtask.png" class="edit-edit-delete-subtask-button">
-            <span class="separator3" id="separator3">|</span> 
-            <img onclick="finishEditing(${i})" data-index="${i}" src="./img/add_subtask.png" class="edit-save-subtask-button">
-        </div>
-    `;
-} */
-
 function subtaskToEditHTML(subtask, i) {
   return /*html*/ `
           <li
@@ -250,23 +231,23 @@ function loadRenderSearchedContactsHTML(
   let userMarker = isCurrentUser ? " (you)" : "";
 
   return /*html*/ `
-      <div class="contact-container ${
+      <section class="contact-container ${
         isSelected ? "selected" : ""
       }" onclick="toggleContactSelection('${contact.name}', '${
     contact.surname
   }')">
-          <div class="select-contact">
+          <section class="select-contact">
               <div class="initial" style="background-color: ${
                 contact.bgcolor
               }">${initials}</div>
               <div class="select-name">${contact.name} ${
     contact.surname
   }${userMarker}</div>
-          </div>
+          </section>
           <img class="select-icon" id="edit-select-check" src="${
             isSelected ? "img/check_contact.png" : "img/check-button.png"
           }"  alt="Check Button">
-      </div>`;
+      </section>`;
 }
 
 /**
@@ -279,23 +260,23 @@ function renderAssignedToHTML(contact, initials, isSelected, isCurrentUser) {
   let userMarker = isCurrentUser ? " (you)" : "";
 
   return /* html */ `
-      <div class="contact-container ${
+      <section class="contact-container ${
         isSelected ? "selected" : ""
       }" onclick="toggleContactSelection('${contact.name}', '${
     contact.surname
   }')">
-          <div class="select-contact">
+          <section class="select-contact">
               <div class="initial" style="background-color: ${
                 contact.bgcolor
               }">${initials}</div>
               <div class="select-name">${contact.name} ${
     contact.surname
   }${userMarker}</div>
-          </div>
+          </section>
           <img class="select-icon" id="edit-select-check" src="${
             isSelected ? "img/check_contact.png" : "img/check-button.png"
           }"  alt="Check Button">
-      </div>`;
+      </section>`;
 }
 
 /**
@@ -303,24 +284,6 @@ function renderAssignedToHTML(contact, initials, isSelected, isCurrentUser) {
  * @param {string} subInputValue - The value of the subtask to be displayed.
  * @param {number} i - The unique index or identifier for the subtask.
  */
-/* function subtaskToAddHTML(subInputValue, i) {
-  return /*html `
-        <div id="subtask-container-${i}" class="edit-subtask-container">
-            <div class="edit-subtask-item">
-                <span id="editDot" class="edit-subtask-dot"></span>           
-                <span id="${i}" class="edit-subtask-value" data-subtask-id="${i}" contenteditable="false">${subInputValue}</span>
-            </div>
-            <div class="hover-content">
-                <img onclick="editEditedSubtask(${i})" data-subtask-id="${i}" src="./img/edit_subtask.png" class="edit-edit-subtask-button">
-                <span class="separator2" id="separator2">|</span> 
-                <img onclick="deleteEditSubtask(${i})" data-subtask-id="${i}" src="./img/delete_subtask.png" class="edit-delete-subtask-button">
-            </div>
-            <img onclick="deleteEditSubtask(${i})" data-subtask-id="${i}" src="./img/delete_subtask.png" class="edit-edit-delete-subtask-button">
-            <span class="separator3" id="separator3">|</span> 
-            <img onclick="finishEditing(${i})" data-subtask-id="${i}" src="./img/add_subtask.png" class="edit-save-subtask-button">
-        </div>
-    `;
-} */
 function subtaskToAddHTML(subInputValue, i) {
   return /*html*/ `
           <li
@@ -420,12 +383,12 @@ function processAndSaveSubtasks(task) {
  */
 function renderSlideSubtaskHTML(subtask, i, id) {
   return /*html*/ `
-        <div class="task-slide-subtask">
+        <section class="task-slide-subtask">
             <input type="checkbox" id="subtaskCheckbox${i}" ${
     subtask.status ? "checked" : ""
   } onchange="updateSubtaskStatus(${id}, ${i}, this.checked)">
             <label for="subtaskCheckbox${i}">${subtask.title}</label>
-        </div>
+        </section>
     `;
 }
 
@@ -437,10 +400,10 @@ function renderSlideSubtaskHTML(subtask, i, id) {
  */
 function renderSlideAssignedHTML(initials, name, bgcolor) {
   return /*html*/ `
-        <div class="task-slide-assigned-user">
+        <section class="task-slide-assigned-user">
             <div class="user-marked blue" style="background-color: ${bgcolor}">${initials}</div>
             <span class="task-slide-assigned-user-name">${name}</span>
-        </div>
+        </section>
     `;
 }
 
@@ -469,8 +432,8 @@ function generateTasksHTML(
   })" draggable="true" ondragstart="startDragging(${
     element.id
   })" class="content-container task-touch">
-        <div class="content-container-inner">
-            <div class="card-header">
+        <section class="content-container-inner">
+            <section class="card-header">
                 <div class="board-category" style="background-color: ${backgroundColor};">${
     element.category
   }</div>
@@ -491,13 +454,13 @@ function generateTasksHTML(
                         ${getStatusLinkHTML(element, "done", "Done")}
                     </div>
                 </div>
-            </div>
-            <div class="title-content">
+            </section>
+            <section class="title-content">
                 <div class="title">${element.title}</div>
                 <div id="description" class="content">${
                   element.description
                 }</div>
-            </div>
+            </section>
             <div id="subtasks-board" class="board-subtasks-container" style="display: ${getSubtasksDisplayStyle(
               allTasksCount
             )};">
@@ -506,13 +469,13 @@ function generateTasksHTML(
                 </div>
                 <div class="subtasks">${numberTasks} / ${allTasks} Subtasks</div>
             </div>
-            <div class="prio-container">
+            <section class="prio-container">
                 <div id="assigned-to" class="user-container-board">
                     ${assignedToHTML}
                 </div>
                 <div class="prio-icon"><img src="${priorityImageSrc}" alt=""></div>
-            </div>
-        </div>
+            </section>
+        </section>
     </div>`;
 }
 
@@ -522,10 +485,10 @@ function generateTasksHTML(
  */
 function generateSubtaskHTML(subtask) {
   return /*html*/ `
-        <div class="task-slide-subtask">
+        <section class="task-slide-subtask">
             <input type="checkbox" ${subtask.status ? "checked" : ""} disabled>
             <label>${subtask.title}</label>
-        </div>
+        </section>
     `;
 }
 
