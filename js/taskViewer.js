@@ -7,7 +7,6 @@
 function renderPreview() {
   const preview = document.getElementById("preview");
   if (!preview) {
-    console.warn("Preview-Element nicht gefunden!");
     return;
   }
 

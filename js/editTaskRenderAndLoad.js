@@ -207,12 +207,18 @@ function deleteEditSubtask(subtaskId) {
  * @param {number} i - The index or unique identifier for the subtask.
  */
 function editEditedSubtask(i) {
-    let subtaskElement = document.getElementById(i);
+    let subtaskElement = document.getElementById(`edit-value-${i}`);
+
     if (subtaskElement) {
         subtaskElement.contentEditable = true;
         subtaskElement.focus();
+        subtaskElement.setAttribute('aria-readonly', 'false');
+    } else {
+        console.warn(`Kein Element mit ID edit-value-${i} gefunden.`);
     }
+
     let subtaskContainer = document.getElementById(`subtask-container-${i}`);
+
     if (subtaskContainer) {
         addEditingClasses(subtaskContainer);
     }
@@ -270,15 +276,17 @@ function setDisplay(element, value) {
  * finishEditing(3);  // finishes editing for the subtask with id '3'
  */
 function finishEditing(i) {
-    let subtaskElement = document.getElementById(i);
+    let subtaskElement = document.getElementById(`edit-value-${i}`);
     if (subtaskElement) {
         subtaskElement.contentEditable = false;
+        subtaskElement.setAttribute('aria-readonly', 'true');
     }
-    let subtaskContainer = document.getElementById(`subtask-container-${i}`);
 
+    let subtaskContainer = document.getElementById(`subtask-container-${i}`);
     if (subtaskContainer) {
         removeEditingClasses(subtaskContainer);
     }
+
     saveEditedTitle(i);
 }
 
@@ -329,7 +337,12 @@ function removeEditingClasses(container) {
  * @throws {Error} If currentTask is not defined or has no subtasks.
  */
 function saveEditedTitle(i) {
-    let subtaskElement = document.getElementById(i);
+    let subtaskElement = document.getElementById(`edit-value-${i}`);
+
+    if (!subtaskElement) {
+        return;
+    }
+
     let editedTitle = subtaskElement.textContent.trim();
 
     if (!editedTitle) {
@@ -340,6 +353,7 @@ function saveEditedTitle(i) {
         }
         return;
     }
+
     let subtask = currentSelectedTask.subtasks.find(sub => sub.id === i);
     if (subtask) {
         subtask.title = editedTitle;

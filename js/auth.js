@@ -4,7 +4,7 @@ function isAuthenticated() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    if (!isAuthenticated() && window.location.pathname !== '/join/index.html') {
-        window.location.href = '/join/index.html';
+    if (!isAuthenticated() && window.location.pathname !== '/index.html') {
+        window.location.href = '/index.html';
     }
 });

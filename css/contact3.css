@@ -287,15 +287,12 @@ input::-webkit-inner-spin-button {
 }
 
 @media (max-height: 820px) {
-  /* .modal-content-top {
-        padding: 12px 47px;
-        gap: 2px;
-    } */
-
-  /* .edit-content-top {
-        padding: 12px 47px;
-        gap: 2px;
-    } */
+  .modal-content,
+  .edit-content {
+    height: unset;
+    transform: scale(0.8);
+  }
+  
 
   #closeContactModalBtn {
     top: 0;
