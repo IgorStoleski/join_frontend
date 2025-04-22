@@ -2,18 +2,18 @@
  * Handles the click event when the "Forgot Password" link is clicked.
  * Hides the index container, applies background color, and shows the forgot password content.
  */
-function handleForgotPasswordClick() {
+/* function handleForgotPasswordClick() {
     hideIndexContainer();
     applyBackgroundColor();
     displayForgotContent();
-}
+} */
 
 
 /**
  * Adds a click event listener to the "Forgot Password" link.
  */
-let forgotPasswordLink = document.querySelector('.forgot-password-link');
-forgotPasswordLink.addEventListener('click', handleForgotPasswordClick);
+/* let forgotPasswordLink = document.querySelector('.forgot-password-link');
+forgotPasswordLink.addEventListener('click', handleForgotPasswordClick); */
 
 
 /**
@@ -74,20 +74,55 @@ document.addEventListener('DOMContentLoaded', addForgotBlurEvents);
  * 
  * @param {Event} event - The event object triggered by the form submission.
  */
-function showForgotAndRedirect(event) {
-    let emailInput = document.getElementById('emailForgot');
-    let email = emailInput.value;
+async function showForgotAndRedirect(event) {
+    event.preventDefault();
 
-    if (!isEmailInUsersArray(email)) {
+    const email = getEmailInputValue();
+    if (!(await isEmailValid(email))) {
         showEmailNotFoundError();
-        event.preventDefault();
         return;
     }
 
+    await sendPasswordResetEmail(email);
     createAndShowSuccessOverlay();
     displayResetContent('forgot-content', 'reset-content');
     addResetBlurEvents();
-    event.preventDefault();
+}
+
+
+/* function getEmailInputValue() {
+    const input = document.getElementById('emailForgot');
+    return input.value.trim();
+} */
+
+
+async function isEmailValid(email) {
+    // Hier kannst du deinen alten lokalen Check mit fetch ersetzen, wenn nötig
+    return true; // oder z. B. await isEmailInUsersArray(email)
+}
+
+
+async function sendPasswordResetEmail(email) {
+    try {
+        const response = await fetch(`${STORAGE_URL}api/auth/password/reset/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email }),
+        });
+
+        const contentType = response.headers.get('content-type');
+        const data = contentType?.includes('application/json') ? await response.json() : await response.text();
+
+        if (!response.ok) {
+            
+        } else {
+            console.log('Erfolgreich:', data);
+        }
+    } catch (error) {
+        console.error('Netzwerkfehler:', error);
+    }
 }
 
 

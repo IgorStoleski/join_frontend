@@ -121,11 +121,20 @@ input::-webkit-inner-spin-button {
   }
 }
 
+@media (max-width: 1023px) {
+  .all-content {
+    height: calc(100vh - 172px);
+  }
+}
+
 @media (max-width: 890px) {
   .container {
     padding: 20px;
     width: 500px;
     margin-left: 100px;
+  }
+  .all-content {
+    padding: 96px 0 0 0;
   }
 }
 
@@ -272,6 +281,13 @@ input::-webkit-inner-spin-button {
     top: 0;
     left: 0;
   }
+  .add-person-button {
+    right: 5px;
+  }
+  .all-content {
+    padding: 80px 0 0 0;
+    height: calc(100vh - 156px);
+}
 }
 
 @media (max-width: 360px) {
@@ -330,8 +346,4 @@ input::-webkit-inner-spin-button {
   }
 }
 
-@media (max-height: 675px) {
-  .container {
-    height: 400px;
-  }
-}
+

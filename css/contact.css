@@ -5,10 +5,8 @@
     align-items: center;
     gap: 24px;
     width: 456px;
-    height: 928px;
     overflow-y: auto;
     flex-shrink: 0;
-    margin: 97px 0 70px 234px;
 }
 
 .hide-it {
@@ -241,11 +239,13 @@
 
 .all-content {
     display: flex;
+    height: calc(100vh - 96px);
+    padding: 96px 0 0 232px;
+    overflow-x: hidden;
 }
 
 #contact-details {
     padding: 100px;
-    margin-top: 100px;
 }
 
 .contact-detailed-container {

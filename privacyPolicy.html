@@ -9,16 +9,19 @@
     <link rel="stylesheet" href="css/privacyPolicy.css">
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/aside.css">
     <link rel="stylesheet" href="css/imprint.css">
-    <script src="./js/app.js"></script>
     <script src="./js/storage.js"></script>
+    <script src="./js/app.js"></script>
     <link rel="icon" type="image/png" href="img/join_logo_blue.png">
 </head>
 
 <body onload="init()">
     <header w3-include-html="./templates/header.html"></header>
+    <section id="imprint-section" w3-include-html="./templates/imprint.html"></section>
+    <section id="aside-section" w3-include-html="./templates/aside.html"></section>
+
     <main>
-        <section w3-include-html="./templates/imprint.html"></section>
         <section class="privacy-container">
             <section class="privacy-container-header">
                 <h1>Datenschutz&shy;erkl&auml;rung</h1>
@@ -187,6 +190,7 @@
     </main>
     <script src="./js/includeHTML.js"></script>
     <script src="./js/uiHelpers.js"></script>
+    
 </body>
 
 </html>

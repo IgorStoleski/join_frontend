@@ -160,3 +160,11 @@ body {
 .edit-subtask-container.editing-mode {
   border-bottom: 1px solid #4589FF;
 }
+
+.visible-on {
+  visibility: visible;
+}
+
+.visible-off {
+  visibility: hidden;
+}

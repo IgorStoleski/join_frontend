@@ -153,8 +153,8 @@ function togglerememberCheck() {
 /**
 * The remember check element.
 */
-const rememberCheck = document.getElementById('rememberCheck');
-rememberCheck.addEventListener('click', togglerememberCheck);
+/* const rememberCheck = document.getElementById('rememberCheck');
+rememberCheck.addEventListener('click', togglerememberCheck); */
 
 
 /**

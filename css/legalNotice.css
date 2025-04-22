@@ -7,6 +7,8 @@ main {
 }
 
 .legal-notice-container {
+    max-width: 1200px;
+    width: 100%;
     gap: 30px;
     margin: 128px 88px 30px 320px;
 }
