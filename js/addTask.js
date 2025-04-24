@@ -66,19 +66,24 @@ async function createTask() {
  * @param {string} dueDate - The due date for the task in a specified format (e.g., 'YYYY-MM-DD').
  */
 function validateInput(title, description, dueDate) {
+  let isValid = true;
+
   if (!title) {
     showTitleInputError();
-    return;
+    isValid = false;
   }
   if (!description) {
     showDescriptionInputError();
-    return;
+    isValid = false;
   }
   if (!dueDate) {
     showDateInputError();
-    return;
+    isValid = false;
   }
-  validateSelections(title, description, dueDate);
+
+  if (isValid) {
+    validateSelections(title, description, dueDate);
+  }
 }
 
 /**
@@ -89,15 +94,20 @@ function validateInput(title, description, dueDate) {
  * @param {string|Date} dueDate - The due date of the item. Can be a string representation of a date or a Date object.
  */
 function validateSelections(title, description, dueDate) {
+  let isValid = true;
+
   if (!selectedPriority) {
     showPriorityError();
-    return;
+    isValid = false;
   }
   if (!selectedCategory) {
     showSelectCategoryError();
-    return;
+    isValid = false;
   }
-  processValidInput(title, description, dueDate);
+
+  if (isValid) {
+    processValidInput(title, description, dueDate);
+  }
 }
 
 /**

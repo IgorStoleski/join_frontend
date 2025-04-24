@@ -34,12 +34,16 @@ function showContactDetailsHTML(contact, initials, index) {
     <main class="contact-detailed-container">
         <section class="contact-detailed-top">
             <section>
-                <div class="initial-big" style="background-color: ${contact.bgcolor || getRandomColor()}">
+                <div class="initial-big" style="background-color: ${
+                  contact.bgcolor || getRandomColor()
+                }">
                     ${initials}
                 </div>
             </section>
             <section class="contact-detailed-mid">
-                <div class="contact-detailed-name">${contact.name} ${contact.surname}</div>
+                <div class="contact-detailed-name">${contact.name} ${
+    contact.surname
+  }</div>
                 <div class="contact-detailed-edit-delete">
                     <div class="contact-detailed-images" onclick="editContact(${index})"><img class="edit-img" src="./img/edit.png">Edit</div>
                     <div class="contact-detailed-images" onclick="deleteContact(${index})"><img class="delete-img" src="./img/delete.png">Delete</div>
@@ -47,8 +51,12 @@ function showContactDetailsHTML(contact, initials, index) {
             </section>
         </section>
         <span class="contact-detailed-information"> Contact Information </span>             
-        <span class="contact-detailed-text">Email: </span> <span class="email"> ${contact.email}</span>
-        <span class="contact-detailed-text">Telefon: </span> <span class="phone"> ${contact.telefon}</span> 
+        <span class="contact-detailed-text">Email: </span> <span class="email"> ${
+          contact.email
+        }</span>
+        <span class="contact-detailed-text">Telefon: </span> <span class="phone"> ${
+          contact.telefon
+        }</span> 
     </main>
     `;
 }
@@ -68,23 +76,29 @@ function showContactDetailsHTML(contact, initials, index) {
 function showContactDetailsMobileHTML(contact, initials, index) {
   return /*html*/ `
     <main class="contact-detailed-container">
-        <section class="contact-detailed-top">
-            <div>
-                <div class="initial-big" style="background-color: ${contact.bgcolor || getRandomColor()}">
-                    ${initials}
+        <section class="reverse-column">
+            <section class="contact-detailed-top">
+                
+                    <div class="initial-big-mobile" style="background-color: ${
+                      contact.bgcolor || getRandomColor()
+                    }">
+                        ${initials}
+                    </div>
+                
+                <div class="contact-detailed-mid">
+                    <div class="contact-detailed-name">${contact.name} ${
+                        contact.surname
+                    }</div>
                 </div>
-            </div>
-            <div class="contact-detailed-mid">
-                <div class="contact-detailed-name">${contact.name} ${contact.surname}</div>
-            </div>
-        </section>
-        <section class="contact-detailed-information"> Contact Information </section>             
-            <div class="contact-detailed-text">Email: </div> <div class="email"> ${
-              contact.email
-            }</div>
-            <div class="contact-detailed-text">Telefon: </div> <div class="phone"> ${
-              contact.telefon
-            }</div> 
+            </section>
+            <section class="contact-detailed-information"> Contact Information </section>   
+        </section>          
+        <div class="contact-detailed-text">Email: </div> <div class="email"> ${
+          contact.email
+        }</div>
+        <div class="contact-detailed-text">Telefon: </div> <div class="phone"> ${
+          contact.telefon
+        }</div> 
            
             <div class="contact-detailed-mobile-return" onclick="returnToContactsMobile()"><img src="./img/arrow-left-line.png">
         </div> 
@@ -145,10 +159,10 @@ function generateAddContactModalHTML() {
                 <div class="modal-headline">Add contact</div>
                 <div class="modal-text">Tasks are better with a team!</div>
             </section>
-            <section class="modal-input-container">
-                <div class="modal-input-img">
+            <section class="modal-input-img">
                     <img src="./img/person_add.png">
-                </div>
+            </section>
+            <section class="modal-input-container">                
                 <section class="modal-input-row">
                     <div class="modal-input-frame">
                         <div class="error-msg" id="error-Name"></div>
@@ -214,10 +228,8 @@ function generateEditContactModalHTML(index, initials, contact) {
          <div class="modal-logo"><img src="./img/join_logo.png"></div>
          <div class="modal-headline">Edit contact</div>
      </section>
-     <section class="modal-input-container">
-         <div class="initial-big" style="background-color: ${contact.bgcolor}">
-             ${initials}
-         </div>
+     <section class="initial-big" style="background-color: ${contact.bgcolor}">${initials}</section>
+     <section class="modal-input-container">             
          <section class="modal-input-row">
              <div class="modal-input-frame">
                  <div class="error-msg" id="error-editName"></div>
@@ -284,10 +296,10 @@ function generateEditContactMobileHTML(index, initials, contact) {
             <div class="modal-logo"><img src="./img/join_logo.png"></div>
             <div class="modal-headline">Edit contact</div>
         </section>
-        <section class="modal-input-container">
-            <div class="initial-big" style="background-color: ${contact.bgcolor}">
+        <div class="initial-big" style="background-color: ${contact.bgcolor}">
                 ${initials}
             </div>
+        <section class="modal-input-container">
             <section class="modal-input-row">
                 <div class="modal-input-frame">
                         <input class="modal-input-field"  type="text" id="editFullName" placeholder="Name">

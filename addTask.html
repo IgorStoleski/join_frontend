@@ -19,7 +19,7 @@
     <link rel="icon" type="image/png" href="./img/join_logo_blue.png" />
   </head>
 
-  <body onload="init(), initTask()">
+  <body onload="init(), initTask(), setPriority()">
     <header w3-include-html="./templates/header.html"></header>
     <aside w3-include-html="./templates/aside.html"></aside>
     <form id="taskForm">
@@ -50,7 +50,7 @@
               This field is required
             </p>
           </section>
-          <div class="due-date-container">
+          <section class="due-date-container">
             <span class="due-date-header">Due date</span>
             <div class="due-date-input-container">
               <input id="dueDate" class="due-date-textfield" type="date" />
@@ -58,7 +58,7 @@
             <span id="requiredDate" class="add-task-field-required">
               This field is required
             </span>
-          </div>
+          </section>
         </section>
         <section class="add-task-container-priority">
           <span class="add-task-priority-header">Priority</span>

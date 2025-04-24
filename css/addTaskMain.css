@@ -172,7 +172,9 @@
 }
 
 .due-date-textfield {
-    display: flex;
+    cursor: text;
+    box-sizing: border-box;
+    display: block;
     align-items: center;
     align-self: stretch;
     width: 100%;
@@ -185,6 +187,10 @@
     line-height: 120%;
     color: var(--style, #D1D1D1);
 }
+
+.due-date-textfield::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+  }
 
 .due-date-calendar-icon {
     width: 24px;

@@ -90,6 +90,14 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+function setPriority() {
+    const mediumButton = document.getElementById('prioMedium');
+    if (mediumButton) {
+        priority(mediumButton);
+    }
+}
+
+
 /**
  * Sets the priority based on the button clicked. Resets other buttons and hides any priority errors.
  * @param {HTMLElement} button - The button element that was clicked to set the priority.
@@ -109,6 +117,9 @@ function priority(button) {
         highlightButton(button, '#7AE229', './img/prio_low_active.png');
         selectedPriority = 'low';
     }
+
+    // Aktuellen Button markieren
+    button.classList.add('selected');
 }
 
 

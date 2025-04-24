@@ -3,7 +3,8 @@ function isUserLoggedIn() {
     return token !== null;
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+
+function toggleAside() {
     const imprintSection = document.getElementById('imprint-section');
     const asideSection = document.getElementById('aside-section');
 
@@ -16,5 +17,4 @@ document.addEventListener('DOMContentLoaded', function () {
         imprintSection.style.display = 'block';
         asideSection.style.display = 'none';
     }
-
-});
+}

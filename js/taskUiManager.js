@@ -98,6 +98,9 @@ function addChangeTextAreaBorderOnFocusBlurInput(textarea) {
 }
 
 
+
+
+
 /**
  * Adds a priority to a button element and updates the selectedPriority variable.
  * This function adds visual effects to the specified button based on its ID and sets
@@ -107,6 +110,11 @@ function addChangeTextAreaBorderOnFocusBlurInput(textarea) {
 function addPriority(button) {
     addResetButtons();
     addHidePriorityError();
+
+    // Alle Priority-Buttons deselektieren
+    document.querySelectorAll('.priority-choice-inner').forEach(btn => {
+        btn.classList.remove('selected');
+    });
 
     if (button.id === 'addPrioUrgent') {
         addHighlightButton(button, '#FF3D00', './img/prio_high_active.png');
@@ -118,6 +126,9 @@ function addPriority(button) {
         addHighlightButton(button, '#7AE229', './img/prio_low_active.png');
         selectedPriority = 'low';
     }
+
+    // Aktuellen Button markieren
+    button.classList.add('selected');
 }
 
 

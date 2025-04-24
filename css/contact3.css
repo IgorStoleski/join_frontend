@@ -92,7 +92,7 @@ input::-webkit-inner-spin-button {
   }
 
   .contact-detailed-images-head {
-    right: 30px;
+    right: 5px;
     bottom: 90px;
   }
 
@@ -121,6 +121,24 @@ input::-webkit-inner-spin-button {
   }
 }
 
+@media (max-width: 1200px) {
+  .edit-content,
+  .modal-content {
+    border-radius: 30px;
+  }
+  .edit-content-top,
+  .modal-content-top {
+    border-radius: 30px 30px 0 0;
+  }
+  .modal-content,
+  .edit-content {
+    height: unset;
+  }
+  .add-contact-buttons {
+    padding-bottom: 20px;
+  }
+}
+
 @media (max-width: 1023px) {
   .all-content {
     height: calc(100vh - 172px);
@@ -136,6 +154,10 @@ input::-webkit-inner-spin-button {
   .all-content {
     padding: 96px 0 0 0;
   }
+  /* .edit-content,
+  .edit-modal {
+    height: calc(100vh - 100px);
+  } */
 }
 
 @media (max-width: 768px) {
@@ -145,24 +167,50 @@ input::-webkit-inner-spin-button {
   }
   .modal-content {
     height: unset;
+    box-sizing: border-box;
   }
   .container {
     margin-left: 0;
     width: 402px;
   }
+  .edit-content,
+  .modal-content {
+    gap: 0;
+  }
 
   #contact-details-mobile {
     margin-left: -30px;
   }
+  .modal-input-container {
+    gap: 15px;
+    top: -30px;
+    position: relative;
+  }
+  .add-contact-buttons {
+    padding-bottom: 20px;
+  }
+  .initial-big {
+    top: -45px;
+    position: relative;
+  }
+  .modal-input-img {
+    top: -30px;
+  }
+  .modal-logo{
+    display: none;
+  }
+  .reverse-column {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 21px;
+  }
 }
 
 @media (max-width: 540px) {
-  .edit-content-top {
-    width: 371px;
-  }
-
-  .modal-content-top {
-    width: 371px;
+  .edit-content-top,
+  .modal-content-top  {
+    width: 100%;
+    padding: 50px 0;
   }
 
   #closeEditModalBtn {
@@ -178,17 +226,10 @@ input::-webkit-inner-spin-button {
   .modal-content {
     height: unset;
     box-sizing: border-box;
-    width: 290px;
-    transform: scale(0.9);
   }
   .edit-content-top {
     box-sizing: border-box;
     padding-top: 6px;
-    width: 290px;
-  }
-
-  .modal-content-top {
-    width: 290px;
   }
 
   .modal-input-frame,
@@ -238,17 +279,12 @@ input::-webkit-inner-spin-button {
   }
 
   .modal-content-top {
-    padding: 0;
-    gap: 2px;
-  }
-
-  .edit-content-top {
-    padding: 6px 22px;
+    padding: 70px 0 55px 0;;
     gap: 2px;
   }
 
   #closeContactModalBtn {
-    top: 0;
+    top: -70px;
   }
 
   #closeEditModalBtn {
@@ -263,23 +299,25 @@ input::-webkit-inner-spin-button {
     font-size: 16px;
   }
 
-  .modal-input-img {
+  /* .modal-input-img {
     width: 34px;
     height: 34px;
-  }
+  } */
 
-  .initial-big {
-    width: 46px;
-    height: 46px;
+  /* .initial-big {
+    width: 120px;
+    height: 120px;
     font-size: 19px;
-  }
+  } */
 
   .modal-input-img img {
-    width: 34px;
-    height: 34px;
+    /* width: 34px;
+    height: 34px; */
     position: relative;
     top: 0;
     left: 0;
+    height: 120px;
+    width: 120px;
   }
   .add-person-button {
     right: 5px;
@@ -287,7 +325,14 @@ input::-webkit-inner-spin-button {
   .all-content {
     padding: 80px 0 0 0;
     height: calc(100vh - 156px);
+  }
 }
+
+@media (max-width: 400px) {
+  .edit-content,
+  .modal-input-container {
+    width: 90%;
+  }
 }
 
 @media (max-width: 360px) {
@@ -303,15 +348,16 @@ input::-webkit-inner-spin-button {
 }
 
 @media (max-height: 820px) {
-  .modal-content,
   .edit-content {
     height: unset;
-    transform: scale(0.8);
   }
-  
+
+  .modal-content {
+    height: calc(100vh - 20px);
+}
 
   #closeContactModalBtn {
-    top: 0;
+    top: -80px;
   }
 
   #closeEditModalBtn {
@@ -326,24 +372,58 @@ input::-webkit-inner-spin-button {
     font-size: 16px;
   }
 
-  .modal-input-img {
+  /* .modal-input-img {
     width: 34px;
     height: 34px;
-  }
+  } */
 
-  .initial-big {
-    width: 46px;
-    height: 46px;
+  /* .initial-big {    
+    width: 120px;
+    height: 120px;
     font-size: 19px;
-  }
+  } */
 
   .modal-input-img img {
-    width: 34px;
-    height: 34px;
+    /* width: 34px;
+    height: 34px; */
     position: relative;
     top: 0;
     left: 0;
   }
 }
-
-
+@media (min-width: 1023px) and (max-width: 1280px) and (min-height: 800px) and (max-height: 900px) {
+  .edit-content,
+  .modal-content {
+    gap: 12px;
+  }
+  .modal-input-container {
+    gap: 15px;
+    top: -40px;
+    position: relative;
+  }
+  .add-contact-buttons {
+    padding-bottom: 20px;
+  }
+  .initial-big {
+    top: -45px;
+    position: relative;
+  }
+  .edit-content-top,
+  .modal-content-top {
+    padding: 40px 22px;
+  }
+  .modal-logo {
+    display: none;
+  }
+  .modal-input-img {
+    top: -40px;
+  }
+  .modal-input-img img {
+    height: 120px;
+    width: 120px;
+  }
+  #closeContactModalBtn {
+    top: -50px;
+    right: -250px;
+  }
+}

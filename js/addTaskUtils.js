@@ -11,6 +11,8 @@ function resetTaskForm() {
     resetAssignedToSelection();
     resetCategorySelection();
     resetSubtasks();
+    resetFilePicker();
+    setPriority();
 }
 
 

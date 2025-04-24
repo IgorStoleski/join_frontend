@@ -190,3 +190,15 @@ function compressImage(file, maxWidth = 800, maxHeight = 800, quality = 0.8) {
     reader.readAsDataURL(file);
   });
 }
+
+function resetFilePicker() {
+  allImages = [];
+  const fileInput = document.getElementById('filepicker');
+  if (fileInput) {
+    fileInput.value = '';
+  }
+  const previewContainer = document.getElementById('gallery');
+  if (previewContainer) {
+    previewContainer.innerHTML = '';
+  }
+}
