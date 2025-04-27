@@ -338,13 +338,10 @@ function removeEditingClasses(container) {
  */
 function saveEditedTitle(i) {
     let subtaskElement = document.getElementById(`edit-value-${i}`);
-
     if (!subtaskElement) {
         return;
     }
-
     let editedTitle = subtaskElement.textContent.trim();
-
     if (!editedTitle) {
         currentSelectedTask.subtasks = currentSelectedTask.subtasks.filter(sub => sub.id !== i);
         const subtaskContainer = document.getElementById(`subtask-container-${i}`);
@@ -353,7 +350,6 @@ function saveEditedTitle(i) {
         }
         return;
     }
-
     let subtask = currentSelectedTask.subtasks.find(sub => sub.id === i);
     if (subtask) {
         subtask.title = editedTitle;
@@ -370,7 +366,6 @@ function saveEditedTitle(i) {
  */
 function extractColor(element) {
     const colors = [];
-
     for (let i = 0; i < element.assignedTo.length; i++) {
         const fullName = element.assignedTo[i];
         const [firstName, lastName] = fullName.split(' ');
@@ -391,11 +386,9 @@ function extractColor(element) {
  */
 document.addEventListener('input', function (event) {
     let editDueDateInput = event.target;
-
     if (editDueDateInput && editDueDateInput.id === 'edit-due-date') {
         let today = new Date().toISOString().split('T')[0];
-        editDueDateInput.min = today;
-        
+        editDueDateInput.min = today;        
         editDueDateInput.addEventListener('change', function () {
             let selectedDate = editDueDateInput.value;
             if (selectedDate < today) {

@@ -7,9 +7,7 @@
 function filterTasks(searchTerm, status) {
   let filteredTasks = todos.filter((task) => {
     let lowerCaseSearchTerm = searchTerm.toLowerCase();
-    return (
-      task.status === status &&
-      (task.title.toLowerCase().startsWith(lowerCaseSearchTerm) ||
+    return (task.status === status && (task.title.toLowerCase().startsWith(lowerCaseSearchTerm) ||
         task.description.toLowerCase().startsWith(lowerCaseSearchTerm))
     );
   });
@@ -343,7 +341,6 @@ function generateAssignedHTML(additionalClass, bgcolor, initials) {
 function renderSubtask(element) {
   let subtasksHTML;
   let completedTasksCount = 0;
-
   if (element.subtasks && Array.isArray(element.subtasks)) {
     for (const subtask of element.subtasks) {
       if (subtask.title) {

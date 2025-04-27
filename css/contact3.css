@@ -102,12 +102,10 @@ input::-webkit-inner-spin-button {
     bottom: 90px;
   }
 
-  /* Für Webkit-basierte Browser (wie Chrome und Safari) */
   ::-webkit-scrollbar {
     width: 0;
   }
 
-  /* Für Firefox */
   html {
     scrollbar-width: thin;
     scrollbar-color: transparent transparent;
@@ -154,10 +152,6 @@ input::-webkit-inner-spin-button {
   .all-content {
     padding: 96px 0 0 0;
   }
-  /* .edit-content,
-  .edit-modal {
-    height: calc(100vh - 100px);
-  } */
 }
 
 @media (max-width: 768px) {
@@ -299,17 +293,6 @@ input::-webkit-inner-spin-button {
     font-size: 16px;
   }
 
-  /* .modal-input-img {
-    width: 34px;
-    height: 34px;
-  } */
-
-  /* .initial-big {
-    width: 120px;
-    height: 120px;
-    font-size: 19px;
-  } */
-
   .modal-input-img img {
     /* width: 34px;
     height: 34px; */
@@ -346,7 +329,6 @@ input::-webkit-inner-spin-button {
     width: 250px;
   }
 }
-
 @media (max-height: 820px) {
   .edit-content {
     height: unset;
@@ -371,17 +353,6 @@ input::-webkit-inner-spin-button {
   .modal-text {
     font-size: 16px;
   }
-
-  /* .modal-input-img {
-    width: 34px;
-    height: 34px;
-  } */
-
-  /* .initial-big {    
-    width: 120px;
-    height: 120px;
-    font-size: 19px;
-  } */
 
   .modal-input-img img {
     /* width: 34px;

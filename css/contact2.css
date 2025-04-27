@@ -17,8 +17,7 @@
   line-height: 120%;
 }
 
-.initial-big,
-.initial-big-mobile {
+.initial-big,.initial-big-mobile {
   box-sizing: border-box;
   display: flex;
   width: 120px;

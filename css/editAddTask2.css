@@ -10,8 +10,7 @@
     cursor: pointer;
 }
 
-.edit-loaded-categories,
-.edit-loaded-contacts {
+.edit-loaded-categories, .edit-loaded-contacts {
     display: none;
     width: 100%;
     overflow-y: scroll;
@@ -255,13 +254,11 @@
     display: none;
 }
 
-.edit-edit-subtask-button,
-.edit-delete-subtask-button {
+.edit-edit-subtask-button, .edit-delete-subtask-button {
     cursor: pointer;
 }
 
-.edit-edit-delete-subtask-button,
-.edit-save-subtask-button {
+.edit-edit-delete-subtask-button, .edit-save-subtask-button {
     display: none;
     cursor: pointer;
     width: 24px;
@@ -317,7 +314,6 @@
     font-weight: 400;
     line-height: 120%;
 }
-
 .edit-button-clear:hover {
     transition: ease-in-out 100ms;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -338,7 +334,6 @@
 .edit-button-clear:active .edit-button-clear-pic {
     content: url('../img/cancel_icon_active.png');
 }
-
 .edit-button-create-task {
     display: flex;
     padding: 16px 10px;
@@ -400,6 +395,5 @@
         bottom: 110px;
         right: 8px;
         transform: scale(0.8);
-    }
-    
+    }    
 }
