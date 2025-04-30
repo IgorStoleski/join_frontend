@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="css/signUp.css">
     <link rel="stylesheet" href="css/signUpMedia.css">
     <link rel="stylesheet" href="css/fonts.css">
-    <script src="./js/app.js"></script>
     <link rel="icon" type="image/png" href="img/join_logo_blue.png">
 </head>
 
@@ -18,84 +17,97 @@
         <img class="white-small-logo" src="img/join_logo_large.png" alt="Join Logo">
     </header>
 
-    <form id="signUpForm" class="sign-up-container">
+    <form id="signUpForm" class="sign-up-container" >
         <section class="arrow-container">
             <a href="index.html" class="arrow-left-icon"></a>
         </section>
-
         <section class="sign-up-main-header">
             <div class="sign-up-sub-header">
                 <span class="sign-up-header-title">Sign up</span>
                 <div class="sign-up-header-line"></div>
             </div>
         </section>
-
-        <main class="sign-up-formular">
-            <section class="sign-up-formular-container">
-                <section class="sign-up-info-box">
-                    <div class="sign-up-input-frame">
-                        <input required type="text" id="username" class="sign-up-text-input" placeholder="Name" pattern="[A-Za-z].*" title="Das erste Zeichen muss ein Buchstabe sein.">
-                        <img class="sign-up-icon" src="img/person.png" alt="Name">
-                    </div>
-                </section>
-                <section class="sign-up-info-box">
-                    <div class="sign-up-input-frame">
-                        <input required type="text" id="usersurname" class="sign-up-text-input" placeholder="Surname" pattern="[A-Za-z].*" title="Das erste Zeichen muss ein Buchstabe sein.">
-                        <img class="sign-up-icon" src="img/person.png" alt="Surname">
-                    </div>
-                </section>
-                <section class="sign-up-info-box">
-                    <div class="sign-up-input-frame">
-                        <input required type="email" id="email" class="sign-up-text-input" name="email"
-                            autocomplete="email" placeholder="Email">
-                        <img class="sign-up-icon" src="img/mail.png" alt="Email">
-                    </div>
-                </section>
-                <section class="sign-up-info-box">
-                    <div class="sign-up-input-frame">
-                        <input required type="password" id="password" class="sign-up-text-input" placeholder="Password"
-                            autocomplete="current-password" minlength="4">
-                        <img class="sign-up-icon" src="img/lock.png" alt="Password" id="passwordIcon">
-                    </div>
-                </section>
-                <section class="sign-up-info-box">
-                    <div id="sign-up-input-frame" class="sign-up-input-frame">
-                        <input required type="password" id="confirmPassword" class="sign-up-text-input"
-                            placeholder="Confirm Password" autocomplete="current-password" minlength="4">
-                        <img class="sign-up-icon" src="img/lock.png" alt="Confirm Password" id="confirmPasswordIcon">
-                    </div>
-                </section>
+        <!-- Name -->
+        <section class="sign-up-info-box">
+          <div class="sign-up-input-frame">
+            <div class="error-msg" id="error-username"></div>
+            <section class="sign-up-dflex">
+                <input type="text" id="username" class="sign-up-text-input" placeholder="Name">
+                <img class="sign-up-icon" src="img/person.png" alt="Name">
             </section>
-
-            <section class="password-match-error" id="signUpMatchError">Ups! your password don´t match</section>
-            <section class="password-match-error" id="emailExistsError">Ups! Email already exists</section>
-
-            <section class="privacy-check-container">
-                <img class="privacy-check-icon" id="privacyCheck" src="img/check-button.png" alt="Check Button">
-                <p class="privacy-accept-text">I accept the</p>
-                <a class="privacy-policy-link" href="privacyPolicy.html" target="_blank">Privacy Policy</a>
-            </section>
-            <section id="privacyError" class="privacy-error-msg" style="display: none;">
-                Please accept the privacy policy to continue.
-            </section>
-        </main>
-
-        <section class="sign-up-btn-container">
-            <button type="submit" class="sign-up-btn">Sign up</button>
+          </div>
         </section>
-    </form>
+      
+        <!-- Surname -->
+        <section class="sign-up-info-box">
+          <div class="sign-up-input-frame">
+            <div class="error-msg" id="error-usersurname"></div>
+            <section class="sign-up-dflex">
+                <input type="text" id="usersurname" class="sign-up-text-input" placeholder="Surname">
+                <img class="sign-up-icon" src="img/person.png" alt="Surname">
+            </section>
+          </div>
+        </section>
+      
+        <!-- Email -->
+        <section class="sign-up-info-box">
+          <div class="sign-up-input-frame">
+            <div class="error-msg" id="error-email"></div>
+            <section class="sign-up-dflex">
+                <input type="text" id="email" class="sign-up-text-input" placeholder="Email">
+                <img class="sign-up-icon" src="img/mail.png" alt="Email">
+            </section>
+          </div>
+        </section>
+      
+        <!-- Password -->
+        <section class="sign-up-info-box">
+          <div class="sign-up-input-frame">
+            <div class="error-msg" id="error-password"></div>
+            <section class="sign-up-dflex">
+                <input type="password" id="password" class="sign-up-text-input" placeholder="Password">
+                <img id="passwordIcon" class="sign-up-icon" src="img/lock.png" alt="Password">
+            </section>
+          </div>
+        </section>
+      
+        <!-- Confirm Password -->
+        <section class="sign-up-info-box">
+          <div class="sign-up-input-frame">
+            <div class="error-msg" id="error-confirmPassword"></div>
+            <section class="sign-up-dflex">
+                <input type="password" id="confirmPassword" class="sign-up-text-input" placeholder="Confirm Password">
+                <img id="confirmPasswordIcon" class="sign-up-icon" src="img/lock.png" alt="Confirm Password">
+            </section>
+          </div>
+        </section>
+      
+        <!-- Privacy -->
+        <section class="privacy-check-container">
+          <img class="privacy-check-icon" id="privacyCheck" src="img/check-button.png" alt="Check Button">
+          <p class="privacy-accept-text">I accept the</p>
+          <a class="privacy-policy-link" href="privacyPolicyImprint.html">Privacy Policy</a>
+        </section>
+        <div class="error-msg" id="error-privacy" style="margin-left:1em;"></div>
+      
+        <!-- Submit -->
+        <section class="sign-up-btn-container">
+          <button type="submit" class="sign-up-btn">Sign up</button>
+        </section>
+      </form>
 
     <footer class="legal-notice-container">
         <section class="legal-notice-sub-container">
-            <a class="legal-notice-text" href="privacyPolicy.html" target="_blank">Privacy Policy</a>
+            <a class="legal-notice-text" href="privacyPolicyImprint.html">Privacy Policy</a>
         </section>
         <section class="legal-notice-sub-container">
-            <a class="legal-notice-text" href="legalNotice.html" target="_blank">Legal Notice</a>
+            <a class="legal-notice-text" href="legalNoticeImprint.html">Legal Notice</a>
         </section>
     </footer>
 
     <script src="js/storage.js"></script>
     <script src="js/register.js"></script>
+    <script src="js/signUp.js"></script>
     <script src="js/registerUi.js"></script>
     <script src="js/contact.js"></script>
 </body>

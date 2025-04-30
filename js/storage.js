@@ -148,26 +148,28 @@ async function deleteContactBackend(pk) {
  * @param {Object} newUser - The user data to be registered.
  * @returns {Promise<Object|null>} A promise that resolves to the server response as a JSON object if successful, or `null` if an error occurs.
  */
-async function setRegisterUser(newUser) {
-  return fetch(STORAGE_URL + "register/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(newUser),
-  })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        throw new Error(`Failed to register user: ${res.status}`);
-      }
-    })
-    .catch((error) => {
-      console.error("Error registering user:", error.message);
-      return null;
-    });
+async function setRegisterUser(user) {
+  const res = await fetch('https://backend.kanban-join.de/register/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(user)
+  });
+  let payload;
+  const contentType = res.headers.get('content-type');
+  if (contentType && contentType.includes('application/json')) {
+    payload = await res.json();
+  } else {
+    const text = await res.text(); // HTML oder sonstwas
+    console.error('Nicht-JSON-Antwort:', text);
+    throw new Error(`Fehlerhafte Antwort vom Server: ${res.status}`);
+  }
+  if (!res.ok) {
+    console.error('Serverfehler:', res.status, payload);
+    throw new Error(payload?.detail || 'Registrierungsfehler');
+  }
+  return payload;
 }
+
 
 /**
  * Gets the value linked to the given key from storage.

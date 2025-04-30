@@ -1,7 +1,7 @@
 let isChecked = false;
 let isPrivacyChecked = false;
 
-document.getElementById("privacyCheck").addEventListener("click", () => {
+/* document.getElementById("privacyCheck").addEventListener("click", () => {
   const checkIcon = document.getElementById("privacyCheck");
   isPrivacyChecked = !isPrivacyChecked;
 
@@ -13,22 +13,22 @@ document.getElementById("privacyCheck").addEventListener("click", () => {
 
   // Button aktivieren/deaktivieren
   document.querySelector(".sign-up-btn").disabled = !isPrivacyChecked;
-});
+}); */
 
 /**
  * Listens for the form submission event and handles registration process.
  */
-document.getElementById('signUpForm').addEventListener('submit', function (event) {
+/* document.getElementById('signUpForm').addEventListener('submit', function (event) {
     event.preventDefault();
     signUpUser();
-});
+}); */
 
 
 /**
  * Registers a new user.
  * @throws {Error} An error if the registration fails.
  */
-async function signUpUser() {
+/* async function signUpUser() {
     const privacyError = document.getElementById('privacyError');
     privacyError.style.display = 'none'; 
     const username = document.getElementById('username').value;
@@ -60,7 +60,7 @@ async function signUpUser() {
 
     let newContact = createNewContact(username, usersurname, emailValue, passWord);
     registerContact(newContact);
-}
+} */
 
 
 /**
@@ -106,15 +106,16 @@ function isValidUsername(username) {
  * @returns {Object} Returns a new contact object.
  */
 function createNewContact(username, usersurname, email, password) {
-
+    const bgcolor = getRandomColor(); 
     return {
-        username: username,
-        first_name: username,
-        last_name: usersurname,
-        email: email,
-        password: password,
+      name: username,
+      surname: usersurname,
+      email: email,
+      password: password,
+      telefon: '',
+      bgcolor: bgcolor,
     };
-}
+  }
 
 
 /**
@@ -160,7 +161,7 @@ async function registerContact(newContact) {
             throw new Error('Failed to register user: ' + (response.message || JSON.stringify(response)));
         }
     } catch (error) {
-        console.error('Error registering new contact:', error);
+        
     }
     resetForm();
 }

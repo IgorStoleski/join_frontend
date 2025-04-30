@@ -1,3 +1,13 @@
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    max-width: 1900px;
+    width: 100%;
+}
+
 .log-in-btn-section {
     display: flex;
     justify-content: center;
@@ -107,9 +117,6 @@
     display: flex;
     align-items: center;
     gap: 35px;
-    position: absolute;
-    top: 67px;
-    right: 86px;
     animation-name: animateBgOpacity;
     animation-duration: 800ms;
     animation-timing-function: ease-out;
@@ -197,7 +204,7 @@
         gap: 10px;
         align-items: flex-start;
         justify-content: flex-start;
-        position: absolute;
+        position: fixed;
         left: -7%;
         top: -5%;
     }
@@ -270,7 +277,7 @@
     }
 
     .sign-up-container {
-        top: auto;
+        position: fixed;
         bottom: 55px;
         left: 50%;
         transform: translateX(-50%);
@@ -298,8 +305,8 @@
     .logo-small {
         width: 44px;
         height: 58px;
-        left: -10%;
-        top: -7%;
+        left: -50px;
+        top: -30px;
     }
 
     .log-in-container {
@@ -312,7 +319,7 @@
     .logo-small {
         width: 34px;
         height: 48px;
-        left: -9%;
+        left: -20%;
         top: -10%;
     }
 
