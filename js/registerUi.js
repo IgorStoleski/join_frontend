@@ -152,6 +152,15 @@ function removeHoverButtonBackground() {
   privacyCheck.style.backgroundImage = "none";
 }
 
+
+/**
+ * Toggles the visibility of a password input field.
+ * If the input type is "password", it changes it to "text" to show the password,
+ * and updates the icon to indicate visibility. If the input type is "text", it
+ * switches back to "password" and updates the icon to indicate hidden content.
+ * @param {HTMLInputElement} input - The password input element to toggle.
+ * @param {HTMLImageElement} icon - The icon element to update based on visibility.
+ */
 function togglePasswordVisibility(input, icon) {
   if (input.type === "password") {
     input.type = "text";
@@ -162,6 +171,15 @@ function togglePasswordVisibility(input, icon) {
   }
 }
 
+
+/**
+ * Updates the icon based on the password input's state.
+ * - If the input is empty, shows a lock icon.
+ * - If the input has text and is of type "password", shows a visibility-off icon.
+ * - If the input has text and is not of type "password", shows a visibility icon.
+ * @param {HTMLInputElement} input - The input element for the password.
+ * @param {HTMLImageElement} icon - The image element that displays the visibility/lock icon.
+ */
 function handlePasswordInput(input, icon) {
   icon.src = input.value.length
     ? input.type === "password"
@@ -170,6 +188,15 @@ function handlePasswordInput(input, icon) {
     : "./img/lock.png";
 }
 
+
+/**
+ * Initializes the password visibility toggle functionality.
+ * This function selects the password input field and the corresponding icon by their IDs.
+ * If both elements are found, it attaches:
+ * - a click event listener to the icon to toggle password visibility,
+ * - an input event listener to the password field to handle UI changes based on the input.
+ * If either the password input or the icon is not found, the function exits early.
+ */
 function initPasswordToggle() {
   const pwd = document.getElementById("password");
   const icon = document.getElementById("passwordIcon");
@@ -186,13 +213,24 @@ function initConfirmPasswordToggle() {
   cpw.addEventListener("input", () => handlePasswordInput(cpw, icon2));
 }
 
+
+/**
+ * Initializes password visibility toggle and input handlers once the DOM content is fully loaded.
+ * This function attaches click event listeners to password visibility icons
+ * and input event listeners to the password and confirm password fields.
+ * It enables toggling visibility and provides visual feedback based on the input.
+ * Expected HTML elements:
+ * - An input with id="password" and an icon with id="passwordIcon"
+ * - An input with id="confirmPassword" and an icon with id="confirmPasswordIcon"
+ * Functions used:
+ * - togglePasswordVisibility(input: HTMLInputElement, icon: HTMLElement): void
+ * - handlePasswordInput(input: HTMLInputElement, icon: HTMLElement): void
+ */
 document.addEventListener("DOMContentLoaded", () => {
-  // 1) Hier alle DOM-Zugriffe
   const pwd = document.getElementById("password");
   const pwdIc = document.getElementById("passwordIcon");
   const cpwd = document.getElementById("confirmPassword");
   const cpwdIc = document.getElementById("confirmPasswordIcon");
-  // 2) Listener NUR binden, wenn pwd && pwdIc existieren
   if (pwd && pwdIc) {
     pwdIc.addEventListener("click", () => togglePasswordVisibility(pwd, pwdIc));
     pwd.addEventListener("input", () => handlePasswordInput(pwd, pwdIc));
@@ -203,7 +241,6 @@ document.addEventListener("DOMContentLoaded", () => {
     );
     cpwd.addEventListener("input", () => handlePasswordInput(cpwd, cpwdIc));
   }
-  // … dasselbe für errorTextSignUp(), errorEmailExists() etc.
 });
 
 /**

@@ -159,12 +159,10 @@ async function setRegisterUser(user) {
   if (contentType && contentType.includes('application/json')) {
     payload = await res.json();
   } else {
-    const text = await res.text(); // HTML oder sonstwas
-    console.error('Nicht-JSON-Antwort:', text);
+    
     throw new Error(`Fehlerhafte Antwort vom Server: ${res.status}`);
   }
   if (!res.ok) {
-    console.error('Serverfehler:', res.status, payload);
     throw new Error(payload?.detail || 'Registrierungsfehler');
   }
   return payload;

@@ -1,68 +1,6 @@
 let isChecked = false;
 let isPrivacyChecked = false;
 
-/* document.getElementById("privacyCheck").addEventListener("click", () => {
-  const checkIcon = document.getElementById("privacyCheck");
-  isPrivacyChecked = !isPrivacyChecked;
-
-  if (isPrivacyChecked) {
-    checkIcon.classList.add("checked");
-  } else {
-    checkIcon.classList.remove("checked");
-  }
-
-  // Button aktivieren/deaktivieren
-  document.querySelector(".sign-up-btn").disabled = !isPrivacyChecked;
-}); */
-
-/**
- * Listens for the form submission event and handles registration process.
- */
-/* document.getElementById('signUpForm').addEventListener('submit', function (event) {
-    event.preventDefault();
-    signUpUser();
-}); */
-
-
-/**
- * Registers a new user.
- * @throws {Error} An error if the registration fails.
- */
-/* async function signUpUser() {
-    const privacyError = document.getElementById('privacyError');
-    privacyError.style.display = 'none'; 
-    const username = document.getElementById('username').value;
-    const usersurname = document.getElementById('usersurname').value;
-    const passWord = getPasswordInputValue();
-    const confirmPassword = getConfirmPasswordInputValue();
-    const emailValue = document.getElementById('email').value;
-
-    resetSignUpFormStyle();
-    privacyError.style.display = 'none';
-
-    if (!validatePasswordMatch(passWord, confirmPassword)) {
-        return;
-    }
-
-    if (isEmailAlreadyRegistered(emailValue)) {
-        showEmailAlreadyRegisteredError();
-        return;
-    }
-
-    if (!isPrivacyChecked) {
-        privacyError.style.display = 'block';
-        return;
-    }
-
-    if (!isValidUsername(username)) {
-        return;
-    }
-
-    let newContact = createNewContact(username, usersurname, emailValue, passWord);
-    registerContact(newContact);
-} */
-
-
 /**
  * Validates whether the entered passwords match.
  * @param {string} password - The password entered by the user.
@@ -130,6 +68,15 @@ function extractNameParts(username) {
     return { newName, newsurname };
 }
 
+
+/**
+ * Creates a new user contact object with a randomly assigned background color.
+ * @param {string} username - The first name of the user.
+ * @param {string} usersurname - The surname of the user.
+ * @param {string} email - The email address of the user.
+ * @returns {Object} A user contact object containing name, surname, email, 
+ *                   an empty phone number, and a random background color.
+ */
 function createNewUserContact (username, usersurname, email) {
     const bgcolor = getRandomColor();
     return {
@@ -166,6 +113,11 @@ async function registerContact(newContact) {
     resetForm();
 }
 
+
+/**
+ * Saves the provided contact data to local storage.
+ * @param {Object} contact - The contact data to be stored.
+ */
 function setContactData(contact) {
     localStorage.setItem('userContact', JSON.stringify(contact));
 }

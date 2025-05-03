@@ -169,3 +169,13 @@ body {
   visibility: hidden;
 }
 
+@media (max-width: 768px) {
+  .email {
+    direction: rtl;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 200px;
+  }
+}

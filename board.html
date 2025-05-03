@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="./css/aside.css">
     <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/editAddTask.css">
-    <link rel="stylesheet" href="./css/editAddTaskMeida.css">
+    <link rel="stylesheet" href="./css/editAddTaskMedia.css">
     <link rel="stylesheet" href="./css/contact.css">
     <link rel="stylesheet" href="./css/contactEdit.css">
     <link rel="stylesheet" href="./css/contactMediaQuery.css">
@@ -41,61 +41,63 @@
     <section w3-include-html="./templates/editTaskSlide.html"></section>
     <header w3-include-html="./templates/header.html"></header>
     <aside w3-include-html="./templates/aside.html"></aside>
-    <section class="search-add-task">
-        <div class="search-add-task-container">
-            <div class="input-conteiner">
-                <input id="input-field" class="input-field" type="text" placeholder="Find Task">
-                <div class="search-right">
-                    <div id="reset-search" class="reset-btn">x</div>
-                    <img src="./img/placeholder.png" alt="Platzhalter">
-                    <img id="search" class="icon" onclick="setFilter()" src="./img/search.png" alt="Lupe">
+    <section class="all-content-container">
+        <section class="search-add-task">
+            <div class="search-add-task-container">
+                <div class="input-conteiner">
+                    <input id="input-field" class="input-field" type="text" placeholder="Find Task">
+                    <div class="search-right">
+                        <div id="reset-search" class="reset-btn">x</div>
+                        <img src="./img/placeholder.png" alt="Platzhalter">
+                        <img id="search" class="icon" onclick="setFilter()" src="./img/search.png" alt="Lupe">
+                    </div>
                 </div>
+                <button onclick="addTask('todo')" class="add-btn addTaskViewerButton">Add Task<img class="plus-icon" src="./img/plus.png"
+                        alt="Plus"></button>
             </div>
-            <button onclick="addTask('todo')" class="add-btn addTaskViewerButton">Add Task<img class="plus-icon" src="./img/plus.png"
-                    alt="Plus"></button>
-        </div>
+        </section>
+        <main class="board-container">
+            <section class="task-container">
+                <div class="board-headline">
+                    <span>To do</span>
+                    <button onclick="addTask('todo')" class="board-add-btn addTaskViewerButton"><img src="./img/plus-blue.png" alt="Plus"></button>
+                </div>
+                <div class="scroll-container">
+                    <div class="drag-area todo-touch" id="todo" data-status="todo" ondrop="moveTo('todo'); removeHighlight('todo')" ondragleave="removeHighlight('todo')" ondragover="allowDrop(event); highlight('todo')"></div>
+                    
+                </div>
+            </section>
+            <section class="task-container">
+                <div class="board-headline">
+                    <span>In progress</span>
+                    <button onclick="addTask('inprogress')" class="board-add-btn addTaskViewerButton"><img src="./img/plus-blue.png" alt="Plus"></button>
+                </div>
+                <div class="scroll-container">
+                    <div class="drag-area in-progress-touch" id="in-progress" data-status="inprogress" ondrop="moveTo('inprogress'); removeHighlight('in-progress')" ondragleave="removeHighlight('in-progress')" ondragover="allowDrop(event); highlight('in-progress')"></div>
+                    
+                </div>
+            </section>
+            <section class="task-container">
+                <div class="board-headline">
+                    <span>Await feedback</span>
+                    <button onclick="addTask('feedback')" class="board-add-btn addTaskViewerButton"><img src="./img/plus-blue.png" alt="Plus"></button>
+                </div>
+                <div class="scroll-container">
+                    <div class="drag-area feedback-touch" id="feedback" data-status="feedback" ondrop="moveTo('feedback'); removeHighlight('feedback')" ondragleave="removeHighlight('feedback')" ondragover="allowDrop(event); highlight('feedback')"></div>
+                    
+                </div>
+            </section>
+            <section class="task-container">
+                <div class="board-headline">
+                    <span>Done</span>
+                </div>
+                <div class="scroll-container">
+                    <div class="drag-area done-touch" id="done" data-status="done" ondrop="moveTo('done'); removeHighlight('done')" ondragleave="removeHighlight('done')" ondragover="allowDrop(event); highlight('done')"></div>
+                    
+                </div>
+            </section>
+        </main>
     </section>
-    <main class="board-container">
-        <section class="task-container">
-            <div class="board-headline">
-                <span>To do</span>
-                <button onclick="addTask('todo')" class="board-add-btn addTaskViewerButton"><img src="./img/plus-blue.png" alt="Plus"></button>
-            </div>
-            <div class="scroll-container">
-                <div class="drag-area todo-touch" id="todo" data-status="todo" ondrop="moveTo('todo'); removeHighlight('todo')" ondragleave="removeHighlight('todo')" ondragover="allowDrop(event); highlight('todo')"></div>
-                
-            </div>
-        </section>
-        <section class="task-container">
-            <div class="board-headline">
-                <span>In progress</span>
-                <button onclick="addTask('inprogress')" class="board-add-btn addTaskViewerButton"><img src="./img/plus-blue.png" alt="Plus"></button>
-            </div>
-            <div class="scroll-container">
-                <div class="drag-area in-progress-touch" id="in-progress" data-status="inprogress" ondrop="moveTo('inprogress'); removeHighlight('in-progress')" ondragleave="removeHighlight('in-progress')" ondragover="allowDrop(event); highlight('in-progress')"></div>
-                
-            </div>
-        </section>
-        <section class="task-container">
-            <div class="board-headline">
-                <span>Await feedback</span>
-                <button onclick="addTask('feedback')" class="board-add-btn addTaskViewerButton"><img src="./img/plus-blue.png" alt="Plus"></button>
-            </div>
-            <div class="scroll-container">
-                <div class="drag-area feedback-touch" id="feedback" data-status="feedback" ondrop="moveTo('feedback'); removeHighlight('feedback')" ondragleave="removeHighlight('feedback')" ondragover="allowDrop(event); highlight('feedback')"></div>
-                
-            </div>
-        </section>
-        <section class="task-container">
-            <div class="board-headline">
-                <span>Done</span>
-            </div>
-            <div class="scroll-container">
-                <div class="drag-area done-touch" id="done" data-status="done" ondrop="moveTo('done'); removeHighlight('done')" ondragleave="removeHighlight('done')" ondragover="allowDrop(event); highlight('done')"></div>
-                
-            </div>
-        </section>
-    </main>
 
     <form id="contactModal" onclick="closeModalBackAddContact(event)" class="modal" onsubmit="saveNewContact(); return false;"></form>
     <form id="taskFormSlider"></form>

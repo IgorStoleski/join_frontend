@@ -111,7 +111,6 @@ async function handleSuccessfulLogIn(pk) {
     };
     saveLoggedInUserData(userData);
     window.location.href = "summary.html";
-    saveContactToBackend();
   } else {
     console.error("Could not retrieve user data");
   }
@@ -188,7 +187,7 @@ function addLoginButtonListener() {
 }
 
 
-async function saveContactToBackend() {
+/* async function saveContactToBackend() {
   const contactData = getContactData();
 
   if (!contactData) {
@@ -200,5 +199,5 @@ async function saveContactToBackend() {
   } catch (error) {
     console.error("Error saving contact:", error);
   }
-}
+} */
 

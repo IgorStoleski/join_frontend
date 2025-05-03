@@ -93,6 +93,12 @@ aside {
     color: var(--bg-color, #4589FF);
 }
 
+@media (max-width: 400px) {
+    .aside-link-text {
+        display: none;
+    }
+}
+
 /* Media Query für Bildschirmbreite von maximal 768px */
 @media(max-width: 768px) {
     aside,

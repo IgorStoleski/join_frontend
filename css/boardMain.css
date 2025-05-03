@@ -383,3 +383,9 @@ body::-webkit-scrollbar-thumb:hover {
     color: white;
 
 }
+
+@media(max-width: 1024px) and (max-height: 768px) {
+    .all-content-container {
+        height: calc(100vh - 172px);
+    }
+}

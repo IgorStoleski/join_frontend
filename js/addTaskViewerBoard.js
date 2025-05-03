@@ -234,3 +234,167 @@ function compressImage(file, maxWidth = 800, maxHeight = 800, quality = 0.8) {
     reader.readAsDataURL(file);
   });
 }
+
+/**
+ * Initializes an event listener for the file upload element "filepickerBoard".
+ * When selecting files, the system checks whether they are images.
+ * Invalid files are displayed with an error message in the “errorBoard”.
+ * Valid images are compressed, saved in Base64 format and uploaded to a gallery.
+ * Prerequisites: The function `compressImage`, as well as the functions `saveGalleryBoard`, 
+ * `renderGalleryBoard` and `loadGalleryBoard` must be available. 
+ * In addition, the global variable `allImages` is accessed.
+ * @function
+ */
+function aktiviereFilePickerListenerAddTask() {
+  const filepickerBoardAddTask = document.getElementById("filepickerBoardAddTask");
+  const errorBoardAddTask = document.getElementById("errorBoardAddTask");
+
+  if (!filepickerBoardAddTask || !errorBoardAddTask) {
+    console.warn("Dateiupload-Elemente nicht gefunden!");
+    return;
+  }
+
+  filepickerBoardAddTask.addEventListener("change", async () => {
+    errorBoardAddTask.style.display = "none";
+    errorBoardAddTask.textContent = "";
+
+    const files = filepickerBoardAddTask.files;
+    if (files.length > 0) {
+      for (const file of files) {
+        if (!file.type.startsWith("image/")) {
+          errorBoardAddTask.textContent = `Die Datei "${file.name}" ist kein gültiges Bild.`;
+          errorBoardAddTask.style.display = "block";
+          return;
+        }
+
+        const compressedBase64 = await compressImage(file, 800, 800, 0.7);
+
+        allImages.push({
+          filename: file.name,
+          fileType: file.type,
+          base64: compressedBase64,
+        });
+
+        saveGalleryBoardAddTask();
+        renderGalleryBoardAddTask();
+        loadGalleryBoardAddTask();
+      }
+    }
+  });
+}
+
+
+/**
+ * Saves the current gallery board to localStorage.
+ * Converts the `allImages` array into a JSON string and stores it
+ * under the key "allImages" in the browser's localStorage.
+ * This allows the gallery state to persist across page reloads.
+ */
+function saveGalleryBoardAddTask() {
+  let arrayAsString = JSON.stringify(allImages);
+  localStorage.setItem("allImages", arrayAsString);
+}
+
+
+/**
+ * Deletes the gallery board from local storage.
+ * This function removes the "allImages" key from local storage,
+ */
+function deleteGalleryBoardAddTask() {
+  localStorage.removeItem("allImages");
+}
+
+
+/**
+ * Loads the image gallery board from local storage.
+ * Retrieves a JSON string of all stored images from local storage,
+ * parses it into the `allImages` array, and renders the gallery board.
+ * If no images are found in local storage, the function does nothing.
+ */
+function loadGalleryBoardAddTask() {
+  let arrayAsString = localStorage.getItem("allImages");
+  if (arrayAsString) {
+    allImages = JSON.parse(arrayAsString);
+    renderGalleryBoardAddTask();
+  }
+}
+
+
+/**
+ * Renders the gallery board by clearing its current content and appending all images.
+ * This function retrieves the DOM element with the ID "galleryBoard". If the element
+ * is found, it clears its contents and iterates through the `allImages` array,
+ * creating and appending a new image element for each image using the `createImageElement` function.
+ * If the "galleryBoard" element is not found, a warning is logged to the console.
+ */
+function renderGalleryBoardAddTask() {
+  const galleryBoardAddTask = document.getElementById("galleryBoardAddTask");
+  if (!galleryBoardAddTask) {
+    console.warn("galleryBoard nicht gefunden!");
+    return;
+  }
+
+  galleryBoardAddTask.innerHTML = "";
+  allImages.forEach((image, index) => {
+    const imageElement = createImageElement(image, index);
+    galleryBoardAddTask.appendChild(imageElement);
+  });
+}
+
+
+/**
+ * Creates a wrapper element for an image with a trashcan button
+ * @param {Object} image - The image object from allImages
+ * @param {number} index - The index of the image in the array
+ * @returns {HTMLElement} - The created image wrapper element
+ */
+function createImageElement(image, index) {
+  // Äußere Card-Box
+  const card = document.createElement("div");
+  card.classList.add("image-card-base");
+  card.classList.add("image-card-small"); 
+
+  // Wrapper für Bild + Button
+  const wrapper = document.createElement("div");
+  wrapper.style.position = "relative";
+  wrapper.style.display = "inline-block";
+  wrapper.style.margin = "10px";
+  wrapper.style.textAlign = "center";
+
+  const img = document.createElement("img");
+  img.src = image.base64;
+
+  const deleteButton = createDeleteButtonAddTask(index);
+
+  wrapper.appendChild(img);
+  wrapper.appendChild(deleteButton);
+  new Viewer(img);
+
+  card.appendChild(wrapper);
+  return card;
+}
+
+/**
+ * Creates a trashcan button that can delete an image
+ * @param {number} index - The index of the image in the array
+ * @returns {HTMLElement} - The created button
+ */
+function createDeleteButtonAddTask(index) {
+  const button = document.createElement("button");
+  button.classList.add("delete-button");
+
+  button.addEventListener("click", () => deleteImageBoardAddTask(index));
+
+  return button;
+}
+
+
+/**
+ * Deletes an image from the array and updates the display
+ * @param {number} index - The index of the image to be deleted
+ */
+function deleteImageBoardAddTask(index) {
+  allImages.splice(index, 1);
+  saveGalleryBoardAddTask();
+  loadGalleryBoardAddTask();
+}

@@ -1,39 +1,66 @@
-
-
+/**
+ * Displays an error message for a given input element and marks it as invalid.
+ * @param {HTMLInputElement} inp - The input element to mark as invalid.
+ * @param {string} msg - The error message to display.
+ */
 function showError(inp, msg) {
   inp.classList.add("invalid");
   document.getElementById(`error-${inp.id}`).textContent = msg;
 }
 
+/**
+ * Clears the error message for a given input element and removes its invalid styling.
+ * @param {HTMLInputElement} inp - The input element to clear the error for.
+ */
 function clearError(inp) {
-    inp.classList.remove("invalid");
-    const errEl = document.getElementById(`error-${inp.id}`);
-    if (errEl) {
-      errEl.textContent = "";
-    }
+  inp.classList.remove("invalid");
+  const errEl = document.getElementById(`error-${inp.id}`);
+  if (errEl) {
+    errEl.textContent = "";
   }
+}
 
-// ========== Validatoren ==========
+
+/**
+ * Checks if the given name contains only alphabetic characters (including German umlauts and ß).
+ * @param {string} name - The name to validate.
+ * @returns {boolean} True if the name is valid, otherwise false.
+ */
 function isValidName(name) {
   return /^[A-Za-zÄÖÜäöüß]+$/.test(name.trim());
 }
 
+
+/**
+ * Validates whether the provided email has a correct email format.
+ * @param {string} email - The email address to validate.
+ * @returns {boolean} True if the email format is valid, otherwise false.
+ */
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 }
 
+
+/**
+ * Compares two passwords to check if they match.
+ * @param {string} pw - The original password.
+ * @param {string} cpw - The confirmation password.
+ * @returns {boolean} True if both passwords match, otherwise false.
+ */
 function validatePasswordMatch(pw, cpw) {
   return pw === cpw;
 }
 
-// Dummy: ersetze durch Deine Logik
+
+/**
+ * Checks whether the given email address is already registered.
+ * @param {string} email - The email address to check.
+ * @returns {boolean} False (placeholder implementation).
+ */
 function isEmailAlreadyRegistered(email) {
   return false;
 }
 
-
-
-// ========== Input-Listener ==========
 ["username", "usersurname", "email", "password", "confirmPassword"].forEach(
   (id) => {
     document
@@ -42,7 +69,6 @@ function isEmailAlreadyRegistered(email) {
   }
 );
 
-// ========== Feld-Validierung ==========
 function validateFields() {
   ["username", "usersurname", "email", "password", "confirmPassword"].forEach(
     (id) => clearError(document.getElementById(id))
@@ -77,7 +103,13 @@ function validateFields() {
   return ok;
 }
 
-// ========== Einmal-Check E-Mail ==========
+
+/**
+ * Validates if the entered email address is unique.
+ * Clears any previous error messages for the email input.
+ * If the email is already registered, shows an error message.
+ * @returns {boolean} Returns true if the email is unique, false otherwise.
+ */
 function validateEmailUnique() {
   const e = document.getElementById("email");
   clearError(e);
@@ -88,7 +120,13 @@ function validateEmailUnique() {
   return true;
 }
 
-// ========== Privacy-Validierung ==========
+
+/**
+ * Validates whether the privacy policy checkbox has been accepted.
+ * Clears any previous error messages.
+ * If the checkbox is not checked, displays an error message.
+ * @returns {boolean} Returns true if the privacy policy is accepted, false otherwise.
+ */
 function validatePrivacy() {
   const msg = document.getElementById("error-privacy");
   msg.textContent = "";
@@ -99,54 +137,45 @@ function validatePrivacy() {
   return true;
 }
 
-/* // ========== Form-Submit ==========
-document.getElementById("signUpForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-  if (!validateFields() || !validateEmailUnique() || !validatePrivacy()) return;
 
-  const username = document.getElementById("username").value.trim(),
-    usersurname = document.getElementById("usersurname").value.trim(),
-    emailValue = document.getElementById("email").value.trim(),
-    password = document.getElementById("password").value;
-
-  let newContact = createNewContact(
-    username,
-    usersurname,
-    emailValue,
-    password
-  );
-  registerContact(newContact);
-}); */
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Inputs & Error-Container holen
-    const fields = ['username','usersurname','email','password','confirmPassword'];
-    fields.forEach(id => {
-      const inp = document.getElementById(id);
-      if (!inp) return;
-      inp.addEventListener('input', () => clearError(inp));
-    });
-  
-    // Privacy-Check
-    const privacyCheck = document.getElementById('privacyCheck');
-    if (privacyCheck) {
-      privacyCheck.addEventListener('click', () => {
-        isPrivacyChecked = !isPrivacyChecked;
-        document.getElementById('error-privacy').textContent = '';
-      });
-    }
-  
-    // Form-Submit
-    const form = document.getElementById('signUpForm');
-    form?.addEventListener('submit', e => {
-      e.preventDefault();
-      if (!validateFields() || !validateEmailUnique() || !validatePrivacy()) return;
-      registerContact(createNewContact(
-        document.getElementById('username').value.trim(),
-        document.getElementById('usersurname').value.trim(),
-        document.getElementById('email').value.trim(),
-        document.getElementById('password').value
-      ));
-    });
+/**
+ * Sets up input validation and form submission handling once the DOM is loaded.
+ * - Clears errors on input changes for form fields.
+ * - Toggles the privacy policy checkbox status and clears related messages.
+ * - Handles form submission, validates fields, and registers the user.
+ */
+document.addEventListener("DOMContentLoaded", () => {
+  const fields = [
+    "username",
+    "usersurname",
+    "email",
+    "password",
+    "confirmPassword",
+  ];
+  fields.forEach((id) => {
+    const inp = document.getElementById(id);
+    if (!inp) return;
+    inp.addEventListener("input", () => clearError(inp));
   });
+  const privacyCheck = document.getElementById("privacyCheck");
+  if (privacyCheck) {
+    privacyCheck.addEventListener("click", () => {
+      isPrivacyChecked = !isPrivacyChecked;
+      document.getElementById("error-privacy").textContent = "";
+    });
+  }
+  const form = document.getElementById("signUpForm");
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (!validateFields() || !validateEmailUnique() || !validatePrivacy())
+      return;
+    registerContact(
+      createNewContact(
+        document.getElementById("username").value.trim(),
+        document.getElementById("usersurname").value.trim(),
+        document.getElementById("email").value.trim(),
+        document.getElementById("password").value
+      )
+    );
+  });
+});

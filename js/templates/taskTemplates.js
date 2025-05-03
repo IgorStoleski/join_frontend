@@ -134,11 +134,11 @@ function renderAddTask() {
         </section>
         <section class="upload-container">
             <span class="upload-text">Upload a pic</span>
-            <img src="./img/upload.png" class="upload" onclick="filepickerBoard.click()"/>
-            <input type="file" id="filepickerBoard" class="filepicker addTaskViewerButton" style="display: none" accept="image/*" multiple />
+            <img src="./img/upload.png" class="upload" onclick="filepickerBoardAddTask.click()"/>
+            <input type="file" id="filepickerBoardAddTask" class="filepicker addTaskViewerButton" style="display: none" accept="image/*" multiple />
         </section>
-        <span id="errorBoard" class="error error-hidden"></span>
-        <section id="galleryBoard" class="gallery"></section>
+        <span id="errorBoardAddTask" class="error error-hidden"></span>
+        <section id="galleryBoardAddTask" class="gallery"></section>
     </section>
     
     <section class="add-task-bottom-container">

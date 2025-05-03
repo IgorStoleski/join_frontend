@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="./css/fonts.css" />
     <link rel="stylesheet" href="./css/contact.css" />
     <link rel="stylesheet" href="./css/contactEdit.css" />
-    <link rel="stylesheet" href="./css/contactMediaQuery" />
+    <link rel="stylesheet" href="./css/contactMediaQuery.css" />
     <link rel="stylesheet" href="./css/addTaskViewer.css" />
     <link rel="stylesheet" href="./css/viewer.css" />
     <link rel="icon" type="image/png" href="./img/join_logo_blue.png" />
@@ -215,25 +215,24 @@
         </section>
         <span id="error" class="error"></span>
         <span id="gallery" class="gallery"></span>
+        <section class="add-task-buttons">
+          <div class="add-task-buttons-inner">
+            <button
+              onclick="resetTaskForm()"
+              type="button"
+              id="clearTaskButton"
+              class="clear-form-btn"
+            >
+              Clear
+              <img class="button-clear-pic" src="./img/cancel-icon.svg" />
+            </button>
+            <button type="submit" id="createTaskButton" class="create-task-btn">
+              Create Task
+              <img class="button-create-task-pic" src="./img/check.svg" />
+            </button>
+          </div>
+        </section>
       </main>
-
-      <section class="add-task-buttons">
-        <div class="add-task-buttons-inner">
-          <button
-            onclick="resetTaskForm()"
-            type="button"
-            id="clearTaskButton"
-            class="clear-form-btn"
-          >
-            Clear
-            <img class="button-clear-pic" src="./img/cancel-icon.svg" />
-          </button>
-          <button type="submit" id="createTaskButton" class="create-task-btn">
-            Create Task
-            <img class="button-create-task-pic" src="./img/check.svg" />
-          </button>
-        </div>
-      </section>
     </form>
 
     <form
