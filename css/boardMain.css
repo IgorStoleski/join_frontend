@@ -178,7 +178,6 @@ body::-webkit-scrollbar-thumb:hover {
     top: 47px;
     left: 299px;
     gap: 46px;
-    overflow: hidden;
 }
 
 .task-container {
@@ -210,9 +209,9 @@ body::-webkit-scrollbar-thumb:hover {
     .scroll-container {
         display: flex;
         height: 350px;
-        width: 850px;
+        width: 1000px;
         flex: 1;
-        overflow-x: scroll;
+        overflow-y: scroll;
         cursor: grab;
     }
     .grabbing{
@@ -229,6 +228,7 @@ body::-webkit-scrollbar-thumb:hover {
         align-items: center;
         flex-direction: row;
         height: unset;
+        gap: 10px;
     }
 }
 
@@ -237,6 +237,7 @@ body::-webkit-scrollbar-thumb:hover {
         position: static;
         justify-content: center;
         padding: 236px 18px 100px 18px;
+        overflow: scroll;
     }
     .search-add-task-container{
         padding-left: 18px;

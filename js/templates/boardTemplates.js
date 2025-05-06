@@ -114,7 +114,7 @@ function renderEditTask(task) {
                         </div>
                     </section>
                     <section class="edit-priority-choice">
-                        <button type="button" onclick="priority(this)" id="edit-prio-urgent"
+                        <button type="button" onclick="editPriority(this)" id="edit-prio-urgent"
                             class="edit-priority-choice-inner prio-urgent">
                             Urgent
                             <div class="edit-priority-choice-inner-pic">
@@ -122,7 +122,7 @@ function renderEditTask(task) {
                                     data-image="prio-high.png">
                             </div>
                         </button>
-                        <button type="button" onclick="priority(this)" id="edit-prio-medium"
+                        <button type="button" onclick="editPriority(this)" id="edit-prio-medium"
                             class="edit-priority-choice-inner prio-medium">
                             Medium
                             <div class="edit-priority-choice-inner-pic">
@@ -130,7 +130,7 @@ function renderEditTask(task) {
                                     data-image="prio-medium.png">
                             </div>
                         </button>
-                        <button type="button" onclick="priority(this)" id="edit-prio-low" class="edit-priority-choice-inner prio-low">
+                        <button type="button" onclick="editPriority(this)" id="edit-prio-low" class="edit-priority-choice-inner prio-low">
                             Low
                             <div class="edit-priority-choice-inner-pic">
                                 <img src="./img/prio-low.png" id="edit-prio-low-img" class="edit-original-image"

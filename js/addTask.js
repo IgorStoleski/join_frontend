@@ -10,7 +10,6 @@ async function initTask() {
   renderCategorys();
 }
 
-
 /**
  * Retrieves the value of a query parameter from a URL.
  * @param {string} name - The name of the query parameter to retrieve.
@@ -51,9 +50,9 @@ document
  * });
  */
 async function createTask() {
-  const title = document.getElementById("taskTitle").value;
-  const description = document.getElementById("taskDescription").value;
-  const dueDate = document.getElementById("dueDate").value;
+  const title = document.getElementById("taskTitle").value.trim();
+  const description = document.getElementById("taskDescription").value.trim();
+  const dueDate = document.getElementById("dueDate").value.trim();
   validateInput(title, description, dueDate);
 }
 
@@ -154,7 +153,7 @@ async function completeTaskCreation(newTodo) {
     console.error("Task wurde nicht korrekt erstellt oder ID fehlt.");
     return;
   }
-  
+
   await saveGallery(savedTask.id); // ⬅ Jetzt sicher!
 
   showCreatedTaskMessage();
@@ -162,7 +161,6 @@ async function completeTaskCreation(newTodo) {
   allImages = [];
   renderGallery();
 }
-
 
 /**
  * Shows a success message overlay and redirects to the index page.

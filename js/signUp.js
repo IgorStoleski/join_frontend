@@ -57,8 +57,16 @@ function validatePasswordMatch(pw, cpw) {
  * @param {string} email - The email address to check.
  * @returns {boolean} False (placeholder implementation).
  */
-function isEmailAlreadyRegistered(email) {
-  return false;
+async function isEmailAlreadyRegistered(email) {
+  try {
+    const res = await fetch(`https://backend.kanban-join.de/check-email/?email=${encodeURIComponent(email)}`);
+    if (!res.ok) throw new Error("Serverfehler");
+    const data = await res.json();
+    return data.isRegistered;
+  } catch (err) {
+    console.error("Fehler bei E-Mail-Prüfung:", err);
+    return false; // Im Zweifel lieber kein Fehler anzeigen
+  }
 }
 
 ["username", "usersurname", "email", "password", "confirmPassword"].forEach(
@@ -81,23 +89,23 @@ function validateFields() {
     cpw = document.getElementById("confirmPassword");
 
   if (!isValidName(u.value)) {
-    showError(u, "Nur Buchstaben erlaubt");
+    showError(u, "Only letters allowed");
     ok = false;
   }
   if (!isValidName(s.value)) {
-    showError(s, "Nur Buchstaben erlaubt");
+    showError(s, "Only letters allowed");
     ok = false;
   }
   if (!isValidEmail(e.value)) {
-    showError(e, "Ungültige E-Mail");
+    showError(e, "Invalid e-mail");
     ok = false;
   }
   if (pw.value.length < 4) {
-    showError(pw, "Mind. 4 Zeichen");
+    showError(pw, "At least 4 characters");
     ok = false;
   }
   if (!validatePasswordMatch(pw.value, cpw.value)) {
-    showError(cpw, "Passwörter stimmen nicht überein");
+    showError(cpw, "Passwords do not match");
     ok = false;
   }
   return ok;
@@ -110,11 +118,12 @@ function validateFields() {
  * If the email is already registered, shows an error message.
  * @returns {boolean} Returns true if the email is unique, false otherwise.
  */
-function validateEmailUnique() {
+async function validateEmailUnique() {
   const e = document.getElementById("email");
   clearError(e);
-  if (isEmailAlreadyRegistered(e.value)) {
-    showError(e, "E-Mail bereits registriert");
+  const exists = await isEmailAlreadyRegistered(e.value);
+  if (exists) {
+    showError(e, "E-mail already registered");
     return false;
   }
   return true;
@@ -165,10 +174,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
   const form = document.getElementById("signUpForm");
-  form?.addEventListener("submit", (e) => {
+  form?.addEventListener("submit", async (e) => {
     e.preventDefault();
-    if (!validateFields() || !validateEmailUnique() || !validatePrivacy())
-      return;
+  
+    const fieldsValid = validateFields();
+    const emailValid = await validateEmailUnique();
+    const privacyValid = validatePrivacy();
+  
+    if (!fieldsValid || !emailValid || !privacyValid) return;
+  
     registerContact(
       createNewContact(
         document.getElementById("username").value.trim(),

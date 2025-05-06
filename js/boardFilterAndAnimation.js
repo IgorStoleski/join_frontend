@@ -81,8 +81,7 @@ async function closeCard() {
   document.getElementById("slide-container").classList.remove("slide-in-board");
   setTimeout(() => {
     document.getElementById("task-slide").classList.add("d-none");
-    document.getElementById("noscroll").classList.remove("noscroll");
-    location.reload();
+    document.getElementById("noscroll").classList.remove("noscroll");    
   }, 100);
   document.body.style.overflow = "auto";
   await updateHTML();

@@ -101,8 +101,7 @@ aside {
 
 /* Media Query für Bildschirmbreite von maximal 768px */
 @media(max-width: 768px) {
-    aside,
-    .aside__policy {
+    aside {
         position: fixed;
         top: revert;
         bottom: 0;

@@ -12,14 +12,18 @@ function editTask(id) {
   document.body.style.overflow = "hidden";
   const slideEditTask = document.getElementById("task-slide");
   slideEditTask.innerHTML = renderEditTask(element);
+  
+  setTimeout(() => {
+    loadSelectedPriority(element);
+    loadDisplayChosenContacts();
+    addToSelectedContacts(element);
+    loadRenderCategory(element);
+    aktiviereEditFilePickerListener();
+    addSubtaskToEdit(element);
+  }, 0);
+
   loadPreviewFromBackend(id, globalIsEditMode);
   currentSelectedTask = element;
-  addSubtaskToEdit(element);
-  loadSelectedPriority(element);
-  loadDisplayChosenContacts();
-  addToSelectedContacts(element);
-  loadRenderCategory(element);
-  aktiviereEditFilePickerListener();
 }
 
 /**
@@ -122,7 +126,7 @@ function loadSelectedPriority(task) {
   if (priorities[task.priority]) {
     const prio = priorities[task.priority];
     const button = document.getElementById(prio.buttonId);
-    highlightButton(button, prio.color, prio.img);
+    editHighlightButton(button, prio.color, prio.img);
     selectedPriority = task.priority;
   }
 }
@@ -132,17 +136,17 @@ function loadSelectedPriority(task) {
  * The function resets other buttons and then sets the highlight for the respective priority button.
  * @param {HTMLElement} button - The clicked priority button.
  */
-function priority(button) {
+function editPriority(button) {
   resetButtons();
 
   if (button.id === "edit-prio-urgent") {
-    highlightButton(button, "#FF3D00", "./img/prio_high_active.png");
+    editHighlightButton(button, "#FF3D00", "./img/prio_high_active.png");
     selectedPriority = "high";
   } else if (button.id === "edit-prio-medium") {
-    highlightButton(button, "#FFA800", "./img/prio_medium_active.png");
+    editHighlightButton(button, "#FFA800", "./img/prio_medium_active.png");
     selectedPriority = "medium";
   } else if (button.id === "edit-prio-low") {
-    highlightButton(button, "#7AE229", "./img/prio_low_active.png");
+    editHighlightButton(button, "#7AE229", "./img/prio_low_active.png");
     selectedPriority = "low";
   }
 }
@@ -173,7 +177,7 @@ function resetButtons() {
  * @param {string} bgColor - The desired background color for the button.
  * @param {string} imageSrc - The source URL for the image to be displayed inside the button.
  */
-function highlightButton(button, bgColor, imageSrc) {
+function editHighlightButton(button, bgColor, imageSrc) {
   button.classList.add("highlighted");
   button.style.backgroundColor = bgColor;
   let image = button.querySelector(".edit-priority-choice-inner-pic img");

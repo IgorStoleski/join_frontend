@@ -162,7 +162,7 @@ function addTask(status) {
     const overlay = document.querySelector(".task-background-overlay");
     overlay.style.display = "block";
     aktiviereFilePickerListenerAddTask();
-    setPriorityAdd();
+    
   } else {
     window.location.href = "addTask.html?status=" + encodeURIComponent(status);
   }
@@ -289,7 +289,7 @@ document.addEventListener("input", function (event) {
 
 
 function setPriorityAdd() {
-    const mediumButton = document.getElementById('prioMedium');
+    const mediumButton = document.getElementById('addPrioMedium');
     if (mediumButton) {
         priorityAdd(mediumButton);
     }
@@ -302,20 +302,16 @@ function setPriorityAdd() {
  * @throws {Error} Throws an error if the button ID does not match any expected priority.
  */
 function priorityAdd(button) {
-    hidePriorityError();
-
-    if (button.id === 'prioUrgent') {
+    if (button.id === 'addPrioUrgent') {
         highlightButton(button, '#FF3D00', './img/prio_high_active.png');
         selectedPriority = 'high';
-    } else if (button.id === 'prioMedium') {
+    } else if (button.id === 'addPrioMedium') {
         highlightButton(button, '#FFA800', './img/prio_medium_active.png');
         selectedPriority = 'medium';
-    } else if (button.id === 'prioLow') {
+    } else if (button.id === 'addPrioLow') {
         highlightButton(button, '#7AE229', './img/prio_low_active.png');
         selectedPriority = 'low';
     }
-
-    // Aktuellen Button markieren
     button.classList.add('selected');
 }
 

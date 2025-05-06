@@ -4,7 +4,7 @@
  */
 function renderAddTask() {
   const currentDate = new Date().toISOString().split("T")[0];
-
+  setTimeout(() => setPriorityAdd(), 50);
   return /* html */ `
 <main class="float-add-task-container">
     <section class="header">

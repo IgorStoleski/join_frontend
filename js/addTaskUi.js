@@ -1,3 +1,5 @@
+let categoryClickListenerActive = false;
+
 /**
  * Applies border color on focus and blur events to elements within a container.
  * @param {string} containerSelector - CSS selector for the container elements.
@@ -5,57 +7,60 @@
  * @param {string} focusColor - CSS color value applied to the container border when the input is focused.
  * @param {string} blurColor - CSS color value applied to the container border when the input loses focus.
  */
-function applyBorderColorOnFocusAndBlur(containerSelector, inputSelector, focusColor, blurColor) {
-    const containers = document.querySelectorAll(containerSelector);
+function applyBorderColorOnFocusAndBlur(
+  containerSelector,
+  inputSelector,
+  focusColor,
+  blurColor
+) {
+  const containers = document.querySelectorAll(containerSelector);
 
-    containers.forEach(container => {
-        const input = container.querySelector(inputSelector);
+  containers.forEach((container) => {
+    const input = container.querySelector(inputSelector);
 
-        input.addEventListener('focus', () => {
-            container.style.borderColor = focusColor;
-        });
-
-        input.addEventListener('blur', () => {
-            container.style.borderColor = blurColor;
-        });
+    input.addEventListener("focus", () => {
+      container.style.borderColor = focusColor;
     });
-}
 
+    input.addEventListener("blur", () => {
+      container.style.borderColor = blurColor;
+    });
+  });
+}
 
 /**
  * Sets up event listeners to apply specific border colors to various input fields when they receive focus or lose focus.
  * This function is executed once the DOM content is fully loaded.
  */
-document.addEventListener('DOMContentLoaded', () => {
-    /**
-     * Applies border color changes for the title text container and its associated text field.
-     */
-    applyBorderColorOnFocusAndBlur(
-        '.add-task-titel-textcontainer',
-        '.add-task-titel-textfield',
-        '#4589FF',
-        '#D1D1D1'
-    );
-    applyBorderColorOnFocusAndBlur(
-        '.due-date-input-container',
-        '.due-date-textfield',
-        '#4589FF',
-        '#D1D1D1'
-    );
-    applyBorderColorOnFocusAndBlur(
-        '.assigned-to-choicefield',
-        '#searchInput',
-        '#4589FF',
-        '#D1D1D1'
-    );
-    applyBorderColorOnFocusAndBlur(
-        '.add-subtask-input',
-        '#subtaskInput',
-        '#4589FF',
-        '#D1D1D1'
-    );
+document.addEventListener("DOMContentLoaded", () => {
+  /**
+   * Applies border color changes for the title text container and its associated text field.
+   */
+  applyBorderColorOnFocusAndBlur(
+    ".add-task-titel-textcontainer",
+    ".add-task-titel-textfield",
+    "#4589FF",
+    "#D1D1D1"
+  );
+  applyBorderColorOnFocusAndBlur(
+    ".due-date-input-container",
+    ".due-date-textfield",
+    "#4589FF",
+    "#D1D1D1"
+  );
+  applyBorderColorOnFocusAndBlur(
+    ".assigned-to-choicefield",
+    "#searchInput",
+    "#4589FF",
+    "#D1D1D1"
+  );
+  applyBorderColorOnFocusAndBlur(
+    ".add-subtask-input",
+    "#subtaskInput",
+    "#4589FF",
+    "#D1D1D1"
+  );
 });
-
 
 /**
  * Changes the border color of a textarea element based on focus, blur, and input events.
@@ -66,37 +71,34 @@ document.addEventListener('DOMContentLoaded', () => {
  * changeTextAreaBorderOnFocusBlurInput(textarea);
  */
 function changeTextAreaBorderOnFocusBlurInput(textarea) {
-    textarea.addEventListener('focus', () => {
-        textarea.style.border = '1px solid #4589FF';
-    });
+  textarea.addEventListener("focus", () => {
+    textarea.style.border = "1px solid #4589FF";
+  });
 
-    textarea.addEventListener('blur', () => {
-        textarea.style.border = '1px solid #D1D1D1';
-    });
+  textarea.addEventListener("blur", () => {
+    textarea.style.border = "1px solid #D1D1D1";
+  });
 
-    textarea.addEventListener('input', () => {
-        textarea.style.border = '1px solid #4589FF';
-    });
+  textarea.addEventListener("input", () => {
+    textarea.style.border = "1px solid #4589FF";
+  });
 }
-
 
 /**
  * Sets up an event listener to change the border of a textarea element when it receives focus, loses focus, or has input.
  * This function is executed once the DOM content is fully loaded.
  */
-document.addEventListener('DOMContentLoaded', () => {
-    let textarea = document.getElementById('taskDescription');
-    changeTextAreaBorderOnFocusBlurInput(textarea);
+document.addEventListener("DOMContentLoaded", () => {
+  let textarea = document.getElementById("taskDescription");
+  changeTextAreaBorderOnFocusBlurInput(textarea);
 });
 
-
 function setPriority() {
-    const mediumButton = document.getElementById('prioMedium');
-    if (mediumButton) {
-        priority(mediumButton);
-    }
+  const mediumButton = document.getElementById("prioMedium");
+  if (mediumButton) {
+    priority(mediumButton);
+  }
 }
-
 
 /**
  * Sets the priority based on the button clicked. Resets other buttons and hides any priority errors.
@@ -104,24 +106,23 @@ function setPriority() {
  * @throws {Error} Throws an error if the button ID does not match any expected priority.
  */
 function priority(button) {
-    resetButtons();
-    hidePriorityError();
+  resetButtons();
+  hidePriorityError();
 
-    if (button.id === 'prioUrgent') {
-        highlightButton(button, '#FF3D00', './img/prio_high_active.png');
-        selectedPriority = 'high';
-    } else if (button.id === 'prioMedium') {
-        highlightButton(button, '#FFA800', './img/prio_medium_active.png');
-        selectedPriority = 'medium';
-    } else if (button.id === 'prioLow') {
-        highlightButton(button, '#7AE229', './img/prio_low_active.png');
-        selectedPriority = 'low';
-    }
+  if (button.id === "prioUrgent") {
+    highlightButton(button, "#FF3D00", "./img/prio_high_active.png");
+    selectedPriority = "high";
+  } else if (button.id === "prioMedium") {
+    highlightButton(button, "#FFA800", "./img/prio_medium_active.png");
+    selectedPriority = "medium";
+  } else if (button.id === "prioLow") {
+    highlightButton(button, "#7AE229", "./img/prio_low_active.png");
+    selectedPriority = "low";
+  }
 
-    // Aktuellen Button markieren
-    button.classList.add('selected');
+  // Aktuellen Button markieren
+  button.classList.add("selected");
 }
-
 
 /**
  * Highlights a button by changing its background color, image source, and text color.
@@ -130,22 +131,20 @@ function priority(button) {
  * @param {string} imageSrc - The image source URL for the button's inner image.
  */
 function highlightButton(button, bgColor, imageSrc) {
-    button.classList.add('highlighted');
-    button.style.backgroundColor = bgColor;
-    let image = button.querySelector('.priority-choice-inner-pic img');
-    image.src = imageSrc;
-    button.style.color = 'white';
+  button.classList.add("highlighted");
+  button.style.backgroundColor = bgColor;
+  let image = button.querySelector(".priority-choice-inner-pic img");
+  image.src = imageSrc;
+  button.style.color = "white";
 }
-
 
 /**
  * Retrieves the logged-in user's data from local storage.
  * @returns {Object} The logged-in user's data, or an empty object if no data is found.
  */
 function getLoggedInUserData() {
-    return JSON.parse(localStorage.getItem('loggedInUser')) || {};
+  return JSON.parse(localStorage.getItem("loggedInUser")) || {};
 }
-
 
 /**
  * Asynchronously renders the contacts assigned to the user.
@@ -161,21 +160,28 @@ function getLoggedInUserData() {
  * renderAssignedTo();
  */
 async function renderAssignedTo() {
-    let loggedInUserData = getLoggedInUserData();
+  let loggedInUserData = getLoggedInUserData();
 
-    let assignedToContainer = document.getElementById('loadedContacts');
-    assignedToContainer.innerHTML = '';
+  let assignedToContainer = document.getElementById("loadedContacts");
+  assignedToContainer.innerHTML = "";
 
-    for (let i = 0; i < contacts.length; i++) {
-        let contact = contacts[i];
-        let initials = `${contact.name.charAt(0)}${contact.surname.charAt(0)}`.toUpperCase();
-        let isSelected = selectedContacts[contact.id] || false;
-        let isCurrentUser = loggedInUserData && contact.email === loggedInUserData.email;
+  for (let i = 0; i < contacts.length; i++) {
+    let contact = contacts[i];
+    let initials = `${contact.name.charAt(0)}${contact.surname.charAt(
+      0
+    )}`.toUpperCase();
+    let isSelected = selectedContacts[contact.id] || false;
+    let isCurrentUser =
+      loggedInUserData && contact.email === loggedInUserData.email;
 
-        assignedToContainer.innerHTML += renderAssignedToHTML(contact, initials, isSelected, isCurrentUser);
-    }
+    assignedToContainer.innerHTML += renderAssignedToHTML(
+      contact,
+      initials,
+      isSelected,
+      isCurrentUser
+    );
+  }
 }
-
 
 /**
  * Renders the contacts that were searched for and updates the HTML container.
@@ -195,47 +201,53 @@ async function renderAssignedTo() {
  * renderSearchedContact(contacts);
  */
 function renderSearchedContact(contacts) {
-    let loggedInUserData = getLoggedInUserData();
+  let loggedInUserData = getLoggedInUserData();
 
-    let assignedToContainer = document.getElementById('loadedContacts');
-    assignedToContainer.innerHTML = '';
+  let assignedToContainer = document.getElementById("loadedContacts");
+  assignedToContainer.innerHTML = "";
 
-    for (let i = 0; i < contacts.length; i++) {
-        let contact = contacts[i];
-        let initials = `${contact.name.charAt(0)}${contact.surname.charAt(0)}`.toUpperCase();
-        let isSelected = selectedContacts[contact.id] || false;
-        let isCurrentUser = loggedInUserData && contact.email === loggedInUserData.email;
+  for (let i = 0; i < contacts.length; i++) {
+    let contact = contacts[i];
+    let initials = `${contact.name.charAt(0)}${contact.surname.charAt(
+      0
+    )}`.toUpperCase();
+    let isSelected = selectedContacts[contact.id] || false;
+    let isCurrentUser =
+      loggedInUserData && contact.email === loggedInUserData.email;
 
-        assignedToContainer.innerHTML += renderSearchedContactsHTML(contact, initials, isSelected, isCurrentUser);
-    }
+    assignedToContainer.innerHTML += renderSearchedContactsHTML(
+      contact,
+      initials,
+      isSelected,
+      isCurrentUser
+    );
+  }
 }
 
-
 /**
- * Toggles the visibility of the "assignedToContainer" and synchronizes 
- * the display of the "contactsContainer" accordingly. 
+ * Toggles the visibility of the "assignedToContainer" and synchronizes
+ * the display of the "contactsContainer" accordingly.
  * Also manages the 'expanded' class of the "assignedToDropdown".
  * @example
  * To toggle the display of the containers
  * toggleAssignedToContainer();
  */
 function toggleAssignedToContainer() {
-    let assignedToContainer = document.getElementById('loadedContacts');
-    let contactsContainer = document.querySelector('.contacts-container');
-    let assignedToDropdown = document.querySelector('.assigned-to-dropdown');
+  let assignedToContainer = document.getElementById("loadedContacts");
+  let contactsContainer = document.querySelector(".contacts-container");
+  let assignedToDropdown = document.querySelector(".assigned-to-dropdown");
 
-    if (assignedToContainer.style.display === 'block') {
-        assignedToContainer.style.display = 'none';
-        assignedToDropdown.classList.remove('expanded');
-        document.removeEventListener('click', clickOutsideHandler);
-    } else {
-        assignedToContainer.style.display = 'block';
-        assignedToDropdown.classList.add('expanded');
-        document.addEventListener('click', clickOutsideHandler);
-    }
-    contactsContainer.style.display = assignedToContainer.style.display;
+  if (assignedToContainer.style.display === "block") {
+    assignedToContainer.style.display = "none";
+    assignedToDropdown.classList.remove("expanded");
+    document.removeEventListener("click", clickOutsideHandler);
+  } else {
+    assignedToContainer.style.display = "block";
+    assignedToDropdown.classList.add("expanded");
+    document.addEventListener("click", clickOutsideHandler);
+  }
+  contactsContainer.style.display = assignedToContainer.style.display;
 }
-
 
 /**
  * Handles the click outside event for assignedToContainer and assignedToDropdown.
@@ -243,18 +255,20 @@ function toggleAssignedToContainer() {
  * @param {MouseEvent} event - The click event
  */
 function clickOutsideHandler(event) {
-    let assignedToContainer = document.getElementById('loadedContacts');
-    let assignedToDropdown = document.querySelector('.assigned-to-dropdown');
-    let contactsContainer = document.querySelector('.contacts-container');
+  let assignedToContainer = document.getElementById("loadedContacts");
+  let assignedToDropdown = document.querySelector(".assigned-to-dropdown");
+  let contactsContainer = document.querySelector(".contacts-container");
 
-    if (!assignedToContainer.contains(event.target) && !assignedToDropdown.contains(event.target)) {
-        assignedToContainer.style.display = 'none';
-        contactsContainer.style.display = 'none';
-        assignedToDropdown.classList.remove('expanded');
-        document.removeEventListener('click', clickOutsideHandler);
-    }
+  if (
+    !assignedToContainer.contains(event.target) &&
+    !assignedToDropdown.contains(event.target)
+  ) {
+    assignedToContainer.style.display = "none";
+    contactsContainer.style.display = "none";
+    assignedToDropdown.classList.remove("expanded");
+    document.removeEventListener("click", clickOutsideHandler);
+  }
 }
-
 
 /**
  * Display the chosen contacts on the page by appending them to
@@ -269,24 +283,40 @@ function clickOutsideHandler(event) {
  *    if the contact is selected.
  */
 function displayChosenContacts() {
-    let chosenContactsContainer = document.getElementById('chosenContacts');
-    chosenContactsContainer.innerHTML = '';
+  const chosenContactsContainer = document.getElementById("chosenContacts");
+  chosenContactsContainer.innerHTML = "";
 
-    for (let i = 0; i < contacts.length; i++) {
-        let contact = contacts[i];
-        let isSelected = selectedContacts[contact.id];
+  const selectedContactIds = Object.keys(selectedContacts).filter(
+    (id) => selectedContacts[id]
+  );
 
-        if (isSelected) {
-            let initials = `${contact.name.charAt(0)}${contact.surname.charAt(0)}`.toUpperCase();
-            chosenContactsContainer.innerHTML += /*html*/`
-                <section class="chosen-contact">
-                    <div class="initial" style="background-color: ${contact.bgcolor}">${initials}</div>
-                </section>
-            `;
-        }
+  const maxVisible = 4;
+  const totalSelected = selectedContactIds.length;
+
+  for (let i = 0; i < Math.min(maxVisible, totalSelected); i++) {
+    const contactId = selectedContactIds[i];
+    const contact = contacts.find((c) => c.id == contactId);
+    if (contact) {
+      const initials = `${contact.name.charAt(0)}${contact.surname.charAt(
+        0
+      )}`.toUpperCase();
+      chosenContactsContainer.innerHTML += /*html*/ `
+          <section class="chosen-contact">
+            <div class="initial" style="background-color: ${contact.bgcolor}">${initials}</div>
+          </section>
+        `;
     }
-}
+  }
 
+  if (totalSelected > maxVisible) {
+    const remaining = totalSelected - maxVisible;
+    chosenContactsContainer.innerHTML += /*html*/ `
+        <section class="chosen-contact">
+          <div class="initial" style="background-color: #D1D1D1">+${remaining}</div>
+        </section>
+      `;
+  }
+}
 
 /**
  * Renders categories into the `loadedCategories` DOM element.
@@ -295,17 +325,16 @@ function displayChosenContacts() {
  * @requires categories - An array of objects where each object should have a 'categoryName' property.
  */
 function renderCategorys() {
-    let categoryContainer = document.getElementById('loadedCategories');
-    categoryContainer.innerHTML = '';
+  let categoryContainer = document.getElementById("loadedCategories");
+  categoryContainer.innerHTML = "";
 
-    for (let i = 0; i < categories.length; i++) {
-        let category = categories[i].categoryName;
-        categoryContainer.innerHTML += `
+  for (let i = 0; i < categories.length; i++) {
+    let category = categories[i].categoryName;
+    categoryContainer.innerHTML += `
             <div class="category" onclick="categorySelected('${category}')">${category}</div>
             `;
-    }
+  }
 }
-
 
 /**
  * Toggles the visibility of the category container.
@@ -313,46 +342,72 @@ function renderCategorys() {
  * - When the category container is not displayed, it shows the container, makes necessary style adjustments, and renders the categories.
  */
 function toggleCategoryContainer() {
-    let selectText = document.querySelector('.select-text');
-    selectText.style.display = 'inline';
+  const selectText = document.querySelector(".select-text");
+  selectText.style.display = "inline";
 
-    let selectedCategoryDisplay = document.getElementById('selectedCategoryDisplay');
-    selectedCategoryDisplay.textContent = '';
+  const selectedCategoryDisplay = document.getElementById(
+    "selectedCategoryDisplay"
+  );
+  selectedCategoryDisplay.textContent = "";
 
-    let categoryContainer = document.getElementById('loadedCategories');
-    let categoryDropdown = document.querySelector('.category-dropdown');
+  const categoryContainer = document.getElementById("loadedCategories");
+  const categoryDropdown = document.querySelector(".category-dropdown");
 
-    if (categoryContainer.style.display === 'block') {
-        categoryContainer.style.display = 'none';
-        categoryDropdown.classList.remove('expanded');
-        categoryDropdown.style.borderBottom = "1px solid #D1D1D1";
+  const isOpen = categoryContainer.style.display === "block";
 
-    } else {
-        categoryContainer.style.display = 'block';
-        categoryDropdown.classList.add('expanded');
-        categoryDropdown.style.borderBottom = "1px solid #4589FF";
-        renderCategorys();
-    }
+  if (isOpen) {
+    categoryContainer.style.display = "none";
+    categoryDropdown.classList.remove("expanded");
+    categoryDropdown.style.borderBottom = "1px solid #D1D1D1";
+    removeCategoryOutsideClickListener();
+  } else {
+    categoryContainer.style.display = "block";
+    categoryDropdown.classList.add("expanded");
+    categoryDropdown.style.borderBottom = "1px solid #4589FF";
+    renderCategorys();
+    addCategoryOutsideClickListener();
+  }
 }
-
 
 /**
  * Updates the UI based on the selected category.
  * @param {string} category - The category that has been selected.
  */
 function categorySelected(category) {
-    selectedCategory = category;
+  selectedCategory = category;
 
-    let selectedCategoryDisplay = document.getElementById('selectedCategoryDisplay');
-    selectedCategoryDisplay.textContent = `${selectedCategory}`;
+  let selectedCategoryDisplay = document.getElementById(
+    "selectedCategoryDisplay"
+  );
+  selectedCategoryDisplay.textContent = `${selectedCategory}`;
+  let selectText = document.querySelector(".select-text");
+  selectText.style.display = "none";
+  let categoryContainer = document.getElementById("loadedCategories");
+  categoryContainer.style.display = "none";
+  let categoryDropdown = document.querySelector(".category-dropdown");
+  categoryDropdown.classList.remove("expanded");
+  categoryDropdown.style.borderBottom = "1px solid #D1D1D1";
+}
 
-    let selectText = document.querySelector('.select-text');
-    selectText.style.display = 'none';
+function addCategoryOutsideClickListener() {
+  if (!categoryClickListenerActive) {
+    document.addEventListener("click", handleCategoryOutsideClick);
+    categoryClickListenerActive = true;
+  }
+}
 
-    let categoryContainer = document.getElementById('loadedCategories');
-    categoryContainer.style.display = 'none';
+function removeCategoryOutsideClickListener() {
+  document.removeEventListener("click", handleCategoryOutsideClick);
+  categoryClickListenerActive = false;
+}
 
-    let categoryDropdown = document.querySelector('.category-dropdown');
-    categoryDropdown.classList.remove('expanded');
-    categoryDropdown.style.borderBottom = "1px solid #D1D1D1";;
+function handleCategoryOutsideClick(event) {
+  const categoryContainer = document.querySelector(".category-container");
+  if (!categoryContainer.contains(event.target)) {
+    document.getElementById("loadedCategories").style.display = "none";
+    document.querySelector(".category-dropdown").classList.remove("expanded");
+    document.querySelector(".category-dropdown").style.borderBottom =
+      "1px solid #D1D1D1";
+    removeCategoryOutsideClickListener();
+  }
 }

@@ -308,10 +308,6 @@ header{
         left: -50px;
         top: -30px;
     }
-
-    .log-in-container {
-        width: 90%;
-    }
 }
 
 /* Media Query für Bildschirmbreite von maximal 540px */
@@ -319,8 +315,8 @@ header{
     .logo-small {
         width: 34px;
         height: 48px;
-        left: -20%;
-        top: -10%;
+        left: -66px;
+        top: -60px;
     }
 
     .sign-up-container {

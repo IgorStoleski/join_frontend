@@ -239,7 +239,7 @@
 
 .all-content {
     display: flex;
-    height: calc(100vh - 96px);
+    height: calc(100vh - 172px);
     padding: 96px 0 0 232px;
     overflow-x: hidden;
 }
