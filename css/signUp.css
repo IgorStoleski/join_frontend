@@ -112,7 +112,6 @@ body {
   padding: 12px 21px;
   display: flex;
   align-items: center;
-  gap: 10px;
   border-bottom: 1px solid var(--style, #d1d1d1);
   background: #fff;
 }

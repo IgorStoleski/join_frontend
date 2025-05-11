@@ -248,16 +248,13 @@ function compressImage(file, maxWidth = 800, maxHeight = 800, quality = 0.8) {
 function aktiviereFilePickerListenerAddTask() {
   const filepickerBoardAddTask = document.getElementById("filepickerBoardAddTask");
   const errorBoardAddTask = document.getElementById("errorBoardAddTask");
-
   if (!filepickerBoardAddTask || !errorBoardAddTask) {
     console.warn("Dateiupload-Elemente nicht gefunden!");
     return;
   }
-
   filepickerBoardAddTask.addEventListener("change", async () => {
     errorBoardAddTask.style.display = "none";
     errorBoardAddTask.textContent = "";
-
     const files = filepickerBoardAddTask.files;
     if (files.length > 0) {
       for (const file of files) {
@@ -266,15 +263,12 @@ function aktiviereFilePickerListenerAddTask() {
           errorBoardAddTask.style.display = "block";
           return;
         }
-
         const compressedBase64 = await compressImage(file, 800, 800, 0.7);
-
         allImages.push({
           filename: file.name,
           fileType: file.type,
           base64: compressedBase64,
         });
-
         saveGalleryBoardAddTask();
         renderGalleryBoardAddTask();
         loadGalleryBoardAddTask();

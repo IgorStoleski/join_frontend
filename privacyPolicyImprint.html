@@ -17,7 +17,45 @@
 
 <body onload="init()">
     <header w3-include-html="./templates/header.html"></header>
-    <section w3-include-html="./templates/imprint.html"></section>
+    <aside class="aside__policy_">
+        <a class="links m-top" href="index.html">
+            <span class="log-in-link_imprint">
+                <img src="img/login.png" alt="Login">
+                <span class="links">Log In</span>
+            </span>
+        </a>
+        <section class="imprint__link-container visible-off">
+            <a id="summary-link" class="links" href="summary.html">
+                <div class="aside__link">
+                    <img src="img/summary.png" alt="Summary">
+                    Summary
+                </div>
+            </a>
+            <a id="add_task-link" class="links" href="addTask.html">
+                <div class="aside__link">
+                    <img src="img/edit_square.png" alt="Add Task">
+                    Add Task
+                </div>
+            </a>
+            <a id="board-link" class="links" href="board.html">
+                <div class="aside__link">
+                    <img src="img/board_sidebar.png" alt="Board">
+                    Board
+                </div>
+            </a>
+            <a id="contact-link" class="links" href="contact.html">
+                <div class="aside__link">
+                    <img src="img/contacts.png" alt="Contacts">
+                    Contacts
+                </div>
+            </a>
+        </section>
+        <section class="imprint__aside-container">
+                <a class="nav-link-imprint" href="privacyPolicyImprint.html">Privacy Policy</a>
+                <a class="nav-link-imprint" href="legalNoticeImprint.html">Legal notice</a>
+        </section>
+    </aside>
+      
 
     <main>
         <section class="privacy-container">
@@ -188,7 +226,7 @@
     </main>
     <script src="./js/includeHTML.js"></script>
     <script src="./js/uiHelpers.js"></script>
-    
+    <script src="./js/imprint.js"></script>
 </body>
 
 </html>

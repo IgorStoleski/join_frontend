@@ -383,7 +383,6 @@ function toggleContactSelection(name, surname) {
   const contact = contacts.find(
     (c) => c.name === name && c.surname === surname
   );
-
   if (!contact) {
     return;
   }

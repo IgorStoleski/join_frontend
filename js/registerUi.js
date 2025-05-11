@@ -205,6 +205,14 @@ function initPasswordToggle() {
   pwd.addEventListener("input", () => handlePasswordInput(pwd, icon));
 }
 
+/**
+ * Initializes the confirm password visibility toggle functionality.
+ * This function selects the confirm password input field and the corresponding icon by their IDs.
+ * If both elements are found, it attaches:
+ * - a click event listener to the icon to toggle password visibility,
+ * - an input event listener to the confirm password field to handle UI changes based on the input.
+ * If either the confirm password input or the icon is not found, the function exits early. 
+ */
 function initConfirmPasswordToggle() {
   const cpw = document.getElementById("confirmPassword");
   const icon2 = document.getElementById("confirmPasswordIcon");

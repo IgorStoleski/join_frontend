@@ -90,6 +90,7 @@ document.addEventListener('DOMContentLoaded', addLoginBlurEvents);
 let passwordInput = document.getElementById('passwordLogin');
 let passwordIcon = document.getElementById('passwordIcon');
 
+
 /**
  * Updates the visibility icon of a password input field based on its current state.
  * @param {HTMLInputElement} passwordInput - The password input element.
@@ -136,7 +137,6 @@ passwordIcon.addEventListener('click', function () {
 });
 
 
-
 /**
  * Toggles the state of the remember check element.
  */
@@ -148,13 +148,6 @@ function togglerememberCheck() {
         setUncheckedState();
     }
 }
-
-
-/**
-* The remember check element.
-*/
-/* const rememberCheck = document.getElementById('rememberCheck');
-rememberCheck.addEventListener('click', togglerememberCheck); */
 
 
 /**

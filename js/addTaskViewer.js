@@ -191,6 +191,12 @@ function compressImage(file, maxWidth = 800, maxHeight = 800, quality = 0.8) {
   });
 }
 
+
+/**
+ * Resets the file picker and clears the selected images.
+ * This function clears the `allImages` array, resets the file input value,
+ * and clears the preview container in the DOM.
+ */
 function resetFilePicker() {
   allImages = [];
   const fileInput = document.getElementById('filepicker');

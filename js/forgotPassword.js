@@ -1,22 +1,4 @@
 /**
- * Handles the click event when the "Forgot Password" link is clicked.
- * Hides the index container, applies background color, and shows the forgot password content.
- */
-/* function handleForgotPasswordClick() {
-    hideIndexContainer();
-    applyBackgroundColor();
-    displayForgotContent();
-} */
-
-
-/**
- * Adds a click event listener to the "Forgot Password" link.
- */
-/* let forgotPasswordLink = document.querySelector('.forgot-password-link');
-forgotPasswordLink.addEventListener('click', handleForgotPasswordClick); */
-
-
-/**
  * Hides the index container element.
  */
 function hideIndexContainer() {

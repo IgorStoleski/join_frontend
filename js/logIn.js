@@ -9,7 +9,9 @@ async function initLogIn() {
   await loadAllContacts();
 }
 
-
+/**
+ * Handles the login process when the user clicks the Gast login button.
+ */
 function guestLogin() {
   const email = "gast@login.de";
   const password = "gastlogin";
@@ -74,18 +76,21 @@ async function logIn(email, password, formSubmitted = true) {
 /**
  * Handles the user login process.
  */
-function handleLogIn() {
+async function handleLogIn() {
+  resetFormStyle();
+
   let email = getEmailInputValue();
   let password = getPasswordInputValue();
 
   if (!email || !password) {
-    return;
+      markInputsInvalid(email, password);
+      return;
   }
 
-  let isLoggedIn = logIn(email, password);
+  let isLoggedIn = await logIn(email, password);
 
   if (!isLoggedIn) {
-    handleFailedLogIn();
+      handleFailedLogIn();
   }
 }
 
@@ -138,9 +143,51 @@ async function fetchUserDetails(pk) {
 Handles the actions after a failed login attempt. 
 */
 function handleFailedLogIn() {
-  resetFormStyle();
-  showPasswordMatchError();
+    showPasswordMatchError();
+    highlightInvalidInputs();
+    changeDisplay();
 }
+
+/**
+ * Resets any previous error styles.
+ */
+function resetFormStyle() {
+  document.getElementById("passwordMatchError").style.display = "none";
+  document.getElementById("emailLogin").classList.remove("input-error");
+  document.getElementById("passwordLogin").classList.remove("input-error");
+}
+
+
+/**
+ * Marks inputs as invalid if the value is empty.
+ */
+function markInputsInvalid(email, password) {
+  if (!email) document.getElementById("emailLogin").classList.add("input-error");
+  if (!password) document.getElementById("passwordLogin").classList.add("input-error");
+}
+
+
+/**
+ * Displays the error message.
+ */
+function showPasswordMatchError() {
+  document.getElementById("passwordMatchError").style.display = "block";
+}
+
+
+function changeDisplay() {
+  document.getElementById("passwordBox").style.display = "unset";
+}
+
+
+/**
+* Visually marks both inputs as faulty.
+*/
+function highlightInvalidInputs() {
+  document.getElementById("emailLogin").classList.add("input-error");
+  document.getElementById("passwordLogin").classList.add("input-error");
+}
+
 
 /**
  * Finds and returns the user object for a given email and password combination.
@@ -185,19 +232,3 @@ function addLoginButtonListener() {
   let loginButton = document.getElementById("loginBtn");
   loginButton.addEventListener("click", handleLogIn);
 }
-
-
-/* async function saveContactToBackend() {
-  const contactData = getContactData();
-
-  if (!contactData) {
-    return;
-  }
-
-  try {
-    await setContact(contactData);
-  } catch (error) {
-    console.error("Error saving contact:", error);
-  }
-} */
-

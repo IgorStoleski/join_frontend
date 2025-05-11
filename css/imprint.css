@@ -13,9 +13,7 @@ aside {
     background: rgba(255, 255, 255, 1);
 }
 
-.aside__policy-container {
-    position: absolute;
-    bottom: 0;
+.imprint__aside-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -25,6 +23,26 @@ aside {
     align-self: stretch;
     width: 232px;
     height: 384px;
+}
+
+.nav-link-imprint {
+    color: var(--menu, #42526E);
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: none;
+    padding: 8px;
+    gap: 8px;
+}
+
+.nav-link-imprint:hover{
+    color: var(--bg-color, #4589FF);
+}
+
+.nav-link-imprint.active {
+    color: white !important;
+    background-color: var(--bg-color, #4589FF) !important;
+    padding: 8px;
 }
 
 .m-top {
@@ -61,7 +79,7 @@ aside {
 
 
 /* Media Query für Bildschirmbreite von maximal 768px */
-@media(max-width: 768px) {
+@media(max-width: 1024px) {
     aside {
         position: fixed;
         top: revert;
@@ -122,6 +140,17 @@ aside {
         font-size: 16px;
         font-weight: 400;
         text-decoration: none;
+    }
+
+    .imprint__aside-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: unset;
+        align-items: unset;
+        align-self: unset;
+        width: unset;
+        height: unset;
+        padding: unset;
     }
     
     .m-top {

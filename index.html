@@ -45,15 +45,15 @@
                                 <img class="log-in-icon" src="img/mail.png" alt="Email">
                             </div>
                         </div>
-                        <div class="log-in-info-box">
+                        <div class="log-in-info-box" id="passwordBox">
                             <div id="log-in-input-frame" class="log-in-input-frame">
                                 <input id="passwordLogin" required type="password" class="log-in-text-input"
                                     placeholder="Password" autocomplete="current-password">
                                 <img class="log-in-icon" src="img/lock.png" alt="Password" id="passwordIcon">
                             </div>
+                            <div class="password-match-error" id="passwordMatchError">Check your email and password. Please Try again</div>
                         </div>
                     </section>
-                    <div class="password-match-error" id="passwordMatchError">Wrong password Ups! Try again</div>
                 </section>
 
                 <!-- <section class="remember-me-container none">
@@ -96,6 +96,7 @@
     <script src="js/templates/resetPasswordTemplates.js"></script>
     <script src="js/contact.js"></script>
     <script src="js/index.js"></script>
+    <script src="js/imprint.js"></script>
 </body>
 
 </html>
