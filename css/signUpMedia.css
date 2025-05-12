@@ -1,3 +1,33 @@
+@media (max-width: 1024px) and (max-height: 1000px) {
+    .white-small-logo {
+        width: 64px;
+        height: 78px;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        align-items: flex-start;
+        justify-content: flex-start;
+        position: absolute;
+        left: 10px;
+        top: 1.5%;
+    }
+
+    .sign-up-container {
+        max-width: 396px;
+        padding: 32px 0px;
+        gap: 16px;
+    }
+    .sign-up-info-box {
+        width: 100%;
+    }
+    .arrow-container {
+        width: 32px;
+        height: 32px;
+        left: 30px;
+        top: 24px;
+    }
+}
+
 /* Media Query für Bildschirmbreite von maximal 768px */
 @media (max-width: 768px) {
     .white-small-logo {

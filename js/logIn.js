@@ -121,6 +121,15 @@ async function handleSuccessfulLogIn(pk) {
   }
 }
 
+
+/**
+ * Fetches user details from the backend based on the given primary key (pk).
+ * Sends a GET request to the storage server using an authentication token.
+ * @async
+ * @function fetchUserDetails
+ * @param {number|string} pk - The primary key of the user to fetch.
+ * @returns {Promise<Object|null>} A promise that resolves to the user data as an object if the request is successful, or `null` if it fails.
+ */
 async function fetchUserDetails(pk) {
   const token = getAuthToken();
   const response = await fetch(STORAGE_URL + "users/" + pk + "/", {
@@ -175,6 +184,9 @@ function showPasswordMatchError() {
 }
 
 
+/**
+ * Changes the display of the password box.
+ */
 function changeDisplay() {
   document.getElementById("passwordBox").style.display = "unset";
 }

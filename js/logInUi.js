@@ -1,5 +1,9 @@
 let passwordMatchError = document.getElementById('passwordMatchError');
-
+const emailInput = document.getElementById('emailLogin');
+const passwordInputCheck = document.getElementById('passwordLogin');
+const loginButton = document.getElementById('loginBtn');
+let passwordInput = document.getElementById('passwordLogin');
+let passwordIcon = document.getElementById('passwordIcon');
 
 /**
  * Retrieves the value of the email input field.
@@ -85,10 +89,6 @@ function addLoginBlurEvents() {
     });
 }
 document.addEventListener('DOMContentLoaded', addLoginBlurEvents);
-
-
-let passwordInput = document.getElementById('passwordLogin');
-let passwordIcon = document.getElementById('passwordIcon');
 
 
 /**
@@ -222,11 +222,6 @@ function saveUserDataOnLogin(userEmail, userPassword, rememberStatus) {
         saveLoggedInUserData(userData);
     }
 }
-
-
-const emailInput = document.getElementById('emailLogin');
-const passwordInputCheck = document.getElementById('passwordLogin');
-const loginButton = document.getElementById('loginBtn');
 
 
 /**

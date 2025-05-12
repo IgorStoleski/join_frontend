@@ -283,39 +283,27 @@ function clickOutsideHandler(event) {
  *    if the contact is selected.
  */
 function displayChosenContacts() {
-  const chosenContactsContainer = document.getElementById("chosenContacts");
-  chosenContactsContainer.innerHTML = "";
+  const container = document.getElementById("chosenContacts");
+  const ids = Object.keys(selectedContacts).filter(id => selectedContacts[id]);
+  const max = 4, total = ids.length;
+  container.innerHTML = '';
 
-  const selectedContactIds = Object.keys(selectedContacts).filter(
-    (id) => selectedContacts[id]
-  );
-
-  const maxVisible = 4;
-  const totalSelected = selectedContactIds.length;
-
-  for (let i = 0; i < Math.min(maxVisible, totalSelected); i++) {
-    const contactId = selectedContactIds[i];
-    const contact = contacts.find((c) => c.id == contactId);
-    if (contact) {
-      const initials = `${contact.name.charAt(0)}${contact.surname.charAt(
-        0
-      )}`.toUpperCase();
-      chosenContactsContainer.innerHTML += /*html*/ `
-          <section class="chosen-contact">
-            <div class="initial" style="background-color: ${contact.bgcolor}">${initials}</div>
-          </section>
-        `;
-    }
-  }
-
-  if (totalSelected > maxVisible) {
-    const remaining = totalSelected - maxVisible;
-    chosenContactsContainer.innerHTML += /*html*/ `
+  ids.slice(0, max).forEach(id => {
+    const c = contacts.find(c => c.id == id);
+    if (c) {
+      const initials = (c.name[0] + c.surname[0]).toUpperCase();
+      container.innerHTML += `
         <section class="chosen-contact">
-          <div class="initial" style="background-color: #D1D1D1">+${remaining}</div>
-        </section>
-      `;
-  }
+          <div class="initial" style="background-color: ${c.bgcolor}">${initials}</div>
+        </section>`;
+    }
+  });
+
+  if (total > max)
+    container.innerHTML += `
+      <section class="chosen-contact">
+        <div class="initial" style="background-color: #D1D1D1">+${total - max}</div>
+      </section>`;
 }
 
 /**

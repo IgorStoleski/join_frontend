@@ -22,7 +22,7 @@ async function moveToMobile(id, status) {
   let currentMobiletask = todos.find((task) => task.id === id);
   if (currentMobiletask) {
     currentMobiletask.status = status;
-    await pushData();
+    await pushData(currentMobiletask, id);
     refreshHTML();
   } else {
     console.error("Task with ID", id, "not found.");

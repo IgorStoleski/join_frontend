@@ -22,18 +22,33 @@ function loadToggleAssignedToContainer() {
  * Renders and displays the selected contacts.
  */
 function renderDisplayChosenContacts() {
-    let chosenContactsContainer = document.getElementById('edit-chosen-contacts');
-    chosenContactsContainer.innerHTML = '';
+  const chosenContactsContainer = document.getElementById('edit-chosen-contacts');
+  chosenContactsContainer.innerHTML = '';
 
-    for (let i = 0; i < contacts.length; i++) {
-        const contact = contacts[i];
-        const isSelected = selectedContacts[contact.id];
+  const selectedContactIds = Object.keys(selectedContacts).filter(
+    (id) => selectedContacts[id]
+  );
 
-        if (isSelected) {
-            let initials = `${contact.name.charAt(0)}${contact.surname.charAt(0)}`.toUpperCase();
-            chosenContactsContainer.innerHTML += renderDisplayChosenContactsHTML(contact, initials);
-        }
+  const maxVisible = 4;
+  const totalSelected = selectedContactIds.length;
+
+  for (let i = 0; i < Math.min(maxVisible, totalSelected); i++) {
+    const contactId = selectedContactIds[i];
+    const contact = contacts.find((c) => c.id == contactId);
+    if (contact) {
+      const initials = `${contact.name.charAt(0)}${contact.surname.charAt(0)}`.toUpperCase();
+      chosenContactsContainer.innerHTML += renderDisplayChosenContactsHTML(contact, initials);
     }
+  }
+
+  if (totalSelected > maxVisible) {
+    const remaining = totalSelected - maxVisible;
+    chosenContactsContainer.innerHTML += /*html*/ `
+      <section class="chosen-contact">
+        <div class="initial" style="background-color: #D1D1D1">+${remaining}</div>
+      </section>
+    `;
+  }
 }
 
 
@@ -56,19 +71,23 @@ function renderDisplayChosenContactsHTML(contact, initials) {
  * Loads and displays the chosen contacts.
  */
 function loadDisplayChosenContacts() {
-    const chosenContactsContainer = document.getElementById('edit-chosen-contacts');
-    let htmlContent = '';
+  const container = document.getElementById('edit-chosen-contacts');
+  const ids = Object.keys(selectedContacts).filter(id => selectedContacts[id]);
+  const max = 4, total = ids.length;
+  let html = '';
 
-    for (let id in selectedContacts) {
-        if (selectedContacts.hasOwnProperty(id)) {
-            let contact = contacts.find(c => c.id === parseInt(id));
-            if (contact) {
-                let initials = `${contact.name.charAt(0)}${contact.surname.charAt(0)}`.toUpperCase();
-                htmlContent += loadDisplayChosenContactsHTML(contact, initials);
-            }
-        }
+  ids.slice(0, max).forEach(id => {
+    const c = contacts.find(c => c.id === parseInt(id));
+    if (c) {
+      const initials = (c.name[0] + c.surname[0]).toUpperCase();
+      html += loadDisplayChosenContactsHTML(c, initials);
     }
-    chosenContactsContainer.innerHTML = htmlContent;
+  });
+
+  if (total > max)
+    html += `<section class="chosen-contact"><div class="initial" style="background-color: #D1D1D1">+${total - max}</div></section>`;
+
+  container.innerHTML = html;
 }
 
 
